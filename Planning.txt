@@ -15,11 +15,11 @@ Requirements:
     3. Email.
     4. Username.
     5. Profile picture.
-    ** Must encrypt login credentials.
+    ** Must encrypt login credentials after registration.
 
     User interface:
     1. Allow users to view, add, update and delete their recipes.
-    2. The user should be able to view and update their detatils - Profile Page.
+    2. The user should be able to view and update their details - Profile Page.
     3. Use protected routing - authentication.
 
     Recipe inputs:
@@ -38,34 +38,40 @@ Requirements:
     2. View added recipe
     3. Update added recipe
     4. Delete recipes
-    5. Filter recipes by name of recipe, category
+    5. Filter recipes by name of recipe, category e.g Breakfast, Lunch, Dinner
+
+    ** USE GET, POST, DELETE, PATCH/PUT with the JSON Server to manage user's recipes.
     
-
-
-
 Solution: 
-    1. Create Registration Page to take username and password
-    2. Create an array to store user login information
-    3. Create Login Page to access Home Page using registered username and password
+    1. Create Registration Page to gather user login credentials.
+    2. Create an array of objects to store user login information along with a recipes array for each user.
+    3. Create Login Page to access Home Page using registered username and password, after validation.
     4. Use username and other user info to render Profile Page
+    5. Create Recipes Page to show all recipes
+    6. Create page for each individual recipe , with more details.
 
 
     Functions:
-    1. addUser - function to add user.
-    2. addTask - function to create new task.
-    3. updateTask - function to update task information.
-    4. deleteTask - function to delete task.
-    5. filterTask - function to filter task.
+    1. handleAddUser - function to add user.
+    2. handleAddRecipe - function to add recipe
+    3. handleUpdateRecipe - function to update recipe information.
+    4. handleDeleteRecipe - function to delete recipe.
+    5. handleFilterRecipes - function to filter recipes.
+    6. handleUserUpdate - function to update user information.
 
     Components:
-    1. HomePage - component with landing page information.
+    1. HomePage - component with home page information.
     2. RegistrationPage - component to get user information.
-    3. LoginPage - component to login.
+    3. LoginPage - component to log in.
+    4. LandingPage - component with landing page information.
+
+
 
     4. Profile - component with user profile information.
-    5. AddTask - component to enter task information.
-    6. DisplayTask - displays user tasks on page.
-    7. SearchTasks - used to filter tasks by due date, priority and completed status.
-    8. Task - component to show individual task.
+    5. AddRecipe - component to enter recipe information.
+    6. DisplayRecipes - displays user recipes on page.
+    7. SearchRecipes - used to filter recipes by name, category.
+    8. RecipeCard - component to show individual recipe card.
+    9. Recipe - component to show recipe in more detail.
 
    

@@ -1,0 +1,77 @@
+Functions:
+    Global variables, arrays:
+    1. Create users Array: 
+        1. INITIALIZE users = [];
+        2. INITIALIZE userObj = {
+                                    name: name, 
+                                    surname: surname,
+                                    email: email,
+                                    username: username,
+                                    password: password,
+                                    recipes: []
+                                }
+        3. PUSH userObj to users.
+        4. INITIALIZE loginStatus = true;
+
+    2. FUNCTION handleAddUser(inputs: name, surname, email, username, password):
+        1. FILTER users, SET filteredUser = user.filter((user) => user.name === username);
+        2. IF filteredUser.length > 0:
+                return;
+            ELSE: 
+                PUSH to users;
+
+
+    3. FUNCTION handleAddRecipe (inputs:   Recipe Name, Ingredients, Instructions, Category, Preparation Time, Cooking Time, Servings):
+        1. INITIALIZE recipeObj = { Recipe Name, Ingredients, Category, Preparation Time,Cooking Time, Servings};
+        2. PUSH recipeObj to recipes array in userObj, userObj.recipes;
+
+
+
+    4. FUNCTION handleUpdateRecipe (inputs: username, updateRecipeInfo object):
+        1. FILTER users, SET filteredUser = user.filter((user) => user.name === username);
+        2. FILTER recipes, SET filteredRecipe = filteredUser.recipes.filter((recipe) => recipe.name === updateRecipeInfo.name);
+        3. SET updateRecipeInfo to filteredRecipe;
+        4. SET users with, new updated filteredRecipe;
+
+    5. FUNCTION handleDeleteRecipe(inputs: username, recipe name):
+        1. FILTER users, SET filteredUser = user.filter((user) => user.name === username);
+        2. FILTER recipes, SET filteredRecipes = filteredUser.recipes.filter((recipe) => recipe.name !== recipe name);
+        3. SET filteredUser.recipes = filterRecipes;
+        
+
+    6. FUNCTION handleFilterRecipes (inputs: recipes):
+        1. FILTER recipe information from recipes based on field / rule, filteredRecipeInformation => field;
+
+    7. FUNCTION handleUserUpdate (inputs: updateObj):
+        1. Create userCopy;
+        2. IF (updateObj.username): 
+            SET userCopy.username = updateObj.username;
+        3. IF (updateObj.password): 
+            SET userCopy.password = updateObj.password; 
+
+    8. FUNCTION handleLogOut():
+        1. SET loginStatus = false;
+
+
+ 
+   Components:
+    1. Profile(props: id, name, surname, username, password, email, profile picture):
+        1. Create divs to hold all prop information
+
+    2. AddRecipe():
+        1. Create inputs field to get recipe information;
+        2. Create button to submit recipe information from field;
+
+    3. DisplayRecipes(inputs: recipes Array):
+        1. Map through recipes and display each recipe on page;
+
+    4. SearchRecipes(inputs: recipes, field):
+        1. Create search bar and button to allow search;
+        2. Filter recipes based on field.
+
+    5. HomePage():
+    6. RegistrationPage():
+    7. LoginPage():
+    8. LandingPage():
+    9. RecipeCard():
+    10. Recipe():
