@@ -1,0 +1,71 @@
+#React Online Recipe App
+
+Problem: Create an app that allows users to add their favorite food recipes, using JSON-server.
+    It should have 4 main pages:
+    1. Login Page
+    2. Registration Page
+    3. Home Page
+    4. Profile Page
+
+
+Requirements: 
+    Registration information:
+    1. Name.
+    2. Surname.
+    3. Email.
+    4. Username.
+    5. Profile picture.
+    ** Must encrypt login credentials.
+
+    User interface:
+    1. Allow users to view, add, update and delete their recipes.
+    2. The user should be able to view and update their detatils - Profile Page.
+    3. Use protected routing - authentication.
+
+    Recipe inputs:
+    1. Recipe Name
+    2. Ingredients
+    3. Instructions
+    4. Category
+    5. Preparation Time
+    6. Cooking Time
+    7. Servings
+
+
+    Features:
+    User must be able to:
+    1. Add new recipe
+    2. View added recipe
+    3. Update added recipe
+    4. Delete recipes
+    5. Filter recipes by name of recipe, category
+    
+
+
+
+Solution: 
+    1. Create Registration Page to take username and password
+    2. Create an array to store user login information
+    3. Create Login Page to access Home Page using registered username and password
+    4. Use username and other user info to render Profile Page
+
+
+    Functions:
+    1. addUser - function to add user.
+    2. addTask - function to create new task.
+    3. updateTask - function to update task information.
+    4. deleteTask - function to delete task.
+    5. filterTask - function to filter task.
+
+    Components:
+    1. HomePage - component with landing page information.
+    2. RegistrationPage - component to get user information.
+    3. LoginPage - component to login.
+
+    4. Profile - component with user profile information.
+    5. AddTask - component to enter task information.
+    6. DisplayTask - displays user tasks on page.
+    7. SearchTasks - used to filter tasks by due date, priority and completed status.
+    8. Task - component to show individual task.
+
+   
