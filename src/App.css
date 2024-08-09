@@ -1,5 +1,5 @@
 * {
- 
+  border: 1px solid black;
 }
 
 .hamburger-menu {
@@ -39,6 +39,8 @@
   flex-direction: column;
   gap: 25px;
 }
+
+
 @media (max-width: 700px) {
   
 
@@ -53,7 +55,7 @@
       top: 0;
       left: -100%;
       bottom: 0;
-      width: 100%;
+      width: 80%;
 
       padding-top: 6rem;
 
@@ -66,7 +68,7 @@
   }
 
   .Sidebar.active {
-      right: 0;
+      left: 0;
   }
 
 }
