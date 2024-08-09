@@ -42,11 +42,20 @@
 
 .Header {
   display: flex;
-  background-color: aqua;
+
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 50px;
+  padding: 20px 25px;
+  background-color: rgb(57, 130, 130);
+}
+
+.profile-link {
+  flex: 1;
 }
 
 .search-div {
-  
+  flex: 6;
   max-width: 500px;
   height: 40px;
   padding: 0px;

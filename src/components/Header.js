@@ -9,6 +9,7 @@ function Header(){
         <div className="Header">
             <div className="hamburger-menu" onClick={handleHamBurgerMenu}>Ham</div>
             <Searchbar/>
+            <div className="profile-link">profile</div>
         </div>
     )
 }
