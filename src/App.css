@@ -2,12 +2,25 @@
   border: 1px solid black;
 }
 
+.App {
+  height: 100vh;
+  display: flex;
+}
+
+.Main {
+  flex: 8;
+  height: inherit;
+  background-color: #4D4DDB;
+}
+
 .hamburger-menu {
   display: none; /* Hidden by default for larger screens */
   cursor: pointer;
 }
+
 /** Sidebar **/
 .Sidebar {
+  flex: 2;
   background-color: whitesmoke;
   width: 30%;
   height: calc(100vh - 40px);
@@ -45,17 +58,19 @@
 
   justify-content: space-evenly;
   align-items: center;
-  gap: 50px;
+
   padding: 20px 25px;
   background-color: rgb(57, 130, 130);
 }
 
+
+
 .profile-link {
-  flex: 1;
+  background-color: #4D4DDB;
 }
 
 .search-div {
-  flex: 6;
+  flex: 90%;
   max-width: 500px;
   height: 40px;
   padding: 0px;
@@ -97,7 +112,27 @@
 
 
 @media (max-width: 700px) {
+  .Header {
+    flex-direction: column-reverse;
+  }
+  .ham-profile {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+   
   
+  }
+
+  .search-div {
+    width: 100%;
+  }
+
+
+  .Main {
+    width: 100%;
+  }
+
+ 
 
   .hamburger-menu {
       display: block;
