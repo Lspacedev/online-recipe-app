@@ -40,6 +40,52 @@
   gap: 25px;
 }
 
+.Header {
+  display: flex;
+  background-color: aqua;
+}
+
+.search-div {
+  
+  max-width: 500px;
+  height: 40px;
+  padding: 0px;
+
+  display: flex;
+  border-radius: 40px;
+  border: 1px solid gray;
+  background-color: white;
+}
+
+.search-div input[type="search"] {
+  flex: 6;
+  margin: 0px;
+  border: none;
+}
+#search-icon-div {
+  flex: 1;
+  height: 100%;
+  border-radius: 40px 0px 0px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#search-icon {
+  margin: 0px;
+  color: rgb(189, 189, 189);
+}
+
+#search-btn {
+  flex: 1;
+  margin: 0px;
+  border-radius: 0px 40px 40px 0px;
+  border: none;
+}
+#search-btn:hover {
+  background-color: rgb(216, 216, 216);
+}
+
+
 
 @media (max-width: 700px) {
   
