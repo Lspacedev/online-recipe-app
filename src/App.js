@@ -1,26 +1,35 @@
 import './App.css';
-import Sidebar from './components/Sidebar';
-import Main from './components/Main';
 import { useState, useEffect } from 'react';
+import Home from './components/Home';
+import Registration from './components/Registration';
+import Login from "./components/Login";
+import Landing from './components/Landing';
+import Profile from './components/Profile';
+import Main from './components/Main';
+
+import ProtectedRoutes from './components/ProtectedRoute';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [users, setUsers] = useState([
-    {name: "guest", 
-    surname: "guest",
-    email: "guest@email.com",
-    username: "guest",
-    password: "guest",
-    recipes: []}
-  ]);
-  const [currentUser, setCurrentUser] = useState(   {name: "guest", 
-    surname: "guest",
-    email: "guest@email.com",
-    username: "guest",
-    password: "guest",
-    recipes: []});
+  const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState({});
+    const [loginStatus, setLoginStatus] = useState(false);
+    const [registrationStatus, setRegistrationStatus] = useState(false);
+  
+  useEffect(()=>{
+    fetch('http://localhost:8000/users')
+    .then((res)=>res.json())
+    .then((res)=>{
+      setUsers(res);
+    }
+    );
+   
 
 
+  },[])
+  console.log("array json",users)
   useEffect(() => {
+
     const usersCopy = users.slice(0);
     const foundUser = usersCopy.find(
       (user) => user.username === currentUser.username
@@ -31,6 +40,87 @@ function App() {
 
     setUsers(usersCopy);
   }, [currentUser]);
+
+  function handleRegistrationSubmit(obj) {
+    //check if user exists
+    const filteredUser = users.filter((user) => user.username === obj.username);
+    if (filteredUser.length > 0) {
+      alert("user already exists");
+    } else if (obj.username === "" || obj.password === "") {
+      alert("no user info");
+    } else {
+      alert("Account created.");
+   
+      fetch('http://localhost:8000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',       
+        },
+        body: JSON.stringify(obj), 
+      }).then(()=>console.log("user added"));
+  
+
+
+
+
+
+
+
+
+
+
+      setUsers((prev) => [...prev, obj]);
+      setRegistrationStatus(true);
+    }
+  }
+
+  function handleLoginSubmit(obj) {
+    const findUser = users.filter((user) => user.username === obj.username);
+    if (findUser.length > 0) {
+      let [user] = findUser;
+      if (user.password === obj.password) {
+        setLoginStatus(true);
+        setCurrentUser(user);
+      } else {
+        alert("invalid login password");
+      }
+    } else {
+      alert("user does not exist");
+    }
+  }
+
+  function handleUserUpdate(obj) {
+    const userCopy = { ...currentUser };
+
+    if (obj.username) {
+      userCopy.username = obj.username;
+    }
+
+    if (obj.password) {
+      userCopy.password = obj.password;
+    }
+
+    setCurrentUser(userCopy);
+  }
+
+  function handleLogOut() {
+   /* const usersCopy = users.slice(0);
+    const foundUser = usersCopy.find((user) => user.id === currentUser.id);
+    console.log(currentTemp, foundUser, currentUser);
+
+    if (foundUser) {
+      foundUser.id = currentUser.id;
+      foundUser.username = currentUser.username;
+      foundUser.password = currentUser.password;
+      foundUser.tasks = currentUser.tasks.slice(0);
+      //usersCopy = usersCopy.filter(user);
+      setUsers(usersCopy);
+    }
+
+    console.log("new", usersCopy);*/
+
+    setLoginStatus(false);
+  }
 
   function handleAddRecipe(obj) {
     //find recipe
@@ -93,12 +183,68 @@ function App() {
 
   console.log("users",users, "current user", currentUser)
   return (
-    <div className="App">
-      <Sidebar/>
-      <Main handleAddRecipe={handleAddRecipe}/>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route exact path="/" element={<Landing />} />
+          <Route
+            exact
+            path="registration"
+            element={
+              <Registration
+                count={users.length}
+                handleRegistrationSubmit={handleRegistrationSubmit}
+                registrationStatus={registrationStatus}
+              />
+            }
+          />
+          <Route
+            exact
+            path="login"
+            element={
+              <Login
+                handleLoginSubmit={handleLoginSubmit}
+                loginStatus={loginStatus}
+              />
+            }
+          />
 
-    </div>
-  );
+          <Route element={<ProtectedRoutes loginStatus={loginStatus} />}>
+      
+            <Route path="home" element={ <Home handleAddRecipe={handleAddRecipe} handleLogOut={handleLogOut}/>}>
+              <Route
+                  index
+                  element={
+                    <Main handleAddRecipe={handleAddRecipe}/>
+                  }
+                />
+                <Route
+                  path='recipes'
+                  element={
+                    <Main handleAddRecipe={handleAddRecipe}/>
+                  }
+                />
+              <Route
+                path="profile"
+                element={
+                  <Profile
+                    username={currentUser.username}
+                    password={currentUser.password}
+                    handleUserUpdate={handleUserUpdate}
+                  />
+                }
+              />
+
+            
+            </Route>
+                          
+
+          </Route>
+        </Routes>
+      </div>
+    </Router>
+   
+  )
 }
 
 export default App;
