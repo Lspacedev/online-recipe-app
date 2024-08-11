@@ -1,13 +1,24 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "",
       "surname": "",
       "email": "",
       "username": "guest",
       "password": "guest",
-      "recipes": []
+      "recipes": [
+        {
+          "recipeName": "cel",
+          "ingredients": "",
+          "instructions": "",
+          "category": "",
+          "prepTime": "",
+          "cookingTime": "",
+          "servings": "",
+          "edit": false
+        }
+      ]
     }
   ]
 }

@@ -1,14 +1,15 @@
-import Header from "./Header"
-import Addrecipe from "./Addrecipe"
+import Header from "./Header";
+import Addrecipe from "./Addrecipe";
+import Recipecard from "./Recipecard";
 
-function Main({handleAddRecipe}){
+function Main({recipes, handleAddRecipe, handleDeleteRecipe}){
     return(
         <div className="Main">
             <Header/>
             <div className="cat-add">
                 <Addrecipe handleAddRecipe={handleAddRecipe}/>
             </div>
-
+ 
         </div>
     )
 }

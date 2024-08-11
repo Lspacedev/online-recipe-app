@@ -6,6 +6,8 @@ import Login from "./components/Login";
 import Landing from './components/Landing';
 import Profile from './components/Profile';
 import Main from './components/Main';
+import DisplayRecipes from './components/DisplayRecipes';
+import Recipe from './components/Recipe';
 
 import ProtectedRoutes from './components/ProtectedRoute';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -27,7 +29,6 @@ function App() {
 
 
   },[])
-  console.log("array json",users)
   useEffect(() => {
 
     const usersCopy = users.slice(0);
@@ -130,18 +131,48 @@ function App() {
 
     //if recipe doesn't exist add it
     if (filteredRecipe.length === 0) {
+      let updatedUser =  {...currentUser};
+      updatedUser.recipes = [...updatedUser.recipes, obj];
+      let recipes = updatedUser.recipes;
+
+  
+      fetch(`http://localhost:8000/users/${currentUser.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({recipes}),
+      })
+      .then(response => response.json())
+      .then(user => console.log(user, "uppdadad"));
+  
+
       setCurrentUser((prev) => ({ ...prev, recipes: [...prev.recipes, obj] }));
     }
   }
 
   function handleDeleteRecipe(name) {
     const filteredRecipes = currentUser.recipes.filter(
-      (recipe) => (recipe) => recipe.recipeName !== name
+     (recipe) => recipe.recipeName !== name
     );
+    
+    let recipes = filteredRecipes;
+    fetch(`http://localhost:8000/users/${currentUser.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({recipes}),
+    })
+    .then(response => response.json())
+    .then(user => console.log(user, "uppdadad2"));
+
+    
     setCurrentUser((prev) => ({ ...prev, recipes: filteredRecipes }));
   }
 
   function handleUpdateRecipe(name) {
+    console.log("ufdfcilckece")
     const recipesCopy = currentUser.recipes.slice(0);
     let recipe = recipesCopy.find((recipe) => recipe.recipeName === name);
     recipe.edit = true;
@@ -174,9 +205,20 @@ function App() {
       recipe.servings = obj.servings;
     }
  
-  
-  
     recipe.edit = false;
+
+
+    let recipes = recipesCopy;
+    fetch(`http://localhost:8000/users/${currentUser.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({recipes}),
+    })
+    .then(response => response.json())
+    .then(user => console.log(user, "uppdadad3"));
+
 
     setCurrentUser((prev) => ({ ...prev, recipes: recipesCopy }));
   }
@@ -212,18 +254,18 @@ function App() {
           <Route element={<ProtectedRoutes loginStatus={loginStatus} />}>
       
             <Route path="home" element={ <Home handleAddRecipe={handleAddRecipe} handleLogOut={handleLogOut}/>}>
-              <Route
-                  index
-                  element={
-                    <Main handleAddRecipe={handleAddRecipe}/>
-                  }
-                />
+           
                 <Route
                   path='recipes'
                   element={
-                    <Main handleAddRecipe={handleAddRecipe}/>
+                    <DisplayRecipes recipes={currentUser.recipes || []} handleDeleteRecipe={handleDeleteRecipe}/>
                   }
-                />
+                >
+                  <Route
+                    path=":recipe_name"
+                    element={
+                    <Recipe  recipes={currentUser.recipes || []} handleUpdateRecipe={handleUpdateRecipe} handleRecipeResubmit={handleRecipeResubmit} handleDeleteRecipe={handleDeleteRecipe}/>}/>
+                </Route>
               <Route
                 path="profile"
                 element={
