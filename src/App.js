@@ -5,7 +5,7 @@ import Registration from './components/Registration';
 import Login from "./components/Login";
 import Landing from './components/Landing';
 import Profile from './components/Profile';
-import Main from './components/Main';
+
 import DisplayRecipes from './components/DisplayRecipes';
 import Recipe from './components/Recipe';
 
