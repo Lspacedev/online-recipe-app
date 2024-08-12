@@ -1,26 +1,262 @@
 * {
-  border: 1px solid black;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  margin: 0px;
+  padding: 0px;
 }
 
 .App {
   height: 100vh;
   display: flex;
 }
+/*Landing*/
+.landing {
+  height: inherit;
+  width: 100vw;
 
-.Home {
+  text-align: center;
+}
+.landing-info {
+  padding: 150px;
+}
+.landing-title {
+  font-size: 4rem;
+  font-weight: bold;
+  margin: 20px;
+  color: #0f0f09;
+}
+.landing-subtitle {
+  font-size: 1.5rem;
+  margin: 25px;
+  color: #0f0f09;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-land {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #bc412b;
+  margin: 15px;
+}
+.login-register {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.login-btn {
+  font-size: 1.2rem;
+  color: #bc412b;
+  background-color: white;
+  border: none;
+}
+.login-btn:hover {
+  color: #645e70;
+}
+.register-btn {
+  background-color: #bc412b;
+  color: white;
+  font-weight: bold;
+  padding: 12px 18px;
+  border-radius: 7px;
+
+  margin-right: 10px;
+  border: none;
+}
+
+.register-btn2 {
+  background-color: #bc412b;
+  color: white;
+  font-weight: bold;
+  padding: 20px 30px;
+  margin: 20px;
+  border-radius: 8px;
+  border: none;
+}
+
+.register-btn:hover {
+  background-color: #403c4b;
+}
+
+.register-btn2:hover {
+  background-color: #403c4b;
+}
+
+/**Login && Registration**/
+.Login,
+.Registration {
   height: 100vh;
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: whitesmoke;
+}
+
+.Registration {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form-container {
+  border-radius: 10px;
+  text-align: center;
+}
+.register-form-container {
+  color: #2d2936;
+}
+.login-form-container h2 {
+  color: #2d2936;
+}
+
+.Login form {
+  margin: 10% auto 0 auto;
+  padding: 50px;
+  width: 400px;
+  height: auto;
+  overflow: hidden;
+  background: white;
+  border-radius: 10px;
+}
+
+.Login form label {
+  font-size: 14px;
+  color: rgb(133, 133, 133);
+  cursor: pointer;
+}
+
+.Login form input {
+  margin: 15px 0;
+  padding: 15px 10px;
+  width: 100%;
+  outline: none;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.Login input[type="submit"] {
+  padding: 15px 50px;
+  width: auto;
+  background-color: #bc412b;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+}
+
+.Login input[type="submit"]:hover {
+  background-color: #ed6a5a;
+}
+
+.Registration form {
+  margin: 10% auto 0 auto;
+  padding: 50px;
+  width: 400px;
+  height: auto;
+  overflow: hidden;
+  background: white;
+  border-radius: 10px;
+}
+
+.Registration form label {
+  font-size: 14px;
+  color: rgb(133, 133, 133);
+  cursor: pointer;
+}
+
+.Registration form input {
+  margin: 15px 0;
+  padding: 15px 10px;
+  width: 100%;
+  outline: none;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.Registration input[type="submit"] {
+  padding: 15px 50px;
+  width: auto;
+  background-color: #bc412b;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+}
+
+.Registration input[type="submit"]:hover {
+  background-color: #ed6a5a;
+}
+
+/**Home**/
+
+.Home {
+  height: 100vh;
+  display: flex;
+  width: 100vw;
 }
 
 .Main {
   flex: 8;
   height: inherit;
+  width: calc(100% - 355px);
+}
+
+/**Profile**/
+
+.Profile {
+  flex: 85%;
+  height: calc(100% - 101px);
+  padding: 0px;
+}
+
+.Profile h1 {
+  margin: 0px;
 }
 
 .Profile {
-  flex: 8;
-  height: inherit;
+  text-align: center;
+}
+.Profile button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  background-color: #bc412b;
+  color: white;
+}
+.Profile button:hover {
+  background-color: #ed6a5a;
+}
+.user-pass {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.user-pass h4 {
+  color: #bc412b;
+}
+.user {
+  text-align: center;
+}
+
+.user div {
+  margin: 5px;
+}
+
+.pass {
+  text-align: center;
+}
+
+.pass div {
+  margin: 5px;
 }
 
 .hamburger-menu {
@@ -32,18 +268,18 @@
 .Sidebar {
   flex: 2;
   width: 30%;
-  height: calc(100vh - 40px);
 
   display: flex;
   flex-direction: column;
   text-align: center;
-
-  padding: 20px 0px;
+  padding: 0px;
+  background-color: rgb(245, 244, 243);
 }
 
 .logo {
   flex: 30%;
-  font-family: "Courier New", Courier, monospace;
+
+  font-size: bold;
 }
 .logo span {
   font-size: 0.9rem;
@@ -68,7 +304,7 @@
   justify-content: space-evenly;
   align-items: center;
 
-  padding: 20px 25px;
+  padding: 5px 25px;
 }
 
 .profile-link {
@@ -83,7 +319,6 @@
   display: flex;
   border-radius: 40px;
   border: 1px solid gray;
-  background-color: white;
 }
 
 .search-div input[type="search"] {
@@ -126,6 +361,15 @@
   align-items: center;
 }
 
+.Add-div button {
+  padding: 15px 30px;
+}
+
+.cat-add {
+  display: flex;
+  justify-content: end;
+}
+
 .Form {
   position: fixed;
   width: 100%;
@@ -154,6 +398,69 @@
   background-color: white;
 }
 
+/*DisplayRecipes*/
+.DisplayRecipes {
+  height: calc(100% - 101px);
+  width: 100%;
+}
+
+.DisplayRecipes .recipes-div {
+  height: 100%;
+
+  margin: 0px;
+  padding: 0px;
+
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  overflow: scroll;
+}
+.DisplayRecipes .item {
+  width: 250px;
+  height: 200px;
+  margin: 5px 0px;
+
+  word-wrap: break-word;
+  background-color: white;
+}
+
+.Recipecard {
+  height: 100%;
+  border-radius: 20px 20px 0px 0px;
+}
+.Recipecard .img {
+  height: 70%;
+  background-color: gray;
+  border-radius: 20px 20px 0px 0px;
+  text-align: center;
+  position: relative;
+}
+.cook-time {
+  background-color: white;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+.Recipecard h3 {
+  margin: 0px;
+}
+.Recipecard p {
+  margin: 0px;
+}
+.Recipe {
+  width: 100%;
+  height: 100%;
+  word-wrap: break-word;
+  text-align: center;
+}
+.category-prep-cook-serve {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
 @media (max-width: 700px) {
   .Header {
     flex-direction: column-reverse;

@@ -13,7 +13,7 @@ function Sidebar({ handleLogOut }) {
   return (
     <div className="Sidebar">
       <h3 className="logo">
-        [Home]<span>Recipes</span>
+        Home<span>Recipes</span>
       </h3>
       <div className="sidebar-links">
         <div onClick={handleNavigateHome}>Dashboard</div>

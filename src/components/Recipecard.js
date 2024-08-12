@@ -14,8 +14,22 @@ class Recipecard extends React.Component {
   render() {
     return (
       <div className="Recipecard">
-       <div>{JSON.stringify(this.props.recipe)}</div>
-        <button onClick={()=>this.props.handleDeleteRecipe(this.props.recipe.recipeName)}>delete</button>
+        <div
+          className="img"
+          onClick={() =>
+            this.props.handleNavigateRecipe(
+              this.props.recipeName,
+              this.props.index
+            )
+          }
+        >
+          img
+          <div className="cook-time">{this.props.recipe.cookingTime}</div>
+        </div>
+        <div className="food-type">
+          <h3>{this.props.recipe.recipeName}</h3>
+          <p>{this.props.recipe.category}</p>
+        </div>
       </div>
     );
   }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import Recipecard from "./Recipecard";
 
 function DisplayRecipes({ recipes, handleDeleteRecipe }) {
   const [showPage, setShowPage] = useState(false);
@@ -24,10 +25,16 @@ function DisplayRecipes({ recipes, handleDeleteRecipe }) {
       {recipe_name !== "" && typeof recipe_name !== "undefined" ? (
         <Outlet context={{ recipeArr: recipes[recipeInfo.index] }} />
       ) : (
-        <ul>
+        <div className="recipes-div">
           {recipes.map((recipe, i) => (
-            <li key={i}>
-              <div
+            <div className="item" key={i}>
+              <Recipecard
+                recipe={recipe}
+                handleNavigateRecipe={handleNavigateRecipe}
+                recipeName={recipe.recipeName}
+                index={i}
+              />
+              {/*<div
                 className="img"
                 onClick={() => handleNavigateRecipe(recipe.recipeName, i)}
               >
@@ -36,10 +43,10 @@ function DisplayRecipes({ recipes, handleDeleteRecipe }) {
               {JSON.stringify(recipe)}
               <button onClick={() => handleDeleteRecipe(recipe.recipeName)}>
                 del
-              </button>
-            </li>
+              </button>*/}
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

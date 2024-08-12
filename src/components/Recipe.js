@@ -26,9 +26,13 @@ function Recipe({
   }
   //navigation
   const navigation = useNavigate();
-  function handleSubmit() {
+  function handleUpdateSubmit() {
     handleRecipeResubmit(recipeArr.recipeName, obj);
     navigation(`/home/recipes/${obj.recipeName}`);
+  }
+  function handleDeleSubmit() {
+    handleDeleteRecipe(recipeArr.recipeName);
+    navigation("/home/recipes");
   }
 
   const [currRecipe] = recipes.filter(
@@ -133,22 +137,38 @@ function Recipe({
             </div>
           </div>
         ) : (
-          <div className="recipe-info">{JSON.stringify(currRecipe)}</div>
+          <div className="recipe-info">
+            <h1>{currRecipe.recipeName}</h1>
+            <div className="category-prep-cook-serve">
+              <div className="category-text">{currRecipe.category}</div>
+              <div className="prep-text">{currRecipe.prepTime}</div>
+              <div className="cook-text">{currRecipe.cookingTime}</div>
+              <div className="serve-text">{currRecipe.servings}</div>
+            </div>
+
+            <div className="ingredients">
+              <h3>Ingredients</h3>
+              <div className="ingredients-text">{currRecipe.ingredients}</div>
+            </div>
+            <div className="instructions">
+              <h3>Instructions</h3>
+              <div className="instructions-text">{currRecipe.instructions}</div>
+            </div>
+          </div>
         )}
         <div className="delete-update">
           <button
             className="update"
             onClick={() => {
-              edit ? handleSubmit() : handleUpdateRecipe(recipeArr.recipeName);
+              edit
+                ? handleUpdateSubmit()
+                : handleUpdateRecipe(recipeArr.recipeName);
             }}
           >
             {edit ? <div className="update-btn">Update </div> : <div>edit</div>}
           </button>
 
-          <button
-            className="delete"
-            onClick={() => handleDeleteRecipe(recipeArr.recipeName)}
-          >
+          <button className="delete" onClick={() => handleDeleSubmit()}>
             del
           </button>
         </div>
