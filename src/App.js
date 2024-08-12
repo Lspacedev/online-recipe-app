@@ -1,36 +1,31 @@
-import './App.css';
-import { useState, useEffect } from 'react';
-import Home from './components/Home';
-import Registration from './components/Registration';
+import "./App.css";
+import { useState, useEffect } from "react";
+import Home from "./components/Home";
+import Registration from "./components/Registration";
 import Login from "./components/Login";
-import Landing from './components/Landing';
-import Profile from './components/Profile';
+import Landing from "./components/Landing";
+import Profile from "./components/Profile";
 
-import DisplayRecipes from './components/DisplayRecipes';
-import Recipe from './components/Recipe';
+import DisplayRecipes from "./components/DisplayRecipes";
+import Recipe from "./components/Recipe";
 
-import ProtectedRoutes from './components/ProtectedRoute';
+import ProtectedRoutes from "./components/ProtectedRoute";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
-    const [loginStatus, setLoginStatus] = useState(false);
-    const [registrationStatus, setRegistrationStatus] = useState(false);
-  
-  useEffect(()=>{
-    fetch('http://localhost:8000/users')
-    .then((res)=>res.json())
-    .then((res)=>{
-      setUsers(res);
-    }
-    );
-   
+  const [loginStatus, setLoginStatus] = useState(false);
+  const [registrationStatus, setRegistrationStatus] = useState(false);
 
-
-  },[])
   useEffect(() => {
-
+    fetch("http://localhost:8000/users")
+      .then((res) => res.json())
+      .then((res) => {
+        setUsers(res);
+      });
+  }, []);
+  useEffect(() => {
     const usersCopy = users.slice(0);
     const foundUser = usersCopy.find(
       (user) => user.username === currentUser.username
@@ -51,24 +46,14 @@ function App() {
       alert("no user info");
     } else {
       alert("Account created.");
-   
-      fetch('http://localhost:8000/users', {
-        method: 'POST',
+
+      fetch("http://localhost:8000/users", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',       
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(obj), 
-      }).then(()=>console.log("user added"));
-  
-
-
-
-
-
-
-
-
-
+        body: JSON.stringify(obj),
+      }).then(() => console.log("user added"));
 
       setUsers((prev) => [...prev, obj]);
       setRegistrationStatus(true);
@@ -105,7 +90,7 @@ function App() {
   }
 
   function handleLogOut() {
-   /* const usersCopy = users.slice(0);
+    /* const usersCopy = users.slice(0);
     const foundUser = usersCopy.find((user) => user.id === currentUser.id);
     console.log(currentTemp, foundUser, currentUser);
 
@@ -131,21 +116,19 @@ function App() {
 
     //if recipe doesn't exist add it
     if (filteredRecipe.length === 0) {
-      let updatedUser =  {...currentUser};
+      let updatedUser = { ...currentUser };
       updatedUser.recipes = [...updatedUser.recipes, obj];
       let recipes = updatedUser.recipes;
 
-  
       fetch(`http://localhost:8000/users/${currentUser.id}`, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({recipes}),
+        body: JSON.stringify({ recipes }),
       })
-      .then(response => response.json())
-      .then(user => console.log(user, "uppdadad"));
-  
+        .then((response) => response.json())
+        .then((user) => console.log(user, "uppdadad"));
 
       setCurrentUser((prev) => ({ ...prev, recipes: [...prev.recipes, obj] }));
     }
@@ -153,26 +136,25 @@ function App() {
 
   function handleDeleteRecipe(name) {
     const filteredRecipes = currentUser.recipes.filter(
-     (recipe) => recipe.recipeName !== name
+      (recipe) => recipe.recipeName !== name
     );
-    
+
     let recipes = filteredRecipes;
     fetch(`http://localhost:8000/users/${currentUser.id}`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({recipes}),
+      body: JSON.stringify({ recipes }),
     })
-    .then(response => response.json())
-    .then(user => console.log(user, "uppdadad2"));
+      .then((response) => response.json())
+      .then((user) => console.log(user, "uppdadad2"));
 
-    
     setCurrentUser((prev) => ({ ...prev, recipes: filteredRecipes }));
   }
 
   function handleUpdateRecipe(name) {
-    console.log("ufdfcilckece")
+    console.log("ufdfcilckece");
     const recipesCopy = currentUser.recipes.slice(0);
     let recipe = recipesCopy.find((recipe) => recipe.recipeName === name);
     recipe.edit = true;
@@ -181,13 +163,13 @@ function App() {
   }
 
   function handleRecipeResubmit(name, obj) {
-    const recipesCopy= currentUser.recipes.slice(0);
+    const recipesCopy = currentUser.recipes.slice(0);
     let recipe = recipesCopy.find((recipe) => recipe.recipeName === name);
     if (obj.recipeName) {
       recipe.recipeName = obj.recipeName;
     }
     if (obj.ingredients) {
-      recipe.ingredients= obj.ingredients;
+      recipe.ingredients = obj.ingredients;
     }
     if (obj.instructions) {
       recipe.instructions = obj.instructions;
@@ -204,26 +186,24 @@ function App() {
     if (obj.servings) {
       recipe.servings = obj.servings;
     }
- 
-    recipe.edit = false;
 
+    recipe.edit = false;
 
     let recipes = recipesCopy;
     fetch(`http://localhost:8000/users/${currentUser.id}`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({recipes}),
+      body: JSON.stringify({ recipes }),
     })
-    .then(response => response.json())
-    .then(user => console.log(user, "uppdadad3"));
-
+      .then((response) => response.json())
+      .then((user) => console.log(user, "uppdadad3"));
 
     setCurrentUser((prev) => ({ ...prev, recipes: recipesCopy }));
   }
 
-  console.log("users",users, "current user", currentUser)
+  console.log("users", users, "current user", currentUser);
   return (
     <Router>
       <div className="App">
@@ -252,20 +232,37 @@ function App() {
           />
 
           <Route element={<ProtectedRoutes loginStatus={loginStatus} />}>
-      
-            <Route path="home" element={ <Home handleAddRecipe={handleAddRecipe} handleLogOut={handleLogOut}/>}>
-           
+            <Route
+              path="home"
+              element={
+                <Home
+                  handleAddRecipe={handleAddRecipe}
+                  handleLogOut={handleLogOut}
+                />
+              }
+            >
+              <Route index element={<div>your landing content</div>} />
+              <Route
+                path="recipes"
+                element={
+                  <DisplayRecipes
+                    recipes={currentUser.recipes || []}
+                    handleDeleteRecipe={handleDeleteRecipe}
+                  />
+                }
+              >
                 <Route
-                  path='recipes'
+                  path=":recipe_name"
                   element={
-                    <DisplayRecipes recipes={currentUser.recipes || []} handleDeleteRecipe={handleDeleteRecipe}/>
+                    <Recipe
+                      recipes={currentUser.recipes || []}
+                      handleUpdateRecipe={handleUpdateRecipe}
+                      handleRecipeResubmit={handleRecipeResubmit}
+                      handleDeleteRecipe={handleDeleteRecipe}
+                    />
                   }
-                >
-                  <Route
-                    path=":recipe_name"
-                    element={
-                    <Recipe  recipes={currentUser.recipes || []} handleUpdateRecipe={handleUpdateRecipe} handleRecipeResubmit={handleRecipeResubmit} handleDeleteRecipe={handleDeleteRecipe}/>}/>
-                </Route>
+                />
+              </Route>
               <Route
                 path="profile"
                 element={
@@ -276,17 +273,12 @@ function App() {
                   />
                 }
               />
-
-            
             </Route>
-                          
-
           </Route>
         </Routes>
       </div>
     </Router>
-   
-  )
+  );
 }
 
 export default App;

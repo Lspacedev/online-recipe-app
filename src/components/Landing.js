@@ -4,7 +4,7 @@ function Landing() {
   return (
     <div className="landing">
       <nav>
-        <div className="logo">todoList</div>
+        <div className="logo">Recipe</div>
         <div className="login-register">
           <Link to="login">
             <button className="login-btn">Log in</button>
@@ -15,9 +15,9 @@ function Landing() {
         </div>
       </nav>
       <div className="landing-info">
-        <div className="landing-title">Organize your day to day tasks.</div>
+        <div className="landing-title">Keep track of your recipes</div>
         <div className="landing-subtitle">
-          A simple way to manage your daily tasks.
+          A simple way to manage your favourite recipes.
         </div>
         <Link to="registration">
           <button className="register-btn2">Register Now</button>

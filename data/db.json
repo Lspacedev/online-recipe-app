@@ -9,13 +9,13 @@
       "password": "guest",
       "recipes": [
         {
-          "recipeName": "cel",
-          "ingredients": "",
-          "instructions": "",
-          "category": "",
-          "prepTime": "",
-          "cookingTime": "",
-          "servings": "",
+          "recipeName": "soup",
+          "ingredients": "onion, carrots, water",
+          "instructions": "lorem lorem",
+          "category": "dinner",
+          "prepTime": "20minutes",
+          "cookingTime": "10minutes",
+          "servings": "1",
           "edit": false
         }
       ]
