@@ -9,6 +9,7 @@ function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
     email: "",
     username: "",
     password: "",
+    profilePic: "",
     recipes: []
   });
 
@@ -25,6 +26,17 @@ function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
     e.preventDefault();
     const { name, value } = e.target;
     setUserDetails((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function handleImageUpload(e) {
+    let input = document.getElementById("profile-pic");
+    var fReader = new FileReader();
+    fReader.readAsDataURL(input.files[0]);
+    fReader.onloadend = function (event) {
+      userDetails.profilePic = event.target.result;
+    };
+    /*let url = URL.createObjectURL(e.target.files[0]);
+    obj.pic = url;*/
   }
 
   function handleSubmit(e) {
@@ -59,6 +71,18 @@ function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
                 name="password"
                 onChange={(e) => handleChange(e)}
                 value={userDetails.password}
+              />
+            </label>
+          </div>
+
+          <div className="profile-pic">
+            <label htmlFor="profile-pic">
+              Profile picture:
+              <input
+                type="file"
+                id="profile-pic"
+                name="pic"
+                onChange={(e) => handleImageUpload(e)}
               />
             </label>
           </div>

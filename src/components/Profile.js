@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-function Profile({ username, password, handleUserUpdate }) {
+function Profile({ username, password, profilePic, handleUserUpdate }) {
   const [userUpdate, setUserUpdate] = useState({
     username: "",
     password: "",
+    profilePic: "",
   });
   const [update, setUpdate] = useState(false);
 
@@ -18,12 +19,37 @@ function Profile({ username, password, handleUserUpdate }) {
     setUserUpdate((prev) => ({ ...prev, [name]: value }));
   }
 
+  function handleImageUpload(e) {
+    let input = document.getElementById("profile-pic2");
+    var fReader = new FileReader();
+    fReader.readAsDataURL(input.files[0]);
+
+    fReader.onloadend = function (event) {
+      setUserUpdate({ ...userUpdate,   profilePic: event.target.result });
+    };
+    /*let url = URL.createObjectURL(e.target.files[0]);
+    obj.pic = url;*/
+  }
+
   return (
     <div className="Profile">
       <div className="profile-picture"></div>
       <div className="contact-details">
         <h1>Account details</h1>
-
+        {update? 
+        (<div className="profile-pic2">
+            <label htmlFor="profile-pic2">
+              Profile picture:
+              <input
+                  type="file"
+                  id="profile-pic2"
+                  name="pic"
+                  onChange={(e) => handleImageUpload(e)}
+                />
+            </label>
+          </div>)
+          :(<div className="profile-pic">{profilePic && <img src={profilePic} />}</div>)}
+  
         <div className="user-pass">
           <div className="user">
             <h4>Username:</h4>

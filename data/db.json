@@ -1,54 +1,14 @@
 {
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "name": "",
       "surname": "",
       "email": "",
       "username": "guest",
       "password": "guest",
-      "recipes": [
-        {
-          "recipeName": "chicken soup",
-          "ingredients": "onion, carrots, water",
-          "instructions": "lorem lorem",
-          "category": "dinner",
-          "prepTime": "20minutes",
-          "cookingTime": "10minutes",
-          "servings": "4",
-          "edit": false
-        },
-        {
-          "recipeName": "rice",
-          "ingredients": "onion, carrots, water",
-          "instructions": "lorem lorem",
-          "category": "dinner",
-          "prepTime": "20minutes",
-          "cookingTime": "10minutes",
-          "servings": "1",
-          "edit": false
-        },
-        {
-          "recipeName": "chicken ",
-          "ingredients": "onion, carrots, water",
-          "instructions": "lorem lorem",
-          "category": "dinner",
-          "prepTime": "20minutes",
-          "cookingTime": "10minutes",
-          "servings": "1",
-          "edit": false
-        },
-        {
-          "recipeName": "chicken soups",
-          "ingredients": "onion, carrots, water",
-          "instructions": "lorem lorem",
-          "category": "dinner",
-          "prepTime": "20minutes",
-          "cookingTime": "10minutes",
-          "servings": "1",
-          "edit": false
-        }
-      ]
+      "profilePic": "",
+      "recipes": []
     }
   ]
 }

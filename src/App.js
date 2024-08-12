@@ -86,24 +86,42 @@ function App() {
       userCopy.password = obj.password;
     }
 
+    if (obj.profilePic) {
+      userCopy.profilePic = obj.profilePic;
+    }
+
+    let username = users.username;
+    /*fetch(`http://localhost:8000/users/${currentUser.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username }),
+    })
+      .then((response) => response.json())
+      .then((user) => console.log(user, "upuuuuu"));
+  */
+    
+
     setCurrentUser(userCopy);
   }
 
   function handleLogOut() {
-    /* const usersCopy = users.slice(0);
+    const usersCopy = users.slice(0);
     const foundUser = usersCopy.find((user) => user.id === currentUser.id);
-    console.log(currentTemp, foundUser, currentUser);
+ 
 
     if (foundUser) {
       foundUser.id = currentUser.id;
       foundUser.username = currentUser.username;
       foundUser.password = currentUser.password;
-      foundUser.tasks = currentUser.tasks.slice(0);
+      foundUser.recipes = currentUser.recipes.slice(0);
       //usersCopy = usersCopy.filter(user);
+
       setUsers(usersCopy);
     }
 
-    console.log("new", usersCopy);*/
+    console.log("new", foundUser);
 
     setLoginStatus(false);
   }
@@ -269,6 +287,7 @@ function App() {
                   <Profile
                     username={currentUser.username}
                     password={currentUser.password}
+                    profilePic={currentUser.profilePic}
                     handleUserUpdate={handleUserUpdate}
                   />
                 }

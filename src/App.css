@@ -218,6 +218,11 @@ nav {
   padding: 0px;
 }
 
+.profile-pic img{
+  width: 150px;
+  height: 150px;
+}
+
 .Profile h1 {
   margin: 0px;
 }
