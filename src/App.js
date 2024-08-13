@@ -244,6 +244,20 @@ function App() {
     setCurrentUser((prev) => ({ ...prev, recipes: recipesCopy }));
   }
 
+  function getPicLink(obj) {
+    if (obj.pic === "") {
+      if (obj.category === "breakfast") {
+        return "/images/breakfast.jpg";
+      } else if (obj.category === "lunch") {
+        return "/images/lunch.jpg";
+      } else if (obj.category === "dinner") {
+        return "/images/dinner.jpg";
+      }
+    } else {
+      return obj.pic;
+    }
+  }
+
   return (
     <Router>
       <div className="App">
@@ -281,7 +295,7 @@ function App() {
                 />
               }
             >
-              <Route index element={<div>your landing content</div>} />
+              <Route index element={<div>landing content</div>} />
               <Route
                 path="recipes"
                 element={
@@ -299,6 +313,7 @@ function App() {
                       handleUpdateRecipe={handleUpdateRecipe}
                       handleRecipeResubmit={handleRecipeResubmit}
                       handleDeleteRecipe={handleDeleteRecipe}
+                      getPicLink={getPicLink}
                     />
                   }
                 />

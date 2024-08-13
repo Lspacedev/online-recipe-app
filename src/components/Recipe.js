@@ -7,6 +7,7 @@ function Recipe({
   handleUpdateRecipe,
   handleRecipeResubmit,
   handleDeleteRecipe,
+  getPicLink,
 }) {
   const [obj, setObj] = useState({
     recipeName: "",
@@ -159,18 +160,34 @@ function Recipe({
         ) : (
           <div className="recipe-info">
             <h1>{currRecipe.recipeName}</h1>
-            <div className="category-prep-cook-serve">
-              <div className="category-text">{currRecipe.category}</div>
-              <div className="prep-text">{currRecipe.prepTime}</div>
-              <div className="cook-text">{currRecipe.cookingTime}</div>
-              <div className="serve-text">{currRecipe.servings}</div>
+            <div className="category-text">
+              <p>{currRecipe.category}</p>
+            </div>
+            <img
+              src={getPicLink(currRecipe)}
+              alt="recipe picture"
+              id="recipe-pic"
+            />
+            <div className="prep-cook-serve">
+              <div className="prep-text">
+                <div className="recipe-sub-head">Prep Time</div>
+                <p>{currRecipe.prepTime}</p>
+              </div>
+              <div className="cook-text">
+                <div className="recipe-sub-head">Cook Time</div>
+                <p>{currRecipe.cookingTime}</p>
+              </div>
+              <div className="serve-text">
+                <div className="recipe-sub-head">Servings</div>
+                <p>{currRecipe.servings}</p>
+              </div>
             </div>
 
-            <div className="ingredients">
+            <div className="ingredients-div">
               <h3>Ingredients</h3>
               <div className="ingredients-text">{currRecipe.ingredients}</div>
             </div>
-            <div className="instructions">
+            <div className="instructions-div">
               <h3>Instructions</h3>
               <div className="instructions-text">{currRecipe.instructions}</div>
             </div>
