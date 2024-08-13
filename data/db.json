@@ -1,14 +1,3 @@
 {
-  "users": [
-    {
-      "id": "1",
-      "name": "",
-      "surname": "",
-      "email": "",
-      "username": "odin",
-      "password": "test",
-      "profilePic": "blob:http://localhost:3001/c61c69f6-213d-4caa-a8fc-73f04d2e6d64",
-      "recipes": []
-    }
-  ]
+  "users": []
 }
