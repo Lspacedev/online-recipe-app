@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-function Profile({ username, password, profilePic, handleUserUpdate }) {
+function Profile({
+  username,
+  password,
+  profilePic,
+  handleUserUpdate,
+  handleDeleteAccount,
+}) {
   const [userUpdate, setUserUpdate] = useState({
     username: "",
     password: "",
@@ -21,14 +27,11 @@ function Profile({ username, password, profilePic, handleUserUpdate }) {
 
   function handleImageUpload(e) {
     let input = document.getElementById("profile-pic2");
-    var fReader = new FileReader();
-    fReader.readAsDataURL(input.files[0]);
-
-    fReader.onloadend = function (event) {
-      setUserUpdate({ ...userUpdate,   profilePic: event.target.result });
-    };
-    /*let url = URL.createObjectURL(e.target.files[0]);
-    obj.pic = url;*/
+    let url = URL.createObjectURL(input.files[0]);
+    setUserUpdate({
+      ...userUpdate,
+      profilePic: url,
+    });
   }
 
   return (
@@ -36,20 +39,24 @@ function Profile({ username, password, profilePic, handleUserUpdate }) {
       <div className="profile-picture"></div>
       <div className="contact-details">
         <h1>Account details</h1>
-        {update? 
-        (<div className="profile-pic2">
+        {update ? (
+          <div className="profile-pic2">
             <label htmlFor="profile-pic2">
               Profile picture:
               <input
-                  type="file"
-                  id="profile-pic2"
-                  name="pic"
-                  onChange={(e) => handleImageUpload(e)}
-                />
+                type="file"
+                id="profile-pic2"
+                name="pic"
+                onChange={(e) => handleImageUpload(e)}
+              />
             </label>
-          </div>)
-          :(<div className="profile-pic">{profilePic && <img src={profilePic} />}</div>)}
-  
+          </div>
+        ) : (
+          <div className="profile-pic">
+            {profilePic && <img src={profilePic} />}
+          </div>
+        )}
+
         <div className="user-pass">
           <div className="user">
             <h4>Username:</h4>
@@ -93,11 +100,19 @@ function Profile({ username, password, profilePic, handleUserUpdate }) {
             )}
           </div>
         </div>
-        <button
-          onClick={() => (update ? handleSubmit(userUpdate) : setUpdate(true))}
-        >
-          {update ? "Submit" : "Update"}
-        </button>
+        <div className="account-delete-update">
+          <button
+            onClick={() =>
+              update ? handleSubmit(userUpdate) : setUpdate(true)
+            }
+          >
+            {update ? "Submit" : "Update"}
+          </button>
+
+          <button id="account-delete" onClick={handleDeleteAccount}>
+            Delete my account
+          </button>
+        </div>
       </div>
     </div>
   );

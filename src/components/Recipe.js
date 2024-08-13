@@ -16,6 +16,7 @@ function Recipe({
     prepTime: "",
     cookingTime: "",
     servings: "",
+    pic: "",
     edit: false,
   });
   const { recipeArr } = useOutletContext();
@@ -33,6 +34,14 @@ function Recipe({
   function handleDeleSubmit() {
     handleDeleteRecipe(recipeArr.recipeName);
     navigation("/home/recipes");
+  }
+  function handleImageUpload(e) {
+    let input = document.getElementById("pic");
+    let url = URL.createObjectURL(input.files[0]);
+    setObj({
+      ...obj,
+      pic: url,
+    });
   }
 
   const [currRecipe] = recipes.filter(
@@ -132,6 +141,17 @@ function Recipe({
                   name="servings"
                   onChange={(e) => handleChange(e)}
                   value={obj.servings}
+                />
+              </label>
+            </div>
+            <div className="pic">
+              <label htmlFor="pic">
+                Picture:
+                <input
+                  type="file"
+                  id="pic"
+                  name="pic"
+                  onChange={(e) => handleImageUpload(e)}
                 />
               </label>
             </div>

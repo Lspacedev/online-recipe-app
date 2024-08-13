@@ -20,6 +20,20 @@ function DisplayRecipes({ recipes, handleDeleteRecipe }) {
     console.log(recipe_name, recipeInfo);
   }, [recipeInfo]);
 
+  function getPicLink(obj) {
+    if (obj.pic === "") {
+      if (obj.category === "breakfast") {
+        return "/images/breakfast.jpg";
+      } else if (obj.category === "lunch") {
+        return "/images/lunch.jpg";
+      } else if (obj.category === "dinner") {
+        return "/images/dinner.jpg";
+      }
+    } else {
+      return obj.pic;
+    }
+  }
+
   return (
     <div className="DisplayRecipes">
       {recipe_name !== "" && typeof recipe_name !== "undefined" ? (
@@ -32,6 +46,7 @@ function DisplayRecipes({ recipes, handleDeleteRecipe }) {
                 recipe={recipe}
                 handleNavigateRecipe={handleNavigateRecipe}
                 recipeName={recipe.recipeName}
+                pic={getPicLink(recipe)}
                 index={i}
               />
               {/*<div

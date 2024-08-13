@@ -10,7 +10,6 @@ class Recipecard extends React.Component {
   increment() {
     this.setState({ count: this.state.count + 1 });
   }
-
   render() {
     return (
       <div className="Recipecard">
@@ -23,7 +22,8 @@ class Recipecard extends React.Component {
             )
           }
         >
-          img
+          <img src={this.props.pic} alt="recipe picture" />
+
           <div className="cook-time">{this.props.recipe.cookingTime}</div>
         </div>
         <div className="food-type">

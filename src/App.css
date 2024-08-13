@@ -218,7 +218,7 @@ nav {
   padding: 0px;
 }
 
-.profile-pic img{
+.profile-pic img {
   width: 150px;
   height: 150px;
 }
@@ -440,6 +440,11 @@ nav {
   border-radius: 20px 20px 0px 0px;
   text-align: center;
   position: relative;
+}
+
+.Recipecard .img img {
+  height: 100%;
+  width: 100%;
 }
 .cook-time {
   background-color: white;

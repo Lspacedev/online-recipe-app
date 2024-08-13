@@ -3,12 +3,13 @@ import { useState } from "react";
 function Form({ handleAddRecipe, toggleClicked }) {
   const [obj, setObj] = useState({
     recipeName: "",
-    ingredients: "", 
-    instructions: "", 
-    category: "", 
-    prepTime: "", 
-    cookingTime: "", 
+    ingredients: "",
+    instructions: "",
+    category: "",
+    prepTime: "",
+    cookingTime: "",
     servings: "",
+    pic: "",
     edit: false,
   });
   function handleChange(e) {
@@ -17,11 +18,18 @@ function Form({ handleAddRecipe, toggleClicked }) {
     setObj((prev) => ({ ...prev, [name]: value }));
   }
 
-
   function handleSubmit(e) {
     e.preventDefault();
     handleAddRecipe(obj);
     toggleClicked();
+  }
+  function handleImageUpload(e) {
+    let input = document.getElementById("pic");
+    let url = URL.createObjectURL(input.files[0]);
+    setObj({
+      ...obj,
+      pic: url,
+    });
   }
 
   function handleFormClose() {
@@ -30,9 +38,9 @@ function Form({ handleAddRecipe, toggleClicked }) {
 
   return (
     <div className="Form">
-        <div className="form-close" onClick={handleFormClose}>
-          x
-        </div>
+      <div className="form-close" onClick={handleFormClose}>
+        x
+      </div>
       <div className="form-div">
         <h3>Enter Recipe Information</h3>
 
@@ -52,7 +60,7 @@ function Form({ handleAddRecipe, toggleClicked }) {
 
           <div className="ingredients">
             <label htmlFor="ingredients">
-            Ingredients
+              Ingredients
               <input
                 type="text"
                 id="ingredients"
@@ -62,11 +70,10 @@ function Form({ handleAddRecipe, toggleClicked }) {
               />
             </label>
           </div>
-       
 
           <div className="instructions">
             <label htmlFor="instructions">
-            Instructions
+              Instructions
               <input
                 type="text"
                 id="instructions"
@@ -79,7 +86,7 @@ function Form({ handleAddRecipe, toggleClicked }) {
 
           <div className="category">
             <label htmlFor="category">
-            Category
+              Category
               <input
                 type="text"
                 id="category"
@@ -92,7 +99,7 @@ function Form({ handleAddRecipe, toggleClicked }) {
 
           <div className="prepTime">
             <label htmlFor="prepTime">
-            Preperation Time
+              Preperation Time
               <input
                 type="text"
                 id="prepTime"
@@ -105,7 +112,7 @@ function Form({ handleAddRecipe, toggleClicked }) {
 
           <div className="cookingTime">
             <label htmlFor="cookingTime">
-            Cooking Time
+              Cooking Time
               <input
                 type="text"
                 id="cookingTime"
@@ -117,13 +124,24 @@ function Form({ handleAddRecipe, toggleClicked }) {
           </div>
           <div className="servings">
             <label htmlFor="servings">
-            Servings
+              Servings
               <input
                 type="text"
                 id="servings"
                 name="servings"
                 onChange={(e) => handleChange(e)}
                 value={obj.servings}
+              />
+            </label>
+          </div>
+          <div className="pic">
+            <label htmlFor="pic">
+              Picture:
+              <input
+                type="file"
+                id="pic"
+                name="pic"
+                onChange={(e) => handleImageUpload(e)}
               />
             </label>
           </div>

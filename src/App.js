@@ -37,6 +37,8 @@ function App() {
     setUsers(usersCopy);
   }, [currentUser]);
 
+  /***  USER FUNCTIONS TO: REGISTER, LOGIN, LOGOUT, UPDATE DETAILS ****/
+
   function handleRegistrationSubmit(obj) {
     //check if user exists
     const filteredUser = users.filter((user) => user.username === obj.username);
@@ -53,7 +55,7 @@ function App() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(obj),
-      }).then(() => console.log("user added"));
+      }).then(() => console.log("user added to database"));
 
       setUsers((prev) => [...prev, obj]);
       setRegistrationStatus(true);
@@ -90,41 +92,54 @@ function App() {
       userCopy.profilePic = obj.profilePic;
     }
 
-    let username = users.username;
-    /*fetch(`http://localhost:8000/users/${currentUser.id}`, {
+    fetch(`http://localhost:8000/users/${currentUser.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username }),
+      body: JSON.stringify(userCopy),
     })
       .then((response) => response.json())
-      .then((user) => console.log(user, "upuuuuu"));
-  */
-    
+      .then((user) => console.log(user, "user information has been updated"));
 
     setCurrentUser(userCopy);
+  }
+
+  function handleDeleteAccount() {
+    const filteredUsers = users.filter((user) => user.id !== currentUser.id);
+
+    //update database
+    fetch(`http://localhost:8000/users/${currentUser.id}`, {
+      method: "DELETE",
+      headers: {
+        "content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then(() => console.log("User deleted"));
+    //update state
+    setUsers(filteredUsers);
+    //logout
+    setLoginStatus(false);
   }
 
   function handleLogOut() {
     const usersCopy = users.slice(0);
     const foundUser = usersCopy.find((user) => user.id === currentUser.id);
- 
 
     if (foundUser) {
       foundUser.id = currentUser.id;
       foundUser.username = currentUser.username;
       foundUser.password = currentUser.password;
+      foundUser.profilePic = currentUser.profilePic;
       foundUser.recipes = currentUser.recipes.slice(0);
-      //usersCopy = usersCopy.filter(user);
-
       setUsers(usersCopy);
     }
 
-    console.log("new", foundUser);
-
     setLoginStatus(false);
   }
+
+  /***  USER FUNCTIONS TO: ADD, DELETE, UPDATE RECIPES ****/
 
   function handleAddRecipe(obj) {
     //find recipe
@@ -136,6 +151,8 @@ function App() {
     if (filteredRecipe.length === 0) {
       let updatedUser = { ...currentUser };
       updatedUser.recipes = [...updatedUser.recipes, obj];
+
+      //recipes array to update database
       let recipes = updatedUser.recipes;
 
       fetch(`http://localhost:8000/users/${currentUser.id}`, {
@@ -146,8 +163,9 @@ function App() {
         body: JSON.stringify({ recipes }),
       })
         .then((response) => response.json())
-        .then((user) => console.log(user, "uppdadad"));
+        .then((user) => console.log(user, "added recipe to database"));
 
+      //update state
       setCurrentUser((prev) => ({ ...prev, recipes: [...prev.recipes, obj] }));
     }
   }
@@ -166,13 +184,13 @@ function App() {
       body: JSON.stringify({ recipes }),
     })
       .then((response) => response.json())
-      .then((user) => console.log(user, "uppdadad2"));
+      .then((user) => console.log(user, "recipe has been deleted"));
 
+    //update state
     setCurrentUser((prev) => ({ ...prev, recipes: filteredRecipes }));
   }
 
   function handleUpdateRecipe(name) {
-    console.log("ufdfcilckece");
     const recipesCopy = currentUser.recipes.slice(0);
     let recipe = recipesCopy.find((recipe) => recipe.recipeName === name);
     recipe.edit = true;
@@ -183,6 +201,7 @@ function App() {
   function handleRecipeResubmit(name, obj) {
     const recipesCopy = currentUser.recipes.slice(0);
     let recipe = recipesCopy.find((recipe) => recipe.recipeName === name);
+    //*****refactor to switch statement*****
     if (obj.recipeName) {
       recipe.recipeName = obj.recipeName;
     }
@@ -204,9 +223,12 @@ function App() {
     if (obj.servings) {
       recipe.servings = obj.servings;
     }
+    if (obj.pic) {
+      recipe.pic = obj.pic;
+    }
 
     recipe.edit = false;
-
+    //recipes array to update database
     let recipes = recipesCopy;
     fetch(`http://localhost:8000/users/${currentUser.id}`, {
       method: "PATCH",
@@ -216,12 +238,12 @@ function App() {
       body: JSON.stringify({ recipes }),
     })
       .then((response) => response.json())
-      .then((user) => console.log(user, "uppdadad3"));
+      .then((user) => console.log(user, "recipe has been updated"));
 
+    //update state
     setCurrentUser((prev) => ({ ...prev, recipes: recipesCopy }));
   }
 
-  console.log("users", users, "current user", currentUser);
   return (
     <Router>
       <div className="App">
@@ -289,6 +311,7 @@ function App() {
                     password={currentUser.password}
                     profilePic={currentUser.profilePic}
                     handleUserUpdate={handleUserUpdate}
+                    handleDeleteAccount={handleDeleteAccount}
                   />
                 }
               />

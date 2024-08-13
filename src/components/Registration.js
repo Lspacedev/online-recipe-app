@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
   const [userDetails, setUserDetails] = useState({
-    id: count + 1,
-    name: "", 
+    id: (count + 1).toString(),
+    name: "",
     surname: "",
     email: "",
     username: "",
     password: "",
     profilePic: "",
-    recipes: []
+    recipes: [],
   });
 
   //navigation
@@ -30,13 +30,11 @@ function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
 
   function handleImageUpload(e) {
     let input = document.getElementById("profile-pic");
-    var fReader = new FileReader();
-    fReader.readAsDataURL(input.files[0]);
-    fReader.onloadend = function (event) {
-      userDetails.profilePic = event.target.result;
-    };
-    /*let url = URL.createObjectURL(e.target.files[0]);
-    obj.pic = url;*/
+    let url = URL.createObjectURL(input.files[0]);
+    setUserDetails({
+      ...userDetails,
+      profilePic: url,
+    });
   }
 
   function handleSubmit(e) {
