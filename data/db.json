@@ -1,3 +1,14 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "1",
+      "name": "",
+      "surname": "",
+      "email": "",
+      "username": "test",
+      "password": "$2a$10$6f3P3iEOyyfMUPt87Xd5GOtKX5W/QNk9WOroYL4rlWL1B0Wt.x/lm",
+      "profilePic": "",
+      "recipes": []
+    }
+  ]
 }

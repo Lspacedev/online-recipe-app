@@ -11,6 +11,7 @@ import Recipe from "./components/Recipe";
 
 import ProtectedRoutes from "./components/ProtectedRoute";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import bcrypt from "bcryptjs-react";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -39,7 +40,7 @@ function App() {
 
   /***  USER FUNCTIONS TO: REGISTER, LOGIN, LOGOUT, UPDATE DETAILS ****/
 
-  function handleRegistrationSubmit(obj) {
+  async function handleRegistrationSubmit(obj) {
     //check if user exists
     const filteredUser = users.filter((user) => user.username === obj.username);
     if (filteredUser.length > 0) {
@@ -48,6 +49,8 @@ function App() {
       alert("no user info");
     } else {
       alert("Account created.");
+      const salt = await bcrypt.genSalt();
+      obj.password = await bcrypt.hash(obj.password, salt);
 
       fetch("http://localhost:8000/users", {
         method: "POST",
@@ -66,12 +69,21 @@ function App() {
     const findUser = users.filter((user) => user.username === obj.username);
     if (findUser.length > 0) {
       let [user] = findUser;
-      if (user.password === obj.password) {
+      bcrypt.compare(obj.password, user.password).then((res) => {
+        if (res === true) {
+          console.log("logged in");
+          setLoginStatus(true);
+          setCurrentUser(user);
+        } else {
+          alert("invalid login password");
+        }
+      });
+      /*if (user.password === obj.password) {
         setLoginStatus(true);
         setCurrentUser(user);
       } else {
         alert("invalid login password");
-      }
+      }*/
     } else {
       alert("user does not exist");
     }
