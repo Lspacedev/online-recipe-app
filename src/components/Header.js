@@ -1,27 +1,54 @@
 import Searchbar from "./Searchbar";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { IoIosSearch } from "react-icons/io";
 
-function Header({handleSearchSubmit, handleSearchChange, searchInput}) {
+function Header({
+  handleSearchSubmit,
+  handleSearchChange,
+  searchInput,
+  profilePic,
+}) {
   //navigation
   const navigation = useNavigate();
   function handleHamBurgerMenu() {
     const sidebar = document.querySelector(".Sidebar");
     sidebar.classList.toggle("active");
   }
+  function handleSearchMenu() {
+    const search = document.querySelector(".search-div");
+    search.classList.toggle("active");
+  }
   function handleNavigateProfile() {
     navigation("/home/profile");
   }
   return (
     <div className="Header">
-      <Searchbar handleSearchSubmit={handleSearchSubmit} handleSearchChange={handleSearchChange} searchInput={searchInput}/>
+      <Searchbar
+        handleSearchSubmit={handleSearchSubmit}
+        handleSearchChange={handleSearchChange}
+        searchInput={searchInput}
+      />
       <div className="ham-profile">
         <div className="hamburger-menu" onClick={handleHamBurgerMenu}>
-          Ham
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
 
-        <div className="profile-link" onClick={handleNavigateProfile}>
-          profile
+        <div className="profile-link">
+          <div className="search-icon-btn" onClick={handleSearchMenu}>
+            <IoIosSearch
+              id="profile-search-icon"
+              style={{
+                fontSize: "1.2rem",
+                margin: "0px",
+              }}
+            />
+          </div>
+          <div className="header-profile-pic" onClick={handleNavigateProfile}>
+            {profilePic && <img src={profilePic} />}
+          </div>
         </div>
       </div>
     </div>

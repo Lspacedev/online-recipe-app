@@ -16,7 +16,10 @@ function Addrecipe({ handleAddRecipe }) {
           />
         )}
 
-        <button onClick={toggleClicked}>New Recipe</button>
+        <button onClick={toggleClicked}>
+          <p id="add-btn-short">+</p>
+          <p id="add-btn-long-text">New Recipe</p>
+        </button>
       </div>
     </div>
   );

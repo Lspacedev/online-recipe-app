@@ -18,8 +18,8 @@ import bcrypt from "bcryptjs-react";
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useLocalStorage("current",{});
-  const [loginStatus, setLoginStatus] = useLocalStorage("loginStatus",false);
+  const [currentUser, setCurrentUser] = useLocalStorage("current", {});
+  const [loginStatus, setLoginStatus] = useLocalStorage("loginStatus", false);
   const [registrationStatus, setRegistrationStatus] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [submittedSearch, setsubmittedSearch] = useState("");
@@ -30,16 +30,12 @@ function App() {
     fetch("http://localhost:8000/users")
       .then((res) => res.json())
       .then((res) => {
-        
         setUsers(res);
-
       });
-
   }, []);
   useEffect(() => {
-    
     const usersCopy = users.slice(0);
-    console.log("updating", users)
+    console.log("updating", users);
     const foundUser = usersCopy.find(
       (user) => user.username === currentUser.username
     );
@@ -52,7 +48,13 @@ function App() {
 
   useEffect(() => {
     if (submittedSearch.length > 0) {
-      let filteredRecipes = currentUser.recipes.filter((recipe)=> recipe.recipeName.toLowerCase().match(submittedSearch.toLowerCase()) || recipe.category.toLowerCase().match(submittedSearch.toLowerCase()))
+      let filteredRecipes = currentUser.recipes.filter(
+        (recipe) =>
+          recipe.recipeName
+            .toLowerCase()
+            .match(submittedSearch.toLowerCase()) ||
+          recipe.category.toLowerCase().match(submittedSearch.toLowerCase())
+      );
       setSearchResults(filteredRecipes);
     }
     return () => {
@@ -88,7 +90,6 @@ function App() {
   }
 
   function handleLoginSubmit(obj) {
-    
     const findUser = users.filter((user) => user.username === obj.username);
     if (findUser.length > 0) {
       let [user] = findUser;
@@ -105,7 +106,7 @@ function App() {
             .then((response) => response.json())
             .then((user) => console.log(user, "user information has been updated"));*/
           setLoginStatus(true);
-          
+
           setCurrentUser(user);
         } else {
           alert("invalid login password");
@@ -125,7 +126,6 @@ function App() {
   async function handleUserUpdate(obj) {
     const userCopy = { ...currentUser };
 
-
     if (obj.name) {
       userCopy.name = obj.name;
     }
@@ -133,7 +133,6 @@ function App() {
     if (obj.surname) {
       userCopy.surname = obj.surname;
     }
-
 
     if (obj.email) {
       userCopy.email = obj.email;
@@ -167,6 +166,7 @@ function App() {
   }
 
   function handleDeleteAccount() {
+    alert("You are about to delete your account. Continue?");
     const filteredUsers = users.filter((user) => user.id !== currentUser.id);
 
     //update database
@@ -322,17 +322,17 @@ function App() {
       return obj.pic;
     }
   }
-  function handleSearchChange (e) {
+  function handleSearchChange(e) {
     e.preventDefault();
     if (e.target.value.length === 0) {
       setsubmittedSearch("");
     }
     setSearchInput(e.target.value);
-  };
+  }
   function handleSearchSubmit() {
     setsubmittedSearch(searchInput);
   }
-  console.log("mount", users, currentUser)
+  console.log("mount", users, currentUser);
 
   return (
     <Router>
@@ -371,10 +371,11 @@ function App() {
                   handleSearchSubmit={handleSearchSubmit}
                   handleSearchChange={handleSearchChange}
                   searchInput={searchInput}
+                  profilePic={currentUser.profilePic}
                 />
               }
             >
-              <Route index element={<Dashboard currentUser={currentUser}/>} />
+              <Route index element={<Dashboard currentUser={currentUser} />} />
               <Route
                 path="recipes"
                 element={

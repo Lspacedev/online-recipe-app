@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 function Landing() {
   return (
     <div className="landing">
-    
       <nav>
         <div className="logo-land">Recipe</div>
         <div className="login-register">
@@ -25,6 +24,7 @@ function Landing() {
             <button className="register-btn2">Register Now</button>
           </Link>
         </div>
+        <div className="landing-img"></div>
       </div>
     </div>
   );

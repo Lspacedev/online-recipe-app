@@ -33,31 +33,43 @@ function Recipe({
     navigation(`/home/recipes/${obj.recipeName}`);
   }
   function handleDeleSubmit() {
-    handleDeleteRecipe(recipeArr.recipeName);
+    handleDeleteRecipe(recipeArr && recipeArr.recipeName);
     navigation("/home/recipes");
   }
   function handleImageUpload(e) {
-    let input = document.getElementById("pic");
+    /* let input = document.getElementById("pic");
     let url = URL.createObjectURL(input.files[0]);
     setObj({
       ...obj,
       pic: url,
-    });
+    });*/
+    let input = document.getElementById("pic");
+    var fReader = new FileReader();
+    fReader.readAsDataURL(input.files[0]);
+    fReader.onloadend = function (event) {
+      setObj({
+        ...obj,
+        pic: event.target.result,
+      });
+    };
   }
-
 
   function handleDropdownChange(e) {
     const { name, value } = e.target;
     setObj((prev) => ({ ...prev, [name]: value }));
   }
+  let currRecipe;
+  let edit;
+  if (recipeArr) {
+    const [curr] = recipes.filter(
+      (recipe) => recipe.recipeName === recipeArr.recipeName
+    );
 
+    currRecipe = curr;
+    edit = currRecipe.edit;
+  }
 
-  const [currRecipe] = recipes.filter(
-    (recipe) => recipe.recipeName === recipeArr.recipeName
-  );
-
-  let edit = currRecipe.edit;
-
+  console.log("recipes in Recipe.js", recipes, currRecipe);
   return (
     <div className="Recipe">
       <div className="recipe-content">
@@ -92,13 +104,12 @@ function Recipe({
             <div className="instructions">
               <label htmlFor="instructions">
                 Instructions
-                <textarea      
-                id="instructions"
-                name="instructions"
-                onChange={(e) => handleChange(e)}
-                value={obj.instructions}>
-                </textarea>
-           
+                <textarea
+                  id="instructions"
+                  name="instructions"
+                  onChange={(e) => handleChange(e)}
+                  value={obj.instructions}
+                ></textarea>
               </label>
             </div>
 
@@ -106,15 +117,14 @@ function Recipe({
               <label htmlFor="category">
                 Category
                 <select
-                name="category"
-                onChange={handleDropdownChange}
-                value={obj.value}
-              >
-                <option value="breakfast">breakfast</option>
-                <option value="lunch">lunch</option>
-                <option value="dinner">dinner</option>
-              </select>
-
+                  name="category"
+                  onChange={handleDropdownChange}
+                  value={obj.value}
+                >
+                  <option value="breakfast">breakfast</option>
+                  <option value="lunch">lunch</option>
+                  <option value="dinner">dinner</option>
+                </select>
               </label>
             </div>
 
@@ -169,37 +179,41 @@ function Recipe({
           </div>
         ) : (
           <div className="recipe-info">
-            <h1>{currRecipe.recipeName}</h1>
+            <h1>{currRecipe && currRecipe.recipeName}</h1>
             <div className="category-text">
-              <p>{currRecipe.category}</p>
+              <p>{currRecipe && currRecipe.category}</p>
             </div>
             <img
-              src={getPicLink(currRecipe)}
+              src={currRecipe && getPicLink(currRecipe)}
               alt="recipe picture"
               id="recipe-pic"
             />
             <div className="prep-cook-serve">
               <div className="prep-text">
                 <div className="recipe-sub-head">Prep Time</div>
-                <p>{currRecipe.prepTime}min</p>
+                <p>{currRecipe && currRecipe.prepTime}min</p>
               </div>
               <div className="cook-text">
                 <div className="recipe-sub-head">Cook Time</div>
-                <p>{currRecipe.cookingTime}min</p>
+                <p>{currRecipe && currRecipe.cookingTime}min</p>
               </div>
               <div className="serve-text">
                 <div className="recipe-sub-head">Servings</div>
-                <p>{currRecipe.servings}</p>
+                <p>{currRecipe && currRecipe.servings}</p>
               </div>
             </div>
 
             <div className="ingredients-div">
               <h3>Ingredients</h3>
-              <div className="ingredients-text">{currRecipe.ingredients}</div>
+              <div className="ingredients-text">
+                {currRecipe && currRecipe.ingredients}
+              </div>
             </div>
             <div className="instructions-div">
               <h3>Instructions</h3>
-              <div className="instructions-text">{currRecipe.instructions}</div>
+              <div className="instructions-text">
+                {currRecipe && currRecipe.instructions}
+              </div>
             </div>
           </div>
         )}
@@ -209,14 +223,14 @@ function Recipe({
             onClick={() => {
               edit
                 ? handleUpdateSubmit()
-                : handleUpdateRecipe(recipeArr.recipeName);
+                : handleUpdateRecipe(recipeArr && recipeArr.recipeName);
             }}
           >
             {edit ? <div className="update-btn">Update </div> : <div>edit</div>}
           </button>
 
           <button className="delete" onClick={() => handleDeleSubmit()}>
-            del
+            Delete
           </button>
         </div>
       </div>

@@ -3,21 +3,39 @@ import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Recipecard from "./Recipecard";
+import useLocalStorage from "./useLocalStorage";
 
 function DisplayRecipes({ recipes, handleDeleteRecipe, searchResults }) {
   const [showPage, setShowPage] = useState(false);
-  const [recipeInfo, setRecipeInfo] = useState({ name: "", index: null });
+  const [recipeInfo, setRecipeInfo] = useLocalStorage("infoObj", {
+    name: "",
+    index: null,
+  });
   const [currentSubPage, setCurrentSubPage] = useState({});
   const { recipe_name } = useParams();
 
   //navigation
   const navigation = useNavigate();
+
+  //function to store clicked Recipecard information to use in navigating to Recipe subpage
   function handleNavigateRecipe(name, index) {
     setRecipeInfo({ name, index });
   }
+
+  //useeffect to listen for click away from current Recipe subpage
+  useEffect(() => {
+    //check if click away true, recipe_name params undefined, if true clear local storage infoObj to avoid redirect to Recipe subpage
+    if (typeof recipe_name === "undefined") {
+      localStorage.removeItem("infoObj");
+    } else {
+      //in the case of change / update of Recipe name, update the recipeInfo Object, which will update the navigation url with new name in the second useeffect
+      setRecipeInfo((prev) => ({ ...prev, name: recipe_name }));
+    }
+  }, [recipe_name]);
+
+  //useeffect to listen to changes in recipeInfo, clicked Recipecard info, and navigate to clicked card subpage
   useEffect(() => {
     navigation(`/home/recipes/${recipeInfo.name}`);
-    console.log(recipe_name, recipeInfo);
   }, [recipeInfo]);
 
   function getPicLink(obj) {
@@ -40,34 +58,33 @@ function DisplayRecipes({ recipes, handleDeleteRecipe, searchResults }) {
         <Outlet context={{ recipeArr: recipes[recipeInfo.index] }} />
       ) : (
         <div className="recipes-div">
-          {searchResults.length !== 0
-          ?
-          searchResults.map((recipe, i) => (
-            <div className="item" key={i}>
-              <Recipecard
-                recipe={recipe}
-                handleNavigateRecipe={handleNavigateRecipe}
-                recipeName={recipe.recipeName}
-                pic={getPicLink(recipe)}
-                index={i}
-              />
-          
-            </div>
-          ))
-          : (recipes.length > 0?
+          {searchResults.length !== 0 ? (
+            searchResults.map((recipe, i) => (
+              <div className="item" key={i}>
+                <Recipecard
+                  recipe={recipe}
+                  handleNavigateRecipe={handleNavigateRecipe}
+                  recipeName={recipe.recipeName}
+                  pic={getPicLink(recipe)}
+                  index={i}
+                />
+              </div>
+            ))
+          ) : recipes.length > 0 ? (
             recipes.map((recipe, i) => (
-            <div className="item" key={i}>
-              <Recipecard
-                recipe={recipe}
-                handleNavigateRecipe={handleNavigateRecipe}
-                recipeName={recipe.recipeName}
-                pic={getPicLink(recipe)}
-                index={i}
-              />
-          
-            </div>
-          )):(<div>No recipes added</div>)
-        )}
+              <div className="item" key={i}>
+                <Recipecard
+                  recipe={recipe}
+                  handleNavigateRecipe={handleNavigateRecipe}
+                  recipeName={recipe.recipeName}
+                  pic={getPicLink(recipe)}
+                  index={i}
+                />
+              </div>
+            ))
+          ) : (
+            <div>No recipes added</div>
+          )}
         </div>
       )}
     </div>

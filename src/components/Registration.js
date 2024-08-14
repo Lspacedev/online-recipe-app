@@ -29,12 +29,21 @@ function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
   }
 
   function handleImageUpload(e) {
-    let input = document.getElementById("profile-pic");
+    /*let input = document.getElementById("profile-pic");
     let url = URL.createObjectURL(input.files[0]);
     setUserDetails({
       ...userDetails,
       profilePic: url,
-    });
+    });*/
+    let input = document.getElementById("profile-pic");
+    var fReader = new FileReader();
+    fReader.readAsDataURL(input.files[0]);
+    fReader.onloadend = function (event) {
+      setUserDetails({
+        ...userDetails,
+        profilePic: event.target.result,
+      });
+    };
   }
 
   function handleSubmit(e) {
@@ -47,7 +56,7 @@ function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
       <div className="register-form-container">
         <h2>Create new account</h2>
         <form>
-        <div className="name">
+          <div className="name">
             <label htmlFor="name">
               Name:
               <input

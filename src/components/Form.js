@@ -23,20 +23,27 @@ function Form({ handleAddRecipe, toggleClicked }) {
     setObj((prev) => ({ ...prev, [name]: value }));
   }
 
-
-
   function handleSubmit(e) {
     e.preventDefault();
     handleAddRecipe(obj);
     toggleClicked();
   }
   function handleImageUpload(e) {
-    let input = document.getElementById("pic");
+    /*let input = document.getElementById("pic");
     let url = URL.createObjectURL(input.files[0]);
     setObj({
       ...obj,
       pic: url,
-    });
+    });*/
+    let input = document.getElementById("pic");
+    var fReader = new FileReader();
+    fReader.readAsDataURL(input.files[0]);
+    fReader.onloadend = function (event) {
+      setObj({
+        ...obj,
+        pic: event.target.result,
+      });
+    };
   }
 
   function handleFormClose() {
@@ -45,12 +52,13 @@ function Form({ handleAddRecipe, toggleClicked }) {
 
   return (
     <div className="Form">
-      <div className="form-close" onClick={handleFormClose}>
-        x
-      </div>
       <div className="form-div">
-        <h3>Enter Recipe Information</h3>
-
+        <div className="form-title-close">
+          <h3>Enter Recipe Information</h3>
+          <div className="form-close" onClick={handleFormClose}>
+            x
+          </div>
+        </div>
         <form>
           <div className="name">
             <label htmlFor="recipe-name">
@@ -81,13 +89,13 @@ function Form({ handleAddRecipe, toggleClicked }) {
           <div className="instructions">
             <label htmlFor="instructions">
               Instructions
-              <textarea      
+              <textarea
                 id="instructions"
                 name="instructions"
+                placeholder="1. Add water..."
                 onChange={(e) => handleChange(e)}
-                value={obj.instructions}>
-              </textarea>
-           
+                value={obj.instructions}
+              ></textarea>
             </label>
           </div>
 
@@ -103,8 +111,6 @@ function Form({ handleAddRecipe, toggleClicked }) {
                 <option value="lunch">lunch</option>
                 <option value="dinner">dinner</option>
               </select>
-
-             
             </label>
           </div>
 
@@ -115,8 +121,11 @@ function Form({ handleAddRecipe, toggleClicked }) {
                 type="number"
                 id="prepTime"
                 name="prepTime"
+                placeholder="Time in minutes e.g 20"
                 onChange={(e) => handleChange(e)}
                 value={obj.prepTime}
+                min="1"
+                max="120"
               />
             </label>
           </div>
@@ -128,8 +137,11 @@ function Form({ handleAddRecipe, toggleClicked }) {
                 type="number"
                 id="cookingTime"
                 name="cookingTime"
+                placeholder="Time in minutes e.g 20"
                 onChange={(e) => handleChange(e)}
                 value={obj.cookingTime}
+                min="1"
+                max="120"
               />
             </label>
           </div>
