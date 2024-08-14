@@ -65,7 +65,9 @@ function Login({ handleLoginSubmit, loginStatus }) {
           ></input>
         </form>
       </div>
-      <div className="login-img"></div>
+      <div className="login-img">
+        <img src='images/login-register.jpg' />
+      </div>
     </div>
   );
 }

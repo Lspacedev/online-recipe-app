@@ -24,7 +24,9 @@ function Landing() {
             <button className="register-btn2">Register Now</button>
           </Link>
         </div>
-        <div className="landing-img"></div>
+        <div className="landing-img">
+            <img src='images/landing.jpg' />
+        </div>
       </div>
     </div>
   );

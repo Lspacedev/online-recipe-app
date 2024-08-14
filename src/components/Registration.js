@@ -137,6 +137,9 @@ function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
           ></input>
         </form>
       </div>
+      <div className="register-img">
+        <img src='images/login-register.jpg' />
+      </div>
     </div>
   );
 }

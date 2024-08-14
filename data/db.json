@@ -18,6 +18,39 @@
           "cookingTime": "20",
           "servings": "2",
           "pic": "",
+          "edit": true
+        },
+        {
+          "recipeName": "pap",
+          "ingredients": "ss",
+          "instructions": "1. Add water",
+          "category": "breakfast",
+          "prepTime": "10",
+          "cookingTime": "20",
+          "servings": "2",
+          "pic": "",
+          "edit": false
+        },
+        {
+          "recipeName": "saar",
+          "ingredients": "test",
+          "instructions": "",
+          "category": "lunch",
+          "prepTime": "1",
+          "cookingTime": "20",
+          "servings": "2",
+          "pic": "",
+          "edit": false
+        },
+        {
+          "recipeName": "fice",
+          "ingredients": "pap",
+          "instructions": "",
+          "category": "dinner",
+          "prepTime": "10",
+          "cookingTime": "2",
+          "servings": "2",
+          "pic": "",
           "edit": false
         }
       ]
