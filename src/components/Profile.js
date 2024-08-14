@@ -1,6 +1,9 @@
 import { useState } from "react";
 
 function Profile({
+  name,
+  surname,
+  email,
   username,
   password,
   profilePic,
@@ -8,6 +11,9 @@ function Profile({
   handleDeleteAccount,
 }) {
   const [userUpdate, setUserUpdate] = useState({
+    name: "",
+    surname: "",
+    email: "",
     username: "",
     password: "",
     profilePic: "",
@@ -56,6 +62,52 @@ function Profile({
             {profilePic && <img src={profilePic} />}
           </div>
         )}
+        <div className="name-div">
+          <h4>Name</h4>
+          {update ? (<div className="name">
+              <label htmlFor="name">
+                Name:
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  onChange={(e) => handleChange(e)}
+                  value={userUpdate.name}
+                />
+              </label>
+            </div>)
+          : <div>{name}</div>}
+        </div>
+
+         <div className="surname-div">
+          <h4>Surname</h4>
+          {update ?  <div className="surname">
+            <label htmlFor="surname">
+              Surname:
+              <input
+                type="text"
+                id="surname"
+                name="surname"
+                onChange={(e) => handleChange(e)}
+                value={userUpdate.surname}
+              />
+            </label>
+          </div>:<div>{surname}</div>}</div>
+
+          <div className="email-div">
+            <h4>Email</h4>
+            {update ? (<div className="email">
+            <label htmlFor="email">
+              Email:
+              <input
+                type="text"
+                id="email"
+                name="email"
+                onChange={(e) => handleChange(e)}
+                value={userUpdate.email}
+              />
+            </label>
+          </div>):(<div>{email}</div>)}</div>
 
         <div className="user-pass">
           <div className="user">

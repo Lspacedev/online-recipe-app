@@ -24,7 +24,7 @@ class Recipecard extends React.Component {
         >
           <img src={this.props.pic} alt="recipe picture" />
 
-          <div className="cook-time">{this.props.recipe.cookingTime}</div>
+          <div className="cook-time">{this.props.recipe.cookingTime}minutes</div>
         </div>
         <div className="food-type">
           <h3>{this.props.recipe.recipeName}</h3>

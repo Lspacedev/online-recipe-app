@@ -2,13 +2,27 @@
   "users": [
     {
       "id": "1",
-      "name": "",
-      "surname": "",
-      "email": "",
+      "name": "name",
+      "surname": "test surname",
+      "email": "test@test.com",
       "username": "test",
-      "password": "$2a$10$6f3P3iEOyyfMUPt87Xd5GOtKX5W/QNk9WOroYL4rlWL1B0Wt.x/lm",
-      "profilePic": "",
-      "recipes": []
+      "password": "$2a$10$ftU.2/qtUFzVJfVE0iljiOeYNV9XwIjzXr1OcylRL/lVe5on1t9lO",
+      "profilePic": "blob:http://localhost:3000/19b45e9d-864e-4e8d-a2f1-6e96a7e4e1d8",
+      "recipes": [
+        {
+          "recipeName": "fice",
+          "ingredients": "pap",
+          "instructions": "1ndd",
+          "category": "breakfast",
+          "prepTime": "1",
+          "cookingTime": "2",
+          "servings": "2",
+          "pic": "",
+          "edit": false
+        }
+      ],
+      "sname": "s"
     }
-  ]
+  ],
+  "current": {}
 }

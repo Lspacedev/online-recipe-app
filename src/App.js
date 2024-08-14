@@ -8,6 +8,9 @@ import Profile from "./components/Profile";
 
 import DisplayRecipes from "./components/DisplayRecipes";
 import Recipe from "./components/Recipe";
+import Dashboard from "./components/Dashboard";
+
+import useLocalStorage from "./components/useLocalStorage";
 
 import ProtectedRoutes from "./components/ProtectedRoute";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -15,19 +18,28 @@ import bcrypt from "bcryptjs-react";
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState({});
-  const [loginStatus, setLoginStatus] = useState(false);
+  const [currentUser, setCurrentUser] = useLocalStorage("current",{});
+  const [loginStatus, setLoginStatus] = useLocalStorage("loginStatus",false);
   const [registrationStatus, setRegistrationStatus] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [submittedSearch, setsubmittedSearch] = useState("");
+
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:8000/users")
       .then((res) => res.json())
       .then((res) => {
+        console.log("users", res)
         setUsers(res);
+
       });
+
   }, []);
   useEffect(() => {
+    
     const usersCopy = users.slice(0);
+    console.log("updating", users)
     const foundUser = usersCopy.find(
       (user) => user.username === currentUser.username
     );
@@ -37,6 +49,16 @@ function App() {
 
     setUsers(usersCopy);
   }, [currentUser]);
+
+  useEffect(() => {
+    if (submittedSearch.length > 0) {
+      let filteredRecipes = currentUser.recipes.filter((recipe)=> recipe.recipeName.toLowerCase().match(submittedSearch.toLowerCase()) || recipe.category.toLowerCase().match(submittedSearch.toLowerCase()))
+      setSearchResults(filteredRecipes);
+    }
+    return () => {
+      setSearchResults([]);
+    };
+  }, [submittedSearch]);
 
   /***  USER FUNCTIONS TO: REGISTER, LOGIN, LOGOUT, UPDATE DETAILS ****/
 
@@ -66,13 +88,24 @@ function App() {
   }
 
   function handleLoginSubmit(obj) {
+    
     const findUser = users.filter((user) => user.username === obj.username);
     if (findUser.length > 0) {
       let [user] = findUser;
       bcrypt.compare(obj.password, user.password).then((res) => {
         if (res === true) {
           console.log("logged in");
+          /*fetch(`http://localhost:8000/current`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user.username),
+          })
+            .then((response) => response.json())
+            .then((user) => console.log(user, "user information has been updated"));*/
           setLoginStatus(true);
+          
           setCurrentUser(user);
         } else {
           alert("invalid login password");
@@ -89,8 +122,22 @@ function App() {
     }
   }
 
-  function handleUserUpdate(obj) {
+  async function handleUserUpdate(obj) {
     const userCopy = { ...currentUser };
+
+
+    if (obj.name) {
+      userCopy.name = obj.name;
+    }
+
+    if (obj.surname) {
+      userCopy.surname = obj.surname;
+    }
+
+
+    if (obj.email) {
+      userCopy.email = obj.email;
+    }
 
     if (obj.username) {
       userCopy.username = obj.username;
@@ -98,6 +145,8 @@ function App() {
 
     if (obj.password) {
       userCopy.password = obj.password;
+      const salt = await bcrypt.genSalt();
+      userCopy.password = await bcrypt.hash(userCopy.password, salt);
     }
 
     if (obj.profilePic) {
@@ -141,6 +190,10 @@ function App() {
 
     if (foundUser) {
       foundUser.id = currentUser.id;
+      foundUser.name = currentUser.name;
+      foundUser.surname = currentUser.surname;
+      foundUser.email = currentUser.email;
+
       foundUser.username = currentUser.username;
       foundUser.password = currentUser.password;
       foundUser.profilePic = currentUser.profilePic;
@@ -269,6 +322,17 @@ function App() {
       return obj.pic;
     }
   }
+  function handleSearchChange (e) {
+    e.preventDefault();
+    if (e.target.value.length === 0) {
+      setsubmittedSearch("");
+    }
+    setSearchInput(e.target.value);
+  };
+  function handleSearchSubmit() {
+    setsubmittedSearch(searchInput);
+  }
+  console.log("mount", users, currentUser)
 
   return (
     <Router>
@@ -304,16 +368,20 @@ function App() {
                 <Home
                   handleAddRecipe={handleAddRecipe}
                   handleLogOut={handleLogOut}
+                  handleSearchSubmit={handleSearchSubmit}
+                  handleSearchChange={handleSearchChange}
+                  searchInput={searchInput}
                 />
               }
             >
-              <Route index element={<div>landing content</div>} />
+              <Route index element={<Dashboard currentUser={currentUser}/>} />
               <Route
                 path="recipes"
                 element={
                   <DisplayRecipes
                     recipes={currentUser.recipes || []}
                     handleDeleteRecipe={handleDeleteRecipe}
+                    searchResults={searchResults}
                   />
                 }
               >
@@ -334,6 +402,9 @@ function App() {
                 path="profile"
                 element={
                   <Profile
+                    name={currentUser.name}
+                    surname={currentUser.surname}
+                    email={currentUser.email}
                     username={currentUser.username}
                     password={currentUser.password}
                     profilePic={currentUser.profilePic}

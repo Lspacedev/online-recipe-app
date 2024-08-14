@@ -2,7 +2,7 @@ import Searchbar from "./Searchbar";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-function Header() {
+function Header({handleSearchSubmit, handleSearchChange, searchInput}) {
   //navigation
   const navigation = useNavigate();
   function handleHamBurgerMenu() {
@@ -14,7 +14,7 @@ function Header() {
   }
   return (
     <div className="Header">
-      <Searchbar />
+      <Searchbar handleSearchSubmit={handleSearchSubmit} handleSearchChange={handleSearchChange} searchInput={searchInput}/>
       <div className="ham-profile">
         <div className="hamburger-menu" onClick={handleHamBurgerMenu}>
           Ham

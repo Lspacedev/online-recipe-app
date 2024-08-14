@@ -3,12 +3,13 @@ import { Outlet } from "react-router-dom";
 
 import Header from "./Header";
 import Addrecipe from "./Addrecipe";
-function Home({ handleAddRecipe, handleLogOut, children }) {
+function Home({ handleAddRecipe, handleLogOut, handleSearchSubmit,handleSearchChange, searchInput }) {
+  
   return (
     <div className="Home">
       <Sidebar handleLogOut={handleLogOut} />
       <div className="Main">
-        <Header />
+        <Header handleSearchSubmit={handleSearchSubmit} handleSearchChange={handleSearchChange} searchInput={searchInput}/>
         <div className="cat-add">
           <Addrecipe handleAddRecipe={handleAddRecipe} />
         </div>

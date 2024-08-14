@@ -45,6 +45,13 @@ function Recipe({
     });
   }
 
+
+  function handleDropdownChange(e) {
+    const { name, value } = e.target;
+    setObj((prev) => ({ ...prev, [name]: value }));
+  }
+
+
   const [currRecipe] = recipes.filter(
     (recipe) => recipe.recipeName === recipeArr.recipeName
   );
@@ -85,26 +92,29 @@ function Recipe({
             <div className="instructions">
               <label htmlFor="instructions">
                 Instructions
-                <input
-                  type="text"
-                  id="instructions"
-                  name="instructions"
-                  onChange={(e) => handleChange(e)}
-                  value={obj.instructions}
-                />
+                <textarea      
+                id="instructions"
+                name="instructions"
+                onChange={(e) => handleChange(e)}
+                value={obj.instructions}>
+                </textarea>
+           
               </label>
             </div>
 
             <div className="category">
               <label htmlFor="category">
                 Category
-                <input
-                  type="text"
-                  id="category"
-                  name="category"
-                  onChange={(e) => handleChange(e)}
-                  value={obj.category}
-                />
+                <select
+                name="category"
+                onChange={handleDropdownChange}
+                value={obj.value}
+              >
+                <option value="breakfast">breakfast</option>
+                <option value="lunch">lunch</option>
+                <option value="dinner">dinner</option>
+              </select>
+
               </label>
             </div>
 
@@ -112,7 +122,7 @@ function Recipe({
               <label htmlFor="prepTime">
                 Preperation Time
                 <input
-                  type="text"
+                  type="number"
                   id="prepTime"
                   name="prepTime"
                   onChange={(e) => handleChange(e)}
@@ -125,7 +135,7 @@ function Recipe({
               <label htmlFor="cookingTime">
                 Cooking Time
                 <input
-                  type="text"
+                  type="number"
                   id="cookingTime"
                   name="cookingTime"
                   onChange={(e) => handleChange(e)}
@@ -171,11 +181,11 @@ function Recipe({
             <div className="prep-cook-serve">
               <div className="prep-text">
                 <div className="recipe-sub-head">Prep Time</div>
-                <p>{currRecipe.prepTime}</p>
+                <p>{currRecipe.prepTime}min</p>
               </div>
               <div className="cook-text">
                 <div className="recipe-sub-head">Cook Time</div>
-                <p>{currRecipe.cookingTime}</p>
+                <p>{currRecipe.cookingTime}min</p>
               </div>
               <div className="serve-text">
                 <div className="recipe-sub-head">Servings</div>

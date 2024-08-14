@@ -5,7 +5,7 @@ function Form({ handleAddRecipe, toggleClicked }) {
     recipeName: "",
     ingredients: "",
     instructions: "",
-    category: "",
+    category: "breakfast",
     prepTime: "",
     cookingTime: "",
     servings: "",
@@ -17,6 +17,13 @@ function Form({ handleAddRecipe, toggleClicked }) {
     const { name, value } = e.target;
     setObj((prev) => ({ ...prev, [name]: value }));
   }
+
+  function handleDropdownChange(e) {
+    const { name, value } = e.target;
+    setObj((prev) => ({ ...prev, [name]: value }));
+  }
+
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -74,26 +81,30 @@ function Form({ handleAddRecipe, toggleClicked }) {
           <div className="instructions">
             <label htmlFor="instructions">
               Instructions
-              <input
-                type="text"
+              <textarea      
                 id="instructions"
                 name="instructions"
                 onChange={(e) => handleChange(e)}
-                value={obj.instructions}
-              />
+                value={obj.instructions}>
+              </textarea>
+           
             </label>
           </div>
 
           <div className="category">
             <label htmlFor="category">
               Category
-              <input
-                type="text"
-                id="category"
+              <select
                 name="category"
-                onChange={(e) => handleChange(e)}
-                value={obj.category}
-              />
+                onChange={handleDropdownChange}
+                value={obj.value}
+              >
+                <option value="breakfast">breakfast</option>
+                <option value="lunch">lunch</option>
+                <option value="dinner">dinner</option>
+              </select>
+
+             
             </label>
           </div>
 
@@ -101,7 +112,7 @@ function Form({ handleAddRecipe, toggleClicked }) {
             <label htmlFor="prepTime">
               Preperation Time
               <input
-                type="text"
+                type="number"
                 id="prepTime"
                 name="prepTime"
                 onChange={(e) => handleChange(e)}
@@ -114,7 +125,7 @@ function Form({ handleAddRecipe, toggleClicked }) {
             <label htmlFor="cookingTime">
               Cooking Time
               <input
-                type="text"
+                type="number"
                 id="cookingTime"
                 name="cookingTime"
                 onChange={(e) => handleChange(e)}

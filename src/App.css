@@ -16,9 +16,14 @@ body {
   width: 100vw;
 
   text-align: center;
+ 
+}
+.landing-content {
+  display: flex;
 }
 .landing-info {
   padding: 150px;
+  width: 50%;
 }
 .landing-title {
   font-size: 4rem;
@@ -173,7 +178,7 @@ nav {
 
 .Registration form input {
   margin: 15px 0;
-  padding: 15px 10px;
+  padding: 5px 10px;
   width: 100%;
   outline: none;
   border: 1px solid #bbb;
@@ -216,6 +221,7 @@ nav {
   flex: 85%;
   height: calc(100% - 101px);
   padding: 0px;
+  overflow-y: scroll;
 }
 
 .profile-pic img {
@@ -244,6 +250,18 @@ nav {
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+.name-div h4 {
+  color: #bc412b;
+}
+
+.surname-div h4 {
+  color: #bc412b;
+}
+
+.email-div h4 {
+  color: #bc412b;
 }
 .user-pass h4 {
   color: #bc412b;
@@ -469,6 +487,7 @@ nav {
 
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 .category-text {

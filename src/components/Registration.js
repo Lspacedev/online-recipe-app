@@ -47,6 +47,42 @@ function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
       <div className="register-form-container">
         <h2>Create new account</h2>
         <form>
+        <div className="name">
+            <label htmlFor="name">
+              Name:
+              <input
+                type="text"
+                id="name"
+                name="name"
+                onChange={(e) => handleChange(e)}
+                value={userDetails.name}
+              />
+            </label>
+          </div>
+          <div className="surname">
+            <label htmlFor="surname">
+              Surname:
+              <input
+                type="text"
+                id="surname"
+                name="surname"
+                onChange={(e) => handleChange(e)}
+                value={userDetails.surname}
+              />
+            </label>
+          </div>
+          <div className="email">
+            <label htmlFor="email">
+              Email:
+              <input
+                type="text"
+                id="email"
+                name="email"
+                onChange={(e) => handleChange(e)}
+                value={userDetails.email}
+              />
+            </label>
+          </div>
           <div className="username">
             <label htmlFor="username">
               Username:
