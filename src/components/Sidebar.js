@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { CiViewList } from "react-icons/ci";
+import { CiLogout } from "react-icons/ci";
 
 function Sidebar({ handleLogOut }) {
   //navigation
@@ -16,11 +19,19 @@ function Sidebar({ handleLogOut }) {
         Home<span>Recipes</span>
       </h3>
       <div className="sidebar-links">
-        <div onClick={handleNavigateHome}>Dashboard</div>
+        <div onClick={handleNavigateHome}>
+          <LuLayoutDashboard />
+          <p>Dashboard</p>
+        </div>
 
-        <div onClick={handleNavigateRecipes}>Recipes</div>
+        <div onClick={handleNavigateRecipes}>
+          <CiViewList />
+          <p>Recipes</p>
+        </div>
       </div>
+
       <div className="logout" onClick={handleLogOut}>
+        <CiLogout />
         Logout
       </div>
     </div>

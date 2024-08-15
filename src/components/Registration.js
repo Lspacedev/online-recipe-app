@@ -21,6 +21,9 @@ function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
       navigation("/login");
     }
   }, [navigation, registrationStatus]);
+  function handleNavigateLogin() {
+    navigation("/login");
+  }
 
   function handleChange(e) {
     e.preventDefault();
@@ -55,6 +58,10 @@ function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
     <div className="Registration">
       <div className="register-form-container">
         <h2>Create new account</h2>
+        <div className="register-to-login">
+          Already have an account?
+          <p onClick={handleNavigateLogin}>Login</p>
+        </div>
         <form>
           <div className="name">
             <label htmlFor="name">
@@ -138,7 +145,7 @@ function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
         </form>
       </div>
       <div className="register-img">
-        <img src='images/login-register.jpg' />
+        <img src="images/login-register.jpg" />
       </div>
     </div>
   );

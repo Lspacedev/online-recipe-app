@@ -46,6 +46,12 @@ function DisplayRecipes({ recipes, handleDeleteRecipe, searchResults }) {
         return "/images/lunch.jpg";
       } else if (obj.category === "dinner") {
         return "/images/dinner.jpg";
+      } else if (obj.category === "dessert") {
+        return "/images/dessert.jpg";
+      } else if (obj.category === "main") {
+        return "/images/main.jpg";
+      } else if (obj.category === "appetiser") {
+        return "/images/appetiser.jpg";
       }
     } else {
       return obj.pic;

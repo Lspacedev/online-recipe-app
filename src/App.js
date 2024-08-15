@@ -317,6 +317,12 @@ function App() {
         return "/images/lunch.jpg";
       } else if (obj.category === "dinner") {
         return "/images/dinner.jpg";
+      } else if (obj.category === "dessert") {
+        return "/images/dessert.jpg";
+      } else if (obj.category === "main") {
+        return "/images/main.jpg";
+      } else if (obj.category === "appetiser") {
+        return "/images/appetiser.jpg";
       }
     } else {
       return obj.pic;
@@ -333,6 +339,16 @@ function App() {
     setsubmittedSearch(searchInput);
   }
   console.log("mount", users, currentUser);
+
+  function countCategories(categoryName) {
+    let number = currentUser.recipes.reduce((count, recipe) => {
+      if (recipe.category === categoryName) {
+        count++;
+      }
+      return count;
+    }, 0);
+    return number;
+  }
 
   return (
     <Router>
@@ -375,7 +391,20 @@ function App() {
                 />
               }
             >
-              <Route index element={<Dashboard currentUser={currentUser} />} />
+              <Route
+                index
+                element={
+                  <Dashboard
+                    currentUser={currentUser}
+                    breakfast={countCategories("breakfast")}
+                    lunch={countCategories("lunch")}
+                    dinner={countCategories("dinner")}
+                    appetiser={countCategories("appetiser")}
+                    main={countCategories("main")}
+                    dessert={countCategories("dessert")}
+                  />
+                }
+              />
               <Route
                 path="recipes"
                 element={

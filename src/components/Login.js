@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Login({ handleLoginSubmit, loginStatus }) {
   const [loginDetails, setLoginDetails] = useState({
@@ -15,6 +16,10 @@ function Login({ handleLoginSubmit, loginStatus }) {
       navigation("/home");
     }
   }, [navigation, loginStatus]);
+
+  function handleNavigateRegister() {
+    navigation("/registration");
+  }
 
   function handleChange(e) {
     e.preventDefault();
@@ -64,9 +69,13 @@ function Login({ handleLoginSubmit, loginStatus }) {
             onClick={(e) => handleSubmit(e)}
           ></input>
         </form>
+        <div className="login-to-register">
+          Don't have an account?{" "}
+          <p onClick={handleNavigateRegister}>Register here</p>
+        </div>
       </div>
       <div className="login-img">
-        <img src='images/login-register.jpg' />
+        <img src="images/login-register.jpg" />
       </div>
     </div>
   );

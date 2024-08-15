@@ -76,7 +76,7 @@ function Recipe({
   console.log("recipes in Recipe.js", recipes, currRecipe);
   return (
     <div className="Recipe">
-      <Backarrow handleBackNavigate={handleBackNavigate}/>
+      <Backarrow handleBackNavigate={handleBackNavigate} />
       <div className="recipe-content">
         {edit === true ? (
           <div className="update-form">
@@ -129,6 +129,9 @@ function Recipe({
                   <option value="breakfast">breakfast</option>
                   <option value="lunch">lunch</option>
                   <option value="dinner">dinner</option>
+                  <option value="dessert">dessert</option>
+                  <option value="main">main</option>
+                  <option value="appetiser">appetiser</option>
                 </select>
               </label>
             </div>
