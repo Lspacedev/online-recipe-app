@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Backarrow from "./Backarrow";
 
 function Recipe({
   recipes,
@@ -31,6 +32,9 @@ function Recipe({
   function handleUpdateSubmit() {
     handleRecipeResubmit(recipeArr.recipeName, obj);
     navigation(`/home/recipes/${obj.recipeName}`);
+  }
+  function handleBackNavigate() {
+    navigation(`/home/recipes/`);
   }
   function handleDeleSubmit() {
     handleDeleteRecipe(recipeArr && recipeArr.recipeName);
@@ -72,6 +76,7 @@ function Recipe({
   console.log("recipes in Recipe.js", recipes, currRecipe);
   return (
     <div className="Recipe">
+      <Backarrow handleBackNavigate={handleBackNavigate}/>
       <div className="recipe-content">
         {edit === true ? (
           <div className="update-form">

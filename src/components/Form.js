@@ -69,6 +69,7 @@ function Form({ handleAddRecipe, toggleClicked }) {
                 name="recipeName"
                 onChange={(e) => handleChange(e)}
                 value={obj.recipeName}
+                required
               />
             </label>
           </div>
