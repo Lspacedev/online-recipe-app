@@ -328,6 +328,14 @@ function App() {
       return obj.pic;
     }
   }
+
+  function getProfilePic(obj) {
+    if (obj.profilePic === "") {
+      return "/images/avatar.png";
+    } else {
+      return obj.profilePic;
+    }
+  }
   function handleSearchChange(e) {
     e.preventDefault();
     if (e.target.value.length === 0) {
@@ -387,7 +395,7 @@ function App() {
                   handleSearchSubmit={handleSearchSubmit}
                   handleSearchChange={handleSearchChange}
                   searchInput={searchInput}
-                  profilePic={currentUser.profilePic}
+                  profilePic={getProfilePic(currentUser)}
                 />
               }
             >
@@ -437,7 +445,7 @@ function App() {
                     email={currentUser.email}
                     username={currentUser.username}
                     password={currentUser.password}
-                    profilePic={currentUser.profilePic}
+                    profilePic={getProfilePic(currentUser)}
                     handleUserUpdate={handleUserUpdate}
                     handleDeleteAccount={handleDeleteAccount}
                   />
