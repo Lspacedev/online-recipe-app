@@ -127,6 +127,7 @@ nav {
 
 .login-to-register p {
   color: #bc412b;
+  cursor: pointer;
 }
 
 .login-to-register p:hover {
@@ -204,6 +205,7 @@ select {
 .register-to-login p {
   color: #bc412b;
   margin: 0px 5px;
+  cursor: pointer;
 }
 
 .register-to-login p:hover {
@@ -251,8 +253,11 @@ select {
   color: white;
   outline: none;
   border: none;
+  cursor: pointer;
 }
-
+.Registration input[type="submit"]:hover {
+  background-color: #ed6a5a;
+}
 .register-img {
   flex: 50%;
 }
