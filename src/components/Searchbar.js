@@ -1,9 +1,6 @@
 import { IoIosSearch } from "react-icons/io";
-import { useState } from "react";
 
 function Searchbar({ handleSearchSubmit, handleSearchChange, searchInput }) {
-
-
   return (
     <div className="search-div">
       <div id="search-icon-div">
@@ -21,10 +18,7 @@ function Searchbar({ handleSearchSubmit, handleSearchChange, searchInput }) {
         onChange={handleSearchChange}
         value={searchInput}
       />
-      <button
-        id="search-btn"
-        onClick={handleSearchSubmit}
-      >
+      <button id="search-btn" onClick={handleSearchSubmit}>
         search
       </button>
     </div>

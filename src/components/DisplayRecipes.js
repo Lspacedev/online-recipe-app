@@ -5,13 +5,12 @@ import { useParams } from "react-router-dom";
 import Recipecard from "./Recipecard";
 import useLocalStorage from "./useLocalStorage";
 
-function DisplayRecipes({ recipes, handleDeleteRecipe, searchResults }) {
-  const [showPage, setShowPage] = useState(false);
+function DisplayRecipes({ recipes, searchResults }) {
   const [recipeInfo, setRecipeInfo] = useLocalStorage("infoObj", {
     name: "",
     index: null,
   });
-  const [currentSubPage, setCurrentSubPage] = useState({});
+
   const { recipe_name } = useParams();
 
   //navigation

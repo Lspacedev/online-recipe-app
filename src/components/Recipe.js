@@ -41,12 +41,6 @@ function Recipe({
     navigation("/home/recipes");
   }
   function handleImageUpload(e) {
-    /* let input = document.getElementById("pic");
-    let url = URL.createObjectURL(input.files[0]);
-    setObj({
-      ...obj,
-      pic: url,
-    });*/
     let input = document.getElementById("pic");
     var fReader = new FileReader();
     fReader.readAsDataURL(input.files[0]);
@@ -193,7 +187,7 @@ function Recipe({
             </div>
             <img
               src={currRecipe && getPicLink(currRecipe)}
-              alt="recipe picture"
+              alt="recipe"
               id="recipe-pic"
             />
             <div className="prep-cook-serve">

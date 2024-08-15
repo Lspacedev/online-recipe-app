@@ -145,7 +145,7 @@ function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
         </form>
       </div>
       <div className="register-img">
-        <img src="images/login-register.jpg" />
+        <img src="images/login-register.jpg" alt="register" />
       </div>
     </div>
   );

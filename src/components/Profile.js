@@ -32,12 +32,6 @@ function Profile({
   }
 
   function handleImageUpload(e) {
-    /*let input = document.getElementById("profile-pic2");
-    let url = URL.createObjectURL(input.files[0]);
-    setUserUpdate({
-      ...userUpdate,
-      profilePic: url,
-    });*/
     let input = document.getElementById("profile-pic2");
     var fReader = new FileReader();
     fReader.readAsDataURL(input.files[0]);
@@ -67,7 +61,7 @@ function Profile({
             </div>
           ) : (
             <div className="profile-pic">
-              {profilePic && <img src={profilePic} />}
+              {profilePic && <img src={profilePic} alt="profile" />}
             </div>
           )}
         </div>

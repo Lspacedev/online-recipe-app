@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 function Login({ handleLoginSubmit, loginStatus }) {
   const [loginDetails, setLoginDetails] = useState({
@@ -75,7 +74,7 @@ function Login({ handleLoginSubmit, loginStatus }) {
         </div>
       </div>
       <div className="login-img">
-        <img src="images/login-register.jpg" />
+        <img src="images/login-register.jpg" alt="login" />
       </div>
     </div>
   );

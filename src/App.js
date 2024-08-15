@@ -35,7 +35,6 @@ function App() {
   }, []);
   useEffect(() => {
     const usersCopy = users.slice(0);
-    console.log("updating", users);
     const foundUser = usersCopy.find(
       (user) => user.username === currentUser.username
     );
@@ -95,16 +94,6 @@ function App() {
       let [user] = findUser;
       bcrypt.compare(obj.password, user.password).then((res) => {
         if (res === true) {
-          console.log("logged in");
-          /*fetch(`http://localhost:8000/current`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user.username),
-          })
-            .then((response) => response.json())
-            .then((user) => console.log(user, "user information has been updated"));*/
           setLoginStatus(true);
 
           setCurrentUser(user);
@@ -112,12 +101,6 @@ function App() {
           alert("invalid login password");
         }
       });
-      /*if (user.password === obj.password) {
-        setLoginStatus(true);
-        setCurrentUser(user);
-      } else {
-        alert("invalid login password");
-      }*/
     } else {
       alert("user does not exist");
     }
@@ -346,7 +329,6 @@ function App() {
   function handleSearchSubmit() {
     setsubmittedSearch(searchInput);
   }
-  console.log("mount", users, currentUser);
 
   function countCategories(categoryName) {
     let number = currentUser.recipes.reduce((count, recipe) => {

@@ -1,5 +1,4 @@
 import Searchbar from "./Searchbar";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
 
@@ -47,7 +46,7 @@ function Header({
             />
           </div>
           <div className="header-profile-pic" onClick={handleNavigateProfile}>
-            {profilePic && <img src={profilePic} />}
+            {profilePic && <img src={profilePic} alt="profile" />}
           </div>
         </div>
       </div>

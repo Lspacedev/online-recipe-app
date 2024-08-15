@@ -27,7 +27,7 @@ function Landing() {
           </Link>
         </div>
         <div className="landing-img">
-          <img src="images/landing.jpg" />
+          <img src="images/landing.jpg" alt="landing" />
         </div>
       </div>
     </div>

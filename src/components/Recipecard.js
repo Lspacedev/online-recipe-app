@@ -3,13 +3,8 @@ import React from "react";
 class Recipecard extends React.Component {
   constructor(props) {
     super(props);
-
-    this.increment = this.increment.bind(this);
   }
 
-  increment() {
-    this.setState({ count: this.state.count + 1 });
-  }
   render() {
     return (
       <div className="Recipecard">
@@ -22,9 +17,11 @@ class Recipecard extends React.Component {
             )
           }
         >
-          <img src={this.props.pic} alt="recipe picture" />
+          <img src={this.props.pic} alt="recipe" />
 
-          <div className="cook-time">{this.props.recipe.cookingTime}minutes</div>
+          <div className="cook-time">
+            {this.props.recipe.cookingTime}minutes
+          </div>
         </div>
         <div className="food-type">
           <h3>{this.props.recipe.recipeName}</h3>
