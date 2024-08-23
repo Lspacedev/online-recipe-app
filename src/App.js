@@ -331,13 +331,17 @@ function App() {
   }
 
   function countCategories(categoryName) {
-    let number = currentUser.recipes.reduce((count, recipe) => {
-      if (recipe.category === categoryName) {
-        count++;
-      }
-      return count;
-    }, 0);
-    return number;
+    if (JSON.stringify(currentUser) !== "{}") {
+      let number = currentUser.recipes.reduce((count, recipe) => {
+        if (recipe.category === categoryName) {
+          count++;
+        }
+        return count;
+      }, 0);
+      return number;
+    } else {
+      return 0;
+    }
   }
 
   return (
