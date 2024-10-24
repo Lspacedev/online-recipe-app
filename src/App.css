@@ -143,13 +143,13 @@ nav {
   align-items: center;
 }
 
-.Login form {
+.Login .form {
   margin: 50px auto;
   padding: 25px 0px;
   width: 60%;
 }
 .Login input,
-textarea,
+button,
 select {
   outline: none;
   border: 1px solid #bbb;
@@ -162,7 +162,7 @@ select {
   border-radius: 10px;
   display: inline-block;
 }
-.Login form div label {
+.Login .form div label {
   display: flex;
   flex-direction: column;
   font-size: 14px;
@@ -170,7 +170,7 @@ select {
   cursor: pointer;
 }
 
-.Login input[type="submit"] {
+.Login .form button {
   margin: 5px 0px;
   background-color: #bc412b;
   color: white;
@@ -179,7 +179,7 @@ select {
   cursor: pointer;
 }
 
-.Login input[type="submit"]:hover {
+.Login .form button:hover {
   background-color: #ed6a5a;
 }
 
@@ -221,12 +221,12 @@ select {
   align-items: center;
 }
 
-.Registration form {
+.Registration .form {
   margin: 0px auto;
   padding: 25px 10px;
 }
 .Registration input,
-textarea,
+button,
 select {
   outline: none;
   border: 1px solid #bbb;
@@ -239,15 +239,13 @@ select {
   border-radius: 10px;
   display: inline-block;
 }
-.Registration form div label {
-  display: flex;
-  flex-direction: column;
+.Registration .form div label {
   font-size: 14px;
   color: rgb(133, 133, 133);
   cursor: pointer;
 }
 
-.Registration input[type="submit"] {
+.Registration .form button {
   margin: 5px 0px;
   background-color: #bc412b;
   color: white;
@@ -255,7 +253,7 @@ select {
   border: none;
   cursor: pointer;
 }
-.Registration input[type="submit"]:hover {
+.Registration .form button:hover {
   background-color: #ed6a5a;
 }
 .register-img {
@@ -579,7 +577,7 @@ select {
   font-size: 2rem;
 }
 
-.form-div form {
+.form-div .form {
   margin: 0 auto 0 auto;
   padding: 25px;
   width: 400px;
@@ -587,17 +585,17 @@ select {
   overflow: hidden;
   background-color: white;
 }
-.form-div form input,
+.form-div .form input,
 textarea,
 select {
   width: 200px;
   margin: 5px 0px;
 }
-.form-div form input[type="submit"] {
+.form-div .form button {
   width: 100%;
 }
 
-.form-div form div label {
+.form-div .form div label {
   display: flex;
   justify-content: space-between;
 }
