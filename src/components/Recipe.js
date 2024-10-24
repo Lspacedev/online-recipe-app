@@ -1,27 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Backarrow from "./Backarrow";
 
-function Recipe({
-  recipes,
-  handleUpdateRecipe,
-  handleRecipeResubmit,
-  handleDeleteRecipe,
-  getPicLink,
-}) {
+function Recipe({ getPicLink }) {
+  const [recipe, setRecipe] = useState({});
   const [obj, setObj] = useState({
-    recipeName: "",
+    name: "",
     ingredients: "",
     instructions: "",
     category: "",
     prepTime: "",
     cookingTime: "",
     servings: "",
-    pic: "",
-    edit: false,
   });
-  const { recipeArr } = useOutletContext();
+  const [edit, setEdit] = useState(false);
+
+  const { recipe_id } = useParams();
+  useEffect(() => {
+    fetchRecipe();
+  }, []);
+  const token = localStorage.getItem("token");
+
+  async function fetchRecipe() {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/recipes/${recipe_id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setRecipe(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function handleChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
@@ -29,16 +49,50 @@ function Recipe({
   }
   //navigation
   const navigation = useNavigate();
-  function handleUpdateSubmit() {
-    handleRecipeResubmit(recipeArr.recipeName, obj);
-    navigation(`/home/recipes/${obj.recipeName}`);
+  function openForm() {
+    setEdit(!edit);
   }
   function handleBackNavigate() {
     navigation(`/home/recipes/`);
   }
-  function handleDeleSubmit() {
-    handleDeleteRecipe(recipeArr && recipeArr.recipeName);
-    navigation("/home/recipes");
+  async function deleteRecipe() {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/recipes/${recipe_id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      navigation("/home/recipes");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function updateRecipe() {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/recipes/${recipe_id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(obj),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setEdit(false);
+    } catch (error) {
+      console.log(error);
+    }
   }
   function handleImageUpload(e) {
     let input = document.getElementById("pic");
@@ -56,18 +110,7 @@ function Recipe({
     const { name, value } = e.target;
     setObj((prev) => ({ ...prev, [name]: value }));
   }
-  let currRecipe;
-  let edit;
-  if (recipeArr) {
-    const [curr] = recipes.filter(
-      (recipe) => recipe.recipeName === recipeArr.recipeName
-    );
 
-    currRecipe = curr;
-    edit = currRecipe.edit;
-  }
-
-  console.log("recipes in Recipe.js", recipes, currRecipe);
   return (
     <div className="Recipe">
       <Backarrow handleBackNavigate={handleBackNavigate} />
@@ -80,7 +123,7 @@ function Recipe({
                 <input
                   type="text"
                   id="recipe-name"
-                  name="recipeName"
+                  name="name"
                   onChange={(e) => handleChange(e)}
                   value={obj.recipeName}
                 />
@@ -167,7 +210,7 @@ function Recipe({
                 />
               </label>
             </div>
-            <div className="pic">
+            {/* <div className="pic">
               <label htmlFor="pic">
                 Picture:
                 <input
@@ -177,44 +220,44 @@ function Recipe({
                   onChange={(e) => handleImageUpload(e)}
                 />
               </label>
-            </div>
+            </div> */}
           </div>
         ) : (
           <div className="recipe-info">
-            <h1>{currRecipe && currRecipe.recipeName}</h1>
+            <h1>{recipe && recipe.name}</h1>
             <div className="category-text">
-              <p>{currRecipe && currRecipe.category}</p>
+              <p>{recipe && recipe.category}</p>
             </div>
-            <img
-              src={currRecipe && getPicLink(currRecipe)}
+            {/* <img
+              src={recipe && getPicLink(recipe)}
               alt="recipe"
               id="recipe-pic"
-            />
+            /> */}
             <div className="prep-cook-serve">
               <div className="prep-text">
                 <div className="recipe-sub-head">Prep Time</div>
-                <p>{currRecipe && currRecipe.prepTime}min</p>
+                <p>{recipe && recipe.prepTime}min</p>
               </div>
               <div className="cook-text">
                 <div className="recipe-sub-head">Cook Time</div>
-                <p>{currRecipe && currRecipe.cookingTime}min</p>
+                <p>{recipe && recipe.cookingTime}min</p>
               </div>
               <div className="serve-text">
                 <div className="recipe-sub-head">Servings</div>
-                <p>{currRecipe && currRecipe.servings}</p>
+                <p>{recipe && recipe.servings}</p>
               </div>
             </div>
 
             <div className="ingredients-div">
               <h3>Ingredients</h3>
               <div className="ingredients-text">
-                {currRecipe && currRecipe.ingredients}
+                {recipe && recipe.ingredients}
               </div>
             </div>
             <div className="instructions-div">
               <h3>Instructions</h3>
               <div className="instructions-text">
-                {currRecipe && currRecipe.instructions}
+                {recipe && recipe.instructions}
               </div>
             </div>
           </div>
@@ -223,15 +266,13 @@ function Recipe({
           <button
             className="update"
             onClick={() => {
-              edit
-                ? handleUpdateSubmit()
-                : handleUpdateRecipe(recipeArr && recipeArr.recipeName);
+              edit ? updateRecipe() : openForm();
             }}
           >
             {edit ? <div className="update-btn">Update </div> : <div>edit</div>}
           </button>
 
-          <button className="delete" onClick={() => handleDeleSubmit()}>
+          <button className="delete" onClick={() => deleteRecipe()}>
             Delete
           </button>
         </div>

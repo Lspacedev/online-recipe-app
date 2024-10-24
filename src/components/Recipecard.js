@@ -10,12 +10,7 @@ class Recipecard extends React.Component {
       <div className="Recipecard">
         <div
           className="img"
-          onClick={() =>
-            this.props.handleNavigateRecipe(
-              this.props.recipeName,
-              this.props.index
-            )
-          }
+          onClick={() => this.props.handleNavigateRecipe(this.props.recipe._id)}
         >
           <img src={this.props.pic} alt="recipe" />
 
@@ -24,7 +19,7 @@ class Recipecard extends React.Component {
           </div>
         </div>
         <div className="food-type">
-          <h3>{this.props.recipe.recipeName}</h3>
+          <h3>{this.props.recipe.name}</h3>
           <p>{this.props.recipe.category}</p>
         </div>
       </div>

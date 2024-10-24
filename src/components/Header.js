@@ -1,13 +1,10 @@
 import Searchbar from "./Searchbar";
 import { useNavigate } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
+import { useState } from "react";
+function Header({ handleSearchSubmit, profilePic }) {
+  const [searchInput, setSearchInput] = useState("");
 
-function Header({
-  handleSearchSubmit,
-  handleSearchChange,
-  searchInput,
-  profilePic,
-}) {
   //navigation
   const navigation = useNavigate();
   function handleHamBurgerMenu() {
@@ -21,13 +18,10 @@ function Header({
   function handleNavigateProfile() {
     navigation("/home/profile");
   }
+
   return (
     <div className="Header">
-      <Searchbar
-        handleSearchSubmit={handleSearchSubmit}
-        handleSearchChange={handleSearchChange}
-        searchInput={searchInput}
-      />
+      <Searchbar handleSearchSubmit={handleSearchSubmit} />
       <div className="ham-profile">
         <div className="hamburger-menu" onClick={handleHamBurgerMenu}>
           <div></div>

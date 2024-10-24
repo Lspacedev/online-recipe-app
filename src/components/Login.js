@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Login({ handleLoginSubmit, loginStatus }) {
+function Login() {
   const [loginDetails, setLoginDetails] = useState({
     username: "",
     password: "",
@@ -9,15 +9,9 @@ function Login({ handleLoginSubmit, loginStatus }) {
 
   //navigation
   const navigation = useNavigate();
-  useEffect(() => {
-    if (loginStatus === true) {
-      //on success redirect user
-      navigation("/home");
-    }
-  }, [navigation, loginStatus]);
 
   function handleNavigateRegister() {
-    navigation("/registration");
+    navigation("/register");
   }
 
   function handleChange(e) {
@@ -26,16 +20,29 @@ function Login({ handleLoginSubmit, loginStatus }) {
     setLoginDetails((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    handleLoginSubmit(loginDetails);
+  async function handleSubmit() {
+    try {
+      const res = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginDetails),
+      });
+
+      const data = await res.json();
+      alert(data.message);
+
+      localStorage.setItem("token", data.token);
+      navigation("/home");
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
     <div className="Login">
       <div className="login-form-container">
         <h2>Welcome back!</h2>
-        <form>
+        <div className="form">
           <div className="username">
             <label htmlFor="username">
               Username:
@@ -53,7 +60,7 @@ function Login({ handleLoginSubmit, loginStatus }) {
             <label htmlFor="password">
               Password:
               <input
-                type="text"
+                type="password"
                 id="password"
                 name="password"
                 onChange={(e) => handleChange(e)}
@@ -62,12 +69,8 @@ function Login({ handleLoginSubmit, loginStatus }) {
             </label>
           </div>
 
-          <input
-            type="submit"
-            value="Log in"
-            onClick={(e) => handleSubmit(e)}
-          ></input>
-        </form>
+          <button onClick={() => handleSubmit()}>Submit</button>
+        </div>
         <div className="login-to-register">
           Don't have an account?{" "}
           <p onClick={handleNavigateRegister}>Register here</p>

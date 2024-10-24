@@ -1,17 +1,17 @@
 import { useState } from "react";
 
-function Form({ handleAddRecipe, toggleClicked }) {
+function Form({ toggleClicked }) {
   const [obj, setObj] = useState({
-    recipeName: "",
+    name: "",
     ingredients: "",
     instructions: "",
     category: "breakfast",
     prepTime: "",
     cookingTime: "",
     servings: "",
-    pic: "",
-    edit: false,
   });
+  const token = localStorage.getItem("token");
+
   function handleChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
@@ -23,18 +23,29 @@ function Form({ handleAddRecipe, toggleClicked }) {
     setObj((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    handleAddRecipe(obj);
+  async function handleSubmit() {
+    try {
+      const response = await fetch("http://localhost:3000/api/recipes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          ...obj,
+          prepTime: Number(obj.prepTime),
+          cookingTime: Number(obj.cookingTime),
+          servings: Number(obj.servings),
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
     toggleClicked();
   }
   function handleImageUpload(e) {
-    /*let input = document.getElementById("pic");
-    let url = URL.createObjectURL(input.files[0]);
-    setObj({
-      ...obj,
-      pic: url,
-    });*/
     let input = document.getElementById("pic");
     var fReader = new FileReader();
     fReader.readAsDataURL(input.files[0]);
@@ -59,16 +70,16 @@ function Form({ handleAddRecipe, toggleClicked }) {
             x
           </div>
         </div>
-        <form>
+        <div className="form">
           <div className="name">
             <label htmlFor="recipe-name">
               Recipe Name
               <input
                 type="text"
                 id="recipe-name"
-                name="recipeName"
+                name="name"
                 onChange={(e) => handleChange(e)}
-                value={obj.recipeName}
+                value={obj.name}
                 required
               />
             </label>
@@ -153,7 +164,7 @@ function Form({ handleAddRecipe, toggleClicked }) {
             <label htmlFor="servings">
               Servings
               <input
-                type="text"
+                type="number"
                 id="servings"
                 name="servings"
                 onChange={(e) => handleChange(e)}
@@ -161,7 +172,7 @@ function Form({ handleAddRecipe, toggleClicked }) {
               />
             </label>
           </div>
-          <div className="pic">
+          {/* <div className="pic">
             <label htmlFor="pic">
               Picture:
               <input
@@ -171,15 +182,10 @@ function Form({ handleAddRecipe, toggleClicked }) {
                 onChange={(e) => handleImageUpload(e)}
               />
             </label>
-          </div>
+          </div> */}
 
-          <input
-            id="task-add-submit"
-            type="submit"
-            value="submit"
-            onClick={(e) => handleSubmit(e)}
-          ></input>
-        </form>
+          <button onClick={() => handleSubmit()}>Submit</button>
+        </div>
       </div>
     </div>
   );
