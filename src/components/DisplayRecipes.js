@@ -45,7 +45,7 @@ function DisplayRecipes({ submittedSearch }) {
     };
   }, [submittedSearch]);
   function handleNavigateRecipe(id) {
-    navigation(`/home/recipes/${id}`);
+    navigation(`/recipes/${id}`);
   }
 
   // function getPicLink(obj) {

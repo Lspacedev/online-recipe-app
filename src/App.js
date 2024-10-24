@@ -66,16 +66,12 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route exact path="/" element={<Landing />} />
-          <Route exact path="register" element={<Registration />} />
-          <Route exact path="login" element={<Login />} />
-
-          <Route element={<ProtectedRoutes />}>
-            <Route
-              path="home"
-              element={<Home handleSearchSubmit={handleSearchSubmit} />}
-            >
-              {/* <Route
+          <Route
+            exact
+            path="/"
+            element={<Home handleSearchSubmit={handleSearchSubmit} />}
+          >
+            {/* <Route
                 index
                 element={
                   <Dashboard
@@ -89,27 +85,11 @@ function App() {
                   />
                 }
               /> */}
-              <Route
-                path="recipes"
-                element={<DisplayRecipes submittedSearch={submittedSearch} />}
-              >
-                <Route path=":recipe_id" element={<Recipe />} />
-              </Route>
-              {/* <Route
-                path="profile"
-                element={
-                  <Profile
-                    name={currentUser.name}
-                    surname={currentUser.surname}
-                    email={currentUser.email}
-                    username={currentUser.username}
-                    password={currentUser.password}
-                    profilePic={getProfilePic(currentUser)}
-                    handleUserUpdate={handleUserUpdate}
-                    handleDeleteAccount={handleDeleteAccount}
-                  />
-                }
-              /> */}
+            <Route
+              path="recipes"
+              element={<DisplayRecipes submittedSearch={submittedSearch} />}
+            >
+              <Route path=":recipe_id" element={<Recipe />} />
             </Route>
           </Route>
         </Routes>

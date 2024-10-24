@@ -7,10 +7,10 @@ function Sidebar({ handleLogOut }) {
   //navigation
   const navigation = useNavigate();
   function handleNavigateRecipes() {
-    navigation("/home/recipes");
+    navigation("/recipes");
   }
   function handleNavigateHome() {
-    navigation("/home");
+    navigation("/");
   }
   return (
     <div className="Sidebar">

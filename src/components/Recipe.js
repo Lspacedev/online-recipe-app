@@ -53,7 +53,7 @@ function Recipe({ getPicLink }) {
     setEdit(!edit);
   }
   function handleBackNavigate() {
-    navigation(`/home/recipes/`);
+    navigation(`/recipes`);
   }
   async function deleteRecipe() {
     try {
@@ -69,7 +69,7 @@ function Recipe({ getPicLink }) {
       );
       const data = await response.json();
       console.log(data);
-      navigation("/home/recipes");
+      navigation("/recipes");
     } catch (error) {
       console.log(error);
     }
