@@ -48,25 +48,25 @@ function DisplayRecipes({ submittedSearch }) {
     navigation(`/home/recipes/${id}`);
   }
 
-  // function getPicLink(obj) {
-  //   if (obj.pic === "") {
-  //     if (obj.category === "breakfast") {
-  //       return "/images/breakfast.jpg";
-  //     } else if (obj.category === "lunch") {
-  //       return "/images/lunch.jpg";
-  //     } else if (obj.category === "dinner") {
-  //       return "/images/dinner.jpg";
-  //     } else if (obj.category === "dessert") {
-  //       return "/images/dessert.jpg";
-  //     } else if (obj.category === "main") {
-  //       return "/images/main.jpg";
-  //     } else if (obj.category === "appetiser") {
-  //       return "/images/appetiser.jpg";
-  //     }
-  //   } else {
-  //     return obj.pic;
-  //   }
-  // }
+  function getPicLink(obj) {
+    if (true) {
+      if (obj.category === "breakfast") {
+        return "/images/breakfast.jpg";
+      } else if (obj.category === "lunch") {
+        return "/images/lunch.jpg";
+      } else if (obj.category === "dinner") {
+        return "/images/dinner.jpg";
+      } else if (obj.category === "dessert") {
+        return "/images/dessert.jpg";
+      } else if (obj.category === "main") {
+        return "/images/main.jpg";
+      } else if (obj.category === "appetiser") {
+        return "/images/appetiser.jpg";
+      }
+    } else {
+      return obj.pic;
+    }
+  }
 
   return (
     <div className="DisplayRecipes">
@@ -80,7 +80,7 @@ function DisplayRecipes({ submittedSearch }) {
                 <Recipecard
                   recipe={recipe}
                   handleNavigateRecipe={handleNavigateRecipe}
-                  // pic={getPicLink(recipe)}
+                  pic={getPicLink(recipe)}
                   index={i}
                 />
               </div>
@@ -91,7 +91,7 @@ function DisplayRecipes({ submittedSearch }) {
                 <Recipecard
                   recipe={recipe}
                   handleNavigateRecipe={handleNavigateRecipe}
-                  //pic={getPicLink(recipe)}
+                  pic={getPicLink(recipe)}
                 />
               </div>
             ))

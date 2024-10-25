@@ -36,14 +36,6 @@ function App() {
     }
   }
 
-  function getProfilePic(obj) {
-    if (obj.profilePic === "") {
-      return "/images/avatar.png";
-    } else {
-      return obj.profilePic;
-    }
-  }
-
   function handleSearchSubmit(searchInput) {
     setsubmittedSearch(searchInput);
   }
@@ -95,21 +87,7 @@ function App() {
               >
                 <Route path=":recipe_id" element={<Recipe />} />
               </Route>
-              {/* <Route
-                path="profile"
-                element={
-                  <Profile
-                    name={currentUser.name}
-                    surname={currentUser.surname}
-                    email={currentUser.email}
-                    username={currentUser.username}
-                    password={currentUser.password}
-                    profilePic={getProfilePic(currentUser)}
-                    handleUserUpdate={handleUserUpdate}
-                    handleDeleteAccount={handleDeleteAccount}
-                  />
-                }
-              /> */}
+              <Route path="profile" element={<Profile />} />
             </Route>
           </Route>
         </Routes>

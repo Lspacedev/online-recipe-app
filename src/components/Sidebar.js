@@ -3,7 +3,7 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { CiViewList } from "react-icons/ci";
 import { CiLogout } from "react-icons/ci";
 
-function Sidebar({ handleLogOut }) {
+function Sidebar() {
   //navigation
   const navigation = useNavigate();
   function handleNavigateRecipes() {
@@ -11,6 +11,10 @@ function Sidebar({ handleLogOut }) {
   }
   function handleNavigateHome() {
     navigation("/home");
+  }
+  function logOut() {
+    localStorage.clear();
+    navigation("/");
   }
   return (
     <div className="Sidebar">
@@ -29,7 +33,7 @@ function Sidebar({ handleLogOut }) {
         </div>
       </div>
 
-      <div className="logout" onClick={handleLogOut}>
+      <div className="logout" onClick={logOut}>
         <CiLogout />
         Logout
       </div>

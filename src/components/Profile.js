@@ -1,28 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function Profile({
-  name,
-  surname,
-  email,
-  username,
-  password,
-  profilePic,
-  handleUserUpdate,
-  handleDeleteAccount,
-}) {
+function Profile() {
   const [userUpdate, setUserUpdate] = useState({
-    name: "",
-    surname: "",
-    email: "",
     username: "",
+    email: "",
     password: "",
-    profilePic: "",
   });
   const [update, setUpdate] = useState(false);
-
-  function handleSubmit(obj) {
-    handleUserUpdate(obj);
-    setUpdate(false);
+  const [profile, setProfile] = useState({});
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+  async function fetchProfile() {
+    try {
+      const response = await fetch("http://localhost:3000/profile", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      setProfile(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function handleSubmit(obj) {
+    try {
+      const response = await fetch(`http://localhost:3000/profile`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(obj),
+      });
+      const data = await response.json();
+      setUpdate(false);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function handleChange(e) {
@@ -42,12 +61,19 @@ function Profile({
       });
     };
   }
+  function getProfilePic(obj) {
+    if (true) {
+      return "/images/avatar.png";
+    } else {
+      return obj.profilePic;
+    }
+  }
 
   return (
     <div className="Profile">
       <div className="contact-details">
         <div className="profile-picture">
-          {update ? (
+          {/* {update ? (
             <div className="profile-pic2">
               <label htmlFor="profile-pic2">
                 Profile picture:
@@ -59,48 +85,31 @@ function Profile({
                 />
               </label>
             </div>
-          ) : (
-            <div className="profile-pic">
-              {profilePic && <img src={profilePic} alt="profile" />}
-            </div>
-          )}
+          ) : ( */}
+          <div className="profile-pic">
+            {<img src={getProfilePic(profile)} alt="profile" />}
+          </div>
+          {/* )} */}
         </div>
         <div className="profile-content">
-          <h2>Account details</h2>
+          <h2>Account details</h2>{" "}
+          {update && <div onClick={() => setUpdate(false)}>X</div>}
           <div className="name-div">
-            <h4>Name</h4>
+            <h4>Username</h4>
             {update ? (
               <div className="name">
                 <input
                   type="text"
                   id="name"
-                  name="name"
+                  name="username"
                   onChange={(e) => handleChange(e)}
                   value={userUpdate.name}
                 />
               </div>
             ) : (
-              <div>{name}</div>
+              <div>{profile.username}</div>
             )}
           </div>
-
-          <div className="surname-div">
-            <h4>Surname</h4>
-            {update ? (
-              <div className="surname">
-                <input
-                  type="text"
-                  id="surname"
-                  name="surname"
-                  onChange={(e) => handleChange(e)}
-                  value={userUpdate.surname}
-                />
-              </div>
-            ) : (
-              <div>{surname}</div>
-            )}
-          </div>
-
           <div className="email-div">
             <h4>Email</h4>
             {update ? (
@@ -114,30 +123,10 @@ function Profile({
                 />
               </div>
             ) : (
-              <div>{email}</div>
+              <div>{profile.email}</div>
             )}
           </div>
-
           <div className="user-pass">
-            <div className="user">
-              <h4>Username:</h4>
-              {update ? (
-                <div>
-                  <div className="name">
-                    <input
-                      type="text"
-                      id="username"
-                      name="username"
-                      onChange={(e) => handleChange(e)}
-                      value={userUpdate.username}
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div>{username}</div>
-              )}
-            </div>
-
             <div className="pass">
               <h4>Password:</h4>
               {update ? (
@@ -153,7 +142,7 @@ function Profile({
                   </div>
                 </div>
               ) : (
-                <div className="password-text">{password}</div>
+                <div className="password-text">{profile.password}</div>
               )}
             </div>
           </div>
@@ -166,9 +155,9 @@ function Profile({
               {update ? "Submit" : "Update"}
             </button>
 
-            <button id="account-delete" onClick={handleDeleteAccount}>
+            {/* <button id="account-delete" onClick={handleDeleteAccount}>
               Delete my account
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

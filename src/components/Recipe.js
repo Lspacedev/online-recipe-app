@@ -110,7 +110,25 @@ function Recipe({ getPicLink }) {
     const { name, value } = e.target;
     setObj((prev) => ({ ...prev, [name]: value }));
   }
-
+  function getPicLink(obj) {
+    if (true) {
+      if (obj.category === "breakfast") {
+        return "/images/breakfast.jpg";
+      } else if (obj.category === "lunch") {
+        return "/images/lunch.jpg";
+      } else if (obj.category === "dinner") {
+        return "/images/dinner.jpg";
+      } else if (obj.category === "dessert") {
+        return "/images/dessert.jpg";
+      } else if (obj.category === "main") {
+        return "/images/main.jpg";
+      } else if (obj.category === "appetiser") {
+        return "/images/appetiser.jpg";
+      }
+    } else {
+      return obj.pic;
+    }
+  }
   return (
     <div className="Recipe">
       <Backarrow handleBackNavigate={handleBackNavigate} />
@@ -228,11 +246,11 @@ function Recipe({ getPicLink }) {
             <div className="category-text">
               <p>{recipe && recipe.category}</p>
             </div>
-            {/* <img
+            <img
               src={recipe && getPicLink(recipe)}
               alt="recipe"
               id="recipe-pic"
-            /> */}
+            />
             <div className="prep-cook-serve">
               <div className="prep-text">
                 <div className="recipe-sub-head">Prep Time</div>

@@ -18,6 +18,13 @@ function Header({ handleSearchSubmit, profilePic }) {
   function handleNavigateProfile() {
     navigation("/home/profile");
   }
+  function getProfilePic(obj) {
+    if (true) {
+      return "/images/avatar.png";
+    } else {
+      return obj.profilePic;
+    }
+  }
 
   return (
     <div className="Header">
@@ -40,7 +47,7 @@ function Header({ handleSearchSubmit, profilePic }) {
             />
           </div>
           <div className="header-profile-pic" onClick={handleNavigateProfile}>
-            {profilePic && <img src={profilePic} alt="profile" />}
+            {<img src={getProfilePic()} alt="profile" />}
           </div>
         </div>
       </div>
