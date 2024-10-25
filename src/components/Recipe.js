@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import Backarrow from "./Backarrow";
+import { IoTime } from "react-icons/io5";
+import { RiBowlFill } from "react-icons/ri";
 
 function Recipe({ getPicLink }) {
   const [recipe, setRecipe] = useState({});
@@ -70,6 +72,7 @@ function Recipe({ getPicLink }) {
       const data = await response.json();
       console.log(data);
       navigation("/recipes");
+      navigation(0);
     } catch (error) {
       console.log(error);
     }
@@ -89,6 +92,8 @@ function Recipe({ getPicLink }) {
       );
       const data = await response.json();
       console.log(data);
+
+      navigation(0);
       setEdit(false);
     } catch (error) {
       console.log(error);
@@ -235,15 +240,24 @@ function Recipe({ getPicLink }) {
             /> */}
             <div className="prep-cook-serve">
               <div className="prep-text">
-                <div className="recipe-sub-head">Prep Time</div>
+                <div className="recipe-sub-head">
+                  <IoTime />
+                  Prep Time
+                </div>
                 <p>{recipe && recipe.prepTime}min</p>
               </div>
               <div className="cook-text">
-                <div className="recipe-sub-head">Cook Time</div>
+                <div className="recipe-sub-head">
+                  <IoTime />
+                  Cook Time
+                </div>
                 <p>{recipe && recipe.cookingTime}min</p>
               </div>
               <div className="serve-text">
-                <div className="recipe-sub-head">Servings</div>
+                <div className="recipe-sub-head">
+                  <RiBowlFill />
+                  Servings
+                </div>
                 <p>{recipe && recipe.servings}</p>
               </div>
             </div>

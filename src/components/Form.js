@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Form({ toggleClicked }) {
   const [obj, setObj] = useState({
@@ -10,6 +11,8 @@ function Form({ toggleClicked }) {
     cookingTime: "",
     servings: "",
   });
+  const navigation = useNavigate();
+
   const token = localStorage.getItem("token");
 
   function handleChange(e) {
@@ -44,6 +47,7 @@ function Form({ toggleClicked }) {
       console.log(error);
     }
     toggleClicked();
+    navigation(0);
   }
   function handleImageUpload(e) {
     let input = document.getElementById("pic");

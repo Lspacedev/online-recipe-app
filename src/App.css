@@ -85,6 +85,7 @@ nav {
   color: #bc412b;
   background-color: white;
   border: none;
+  border-radius: 2px;
 }
 .login-btn:hover {
   color: #ed6a5a;
@@ -281,7 +282,7 @@ select {
   flex: 8;
   height: inherit;
   width: calc(100% - 355px);
-  background-color: white;
+  background-color: whitesmoke;
   overflow-y: scroll;
 }
 
@@ -359,6 +360,7 @@ select {
   border: none;
   background-color: #bc412b;
   color: white;
+  border-radius: 7px;
 }
 .Profile button:hover {
   background-color: #ed6a5a;
@@ -394,11 +396,11 @@ select {
 
   text-align: center;
   padding: 50px 5px;
-  background-color: whitesmoke;
+  background-color: white;
 }
 
 .logo {
-  flex: 30%;
+  flex: 5%;
   font-size: 1.7rem;
   font-weight: bold;
   color: #ed6a5a;
@@ -411,6 +413,7 @@ select {
 
 .add-btn {
   flex: 10%;
+  border-radius: 3px;
 }
 
 .logout {
@@ -425,7 +428,7 @@ select {
 }
 
 .logout:hover {
-  background-color: #ed6a5a;
+  background-color: black;
   border-radius: 0px 15px 15px 0px;
   color: white;
 }
@@ -446,6 +449,9 @@ select {
   align-items: center;
   justify-content: center;
 }
+.sidebar-links .icon {
+  font-size: 1rem;
+}
 .sidebar-links p {
   width: 100px;
   margin: 0px;
@@ -454,7 +460,7 @@ select {
 }
 
 .sidebar-links div:hover {
-  background-color: #ed6a5a;
+  background-color: black;
   border-radius: 0px 15px 15px 0px;
   color: white;
 }
@@ -466,6 +472,7 @@ select {
   align-items: center;
 
   padding: 5px 25px;
+  background-color: white;
 }
 .hamburger-menu {
   margin: 5px 0px 5px 20px;
@@ -535,6 +542,7 @@ select {
   border: none;
   color: white;
   margin-right: 15px;
+  border-radius: 7px;
 }
 
 .Add-div button:hover {
@@ -579,7 +587,7 @@ select {
   font-size: 2rem;
 }
 
-.form-div form {
+.form-div .form {
   margin: 0 auto 0 auto;
   padding: 25px;
   width: 400px;
@@ -587,17 +595,19 @@ select {
   overflow: hidden;
   background-color: white;
 }
-.form-div form input,
+.form-div .form input,
 textarea,
+button,
 select {
   width: 200px;
   margin: 5px 0px;
 }
-.form-div form input[type="submit"] {
+.form-div .form button {
   width: 100%;
+  border-radius: 7px;
 }
 
-.form-div form div label {
+.form-div .form div label {
   display: flex;
   justify-content: space-between;
 }
@@ -612,21 +622,21 @@ select {
   height: 100%;
 
   margin: 0px;
-  padding: 0px;
+  padding: 25px;
 
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
-  gap: 5px;
-  overflow: scroll;
+  gap: 10px;
 }
 .DisplayRecipes .item {
   width: 250px;
-  height: 200px;
+  height: 90px;
   margin: 5px 0px;
 
   word-wrap: break-word;
   background-color: white;
+  border-left: 2px solid #e03112;
 }
 
 .food-type {
@@ -660,13 +670,12 @@ select {
   border-radius: 20px 20px 0px 0px;
 }
 .cook-time {
-  background-color: white;
-  position: absolute;
   bottom: 5px;
   left: 5px;
-  padding: 2px;
+  padding: 5px;
   border-radius: 10px;
   font-size: 0.8rem;
+  color: #2c2c25;
 }
 .Recipecard h3 {
   margin: 0px;
@@ -683,6 +692,16 @@ select {
   display: flex;
   flex-direction: column;
 }
+
+.recipe-content {
+  width: 60%;
+  padding: 25px 0px;
+  margin: 0px auto;
+  background-color: rgb(252, 252, 252);
+  color: #1f1f1f;
+  font-family: "Courier New", Courier, monospace;
+}
+
 .back {
   text-align: start;
   margin: 25px;
@@ -693,8 +712,16 @@ select {
   color: #ed6a5a;
 }
 .category-text {
-  margin: 0px;
+  width: 10%;
+  margin: auto;
   padding: 0px;
+}
+.category-text p {
+  background-color: #bc412b;
+  color: white;
+  padding: 0px;
+  margin: 15px;
+  border-radius: 30px;
 }
 .prep-cook-serve {
   display: flex;
@@ -704,6 +731,7 @@ select {
 
 .recipe-sub-head {
   font-weight: 600;
+  background-color: whitesmoke;
 }
 .recipe-sub-head + p {
   font-size: 0.9rem;
@@ -712,6 +740,8 @@ select {
 .recipe-info h1 {
   margin: 0px;
   padding: 5px 0px;
+  font-weight: 600;
+  font-family: "Courier New", Courier, monospace;
 }
 
 #recipe-pic {
@@ -727,8 +757,10 @@ select {
 .ingredients-text {
   background-color: whitesmoke;
 
-  width: 60%;
+  width: 40%;
   margin: 25px auto;
+  padding: 25px;
+
   border-radius: 20px;
 }
 
@@ -741,8 +773,9 @@ select {
 .instructions-text {
   background-color: whitesmoke;
 
-  width: 60%;
+  width: 40%;
   margin: 25px auto;
+  padding: 25px;
   border-radius: 20px;
 }
 .instructions-div h3 {
@@ -755,6 +788,7 @@ select {
   border: none;
   padding: 10px 15px;
   margin: 5px;
+  border-radius: 7px;
 }
 .update {
   background-color: #bc412b;
@@ -762,6 +796,14 @@ select {
   border: none;
   padding: 10px 15px;
   margin: 5px;
+  border-radius: 7px;
+}
+
+.delete:hover {
+  background-color: #ed6a5a;
+}
+.update:hover {
+  background-color: #ed6a5a;
 }
 
 .update-form {
@@ -846,6 +888,10 @@ select {
   font-weight: 600;
   margin: 0px;
   padding: 0px;
+}
+
+.food-type {
+  cursor: pointer;
 }
 
 @media (max-width: 1200px) {
@@ -998,30 +1044,23 @@ select {
     text-align: center;
     margin: 50px 0px 0px 0px;
   }
-  .form-div form {
+  .form-div .form {
     width: 75%;
   }
-  .form-div form input,
+  .form-div .form input,
   textarea,
+  button,
   select {
     width: 100%;
     outline: none;
     border: 1px solid #bbb;
   }
-  .form-div form div label {
+  .form-div .form div label {
     display: flex;
     flex-direction: column;
   }
   .form-close {
     margin-top: 25px;
-  }
-
-  .Add-div button {
-    padding: 15px 30px;
-    color: #bc412b;
-    background-color: white;
-    border: none;
-    font-size: 2rem;
   }
 
   .profile-pic {
