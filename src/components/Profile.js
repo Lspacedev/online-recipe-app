@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
+  const [profile, setProfile] = useState({});
+
   const [userUpdate, setUserUpdate] = useState({
     username: "",
     email: "",
     password: "",
   });
   const [update, setUpdate] = useState(false);
-  const [profile, setProfile] = useState({});
+  const navigation = useNavigate();
+
   const token = localStorage.getItem("token");
   useEffect(() => {
     fetchProfile();
@@ -38,6 +42,9 @@ function Profile() {
         body: JSON.stringify(obj),
       });
       const data = await response.json();
+      if (response.ok === true) {
+        navigation(0);
+      }
       setUpdate(false);
     } catch (error) {
       console.log(error);
@@ -102,6 +109,7 @@ function Profile() {
                   type="text"
                   id="name"
                   name="username"
+                  placeholder={profile.username}
                   onChange={(e) => handleChange(e)}
                   value={userUpdate.name}
                 />
@@ -118,6 +126,7 @@ function Profile() {
                   type="text"
                   id="email"
                   name="email"
+                  placeholder={profile.email}
                   onChange={(e) => handleChange(e)}
                   value={userUpdate.email}
                 />

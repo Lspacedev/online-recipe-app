@@ -11,7 +11,7 @@ function Landing() {
           <Link to="login">
             <button className="login-btn">Log in</button>
           </Link>
-          <Link to="registration">
+          <Link to="register">
             <button className="register-btn">Register</button>
           </Link>
         </div>
@@ -22,7 +22,7 @@ function Landing() {
           <div className="landing-subtitle">
             A simple way to manage your favourite recipes.
           </div>
-          <Link to="/registration">
+          <Link to="/register">
             <button className="register-btn2">Register Now</button>
           </Link>
         </div>

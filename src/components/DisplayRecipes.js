@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Recipecard from "./Recipecard";
 
-function DisplayRecipes({ submittedSearch }) {
+function DisplayRecipes({ submittedSearch, updateStats }) {
   const [recipes, setRecipes] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
 
@@ -25,7 +25,6 @@ function DisplayRecipes({ submittedSearch }) {
         },
       });
       const data = await response.json();
-      console.log(data);
       setRecipes(data.recipes);
     } catch (error) {
       console.log(error);

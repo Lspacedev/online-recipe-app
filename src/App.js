@@ -15,7 +15,49 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const [submittedSearch, setsubmittedSearch] = useState("");
+  const [stats, setStats] = useState({
+    breakfast: 0,
+    lunch: 0,
+    dinner: 0,
+    appetiser: 0,
+    main: 0,
+    dessert: 0,
+  });
+  const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    if (token !== null) {
+      fetchRecipes();
+    }
+  }, []);
+  useEffect(() => {
+    updateStats("breakfast");
+    updateStats("lunch");
+    updateStats("dinner");
+    updateStats("appetiser");
+    updateStats("main");
+    updateStats("dessert");
+  }, [recipes]);
+  async function fetchRecipes() {
+    try {
+      const res = await fetch("http://localhost:3000/api/recipes", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.ok === true) {
+        const data = await res.json();
 
+        setRecipes(data.recipes);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   function getPicLink(obj) {
     if (obj.pic === "") {
       if (obj.category === "breakfast") {
@@ -40,20 +82,16 @@ function App() {
     setsubmittedSearch(searchInput);
   }
 
-  // function countCategories(categoryName) {
-  //   if (JSON.stringify(currentUser) !== "{}") {
-  //     let number = currentUser.recipes.reduce((count, recipe) => {
-  //       if (recipe.category === categoryName) {
-  //         count++;
-  //       }
-  //       return count;
-  //     }, 0);
-  //     return number;
-  //   } else {
-  //     return 0;
-  //   }
-  // }
-
+  function updateStats(categoryName) {
+    let number = recipes.reduce((count, recipe) => {
+      if (recipe.category === categoryName) {
+        count++;
+      }
+      return count;
+    }, 0);
+    setStats((prev) => ({ ...prev, [categoryName]: number }));
+  }
+  if (loading) return <div>Loading...</div>;
   return (
     <Router>
       <div className="App">
@@ -67,23 +105,28 @@ function App() {
               path="home"
               element={<Home handleSearchSubmit={handleSearchSubmit} />}
             >
-              {/* <Route
+              <Route
                 index
                 element={
                   <Dashboard
-                    currentUser={currentUser}
-                    breakfast={countCategories("breakfast")}
-                    lunch={countCategories("lunch")}
-                    dinner={countCategories("dinner")}
-                    appetiser={countCategories("appetiser")}
-                    main={countCategories("main")}
-                    dessert={countCategories("dessert")}
+                    length={recipes.length}
+                    breakfast={stats.breakfast}
+                    lunch={stats.lunch}
+                    dinner={stats.dinner}
+                    appetiser={stats.appetiser}
+                    main={stats.main}
+                    dessert={stats.dessert}
                   />
                 }
-              /> */}
+              />
               <Route
                 path="recipes"
-                element={<DisplayRecipes submittedSearch={submittedSearch} />}
+                element={
+                  <DisplayRecipes
+                    submittedSearch={submittedSearch}
+                    updateStats={updateStats}
+                  />
+                }
               >
                 <Route path=":recipe_id" element={<Recipe />} />
               </Route>

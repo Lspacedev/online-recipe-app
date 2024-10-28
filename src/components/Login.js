@@ -6,7 +6,7 @@ function Login() {
     username: "",
     password: "",
   });
-
+  const [err, setErr] = useState("");
   //navigation
   const navigation = useNavigate();
 
@@ -27,14 +27,18 @@ function Login() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginDetails),
       });
-
       const data = await res.json();
-      alert(data.message);
 
-      localStorage.setItem("token", data.token);
-      navigation("/home");
+      if (res.ok === true) {
+        alert(data.message);
+        localStorage.setItem("token", data.token);
+        navigation("/home");
+        navigation(0);
+      } else {
+        setErr(data.message);
+      }
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   }
 
@@ -42,6 +46,7 @@ function Login() {
     <div className="Login">
       <div className="login-form-container">
         <h2>Welcome back!</h2>
+        {err && <span className="err">{err}</span>}
         <div className="form">
           <div className="username">
             <label htmlFor="username">

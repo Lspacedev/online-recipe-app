@@ -73,7 +73,12 @@ nav {
   font-style: italic;
   font-family: Arial, Helvetica, sans-serif;
 }
-
+.Login .err {
+  color: red;
+  font-size: 0.7rem;
+  margin: 0px;
+  padding: 0px;
+}
 .login-register {
   display: flex;
   align-items: center;
@@ -85,6 +90,7 @@ nav {
   color: #bc412b;
   background-color: white;
   border: none;
+  border-radius: 2px;
 }
 .login-btn:hover {
   color: #ed6a5a;
@@ -93,7 +99,7 @@ nav {
   background-color: #bc412b;
   color: white;
   font-weight: bold;
-  padding: 12px 18px;
+  padding: 12px 5px;
   border-radius: 7px;
 
   margin-right: 10px;
@@ -143,7 +149,7 @@ nav {
   align-items: center;
 }
 
-.Login .form {
+.Login form {
   margin: 50px auto;
   padding: 25px 0px;
   width: 60%;
@@ -162,7 +168,7 @@ select {
   border-radius: 10px;
   display: inline-block;
 }
-.Login .form div label {
+.Login form div label {
   display: flex;
   flex-direction: column;
   font-size: 14px;
@@ -170,8 +176,9 @@ select {
   cursor: pointer;
 }
 
-.Login .form button {
+.Login button {
   margin: 5px 0px;
+  width: 100%;
   background-color: #bc412b;
   color: white;
   outline: none;
@@ -179,7 +186,7 @@ select {
   cursor: pointer;
 }
 
-.Login .form button:hover {
+.Login button:hover {
   background-color: #ed6a5a;
 }
 
@@ -221,7 +228,7 @@ select {
   align-items: center;
 }
 
-.Registration .form {
+.Registration form {
   margin: 0px auto;
   padding: 25px 10px;
 }
@@ -239,21 +246,24 @@ select {
   border-radius: 10px;
   display: inline-block;
 }
-.Registration .form div label {
+.Registration form div label {
+  display: flex;
+  flex-direction: column;
   font-size: 14px;
   color: rgb(133, 133, 133);
   cursor: pointer;
 }
 
-.Registration .form button {
+.Registration button {
   margin: 5px 0px;
+  width: 100%;
   background-color: #bc412b;
   color: white;
   outline: none;
   border: none;
   cursor: pointer;
 }
-.Registration .form button:hover {
+.Registration button:hover {
   background-color: #ed6a5a;
 }
 .register-img {
@@ -276,10 +286,10 @@ select {
 }
 
 .Main {
-  flex: 8;
+  flex: 85%;
   height: inherit;
   width: calc(100% - 355px);
-  background-color: white;
+  background-color: rgb(248, 249, 250);
   overflow-y: scroll;
 }
 
@@ -357,6 +367,7 @@ select {
   border: none;
   background-color: #bc412b;
   color: white;
+  border-radius: 7px;
 }
 .Profile button:hover {
   background-color: #ed6a5a;
@@ -384,36 +395,47 @@ select {
 
 /** Sidebar **/
 .Sidebar {
-  flex: 2;
+  flex: 15%;
   width: 30%;
 
   display: flex;
   flex-direction: column;
 
   text-align: center;
-  padding: 50px 5px;
-  background-color: whitesmoke;
+  padding: 0px 5px;
+  background-color: white;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 0px 15px;
 }
 
 .logo {
-  flex: 30%;
+  flex: 5%;
   font-size: 1.7rem;
+  margin: 15px;
   font-weight: bold;
-  color: #ed6a5a;
+  font-style: oblique;
+  font-family: "Courier New", Courier, monospace;
 }
 .logo span {
   font-size: 0.9rem;
   font-style: italic;
   font-family: Arial, Helvetica, sans-serif;
+  color: #1f1f1f;
+  border-bottom: 1px solid #e03112;
 }
-
+.logo img {
+  width: 25px;
+  filter: brightness(0) saturate(100%) invert(38%) sepia(69%) saturate(4378%)
+    hue-rotate(345deg) brightness(94%) contrast(94%);
+}
 .add-btn {
   flex: 10%;
+  border-radius: 3px;
 }
 
 .logout {
   cursor: pointer;
-  color: #59594a;
+  color: #0f0f09;
   font-size: 1.1rem;
   margin: 0px;
   padding: 0px;
@@ -423,10 +445,17 @@ select {
 }
 
 .logout:hover {
-  background-color: #ed6a5a;
+  background-color: black;
   border-radius: 0px 15px 15px 0px;
   color: white;
 }
+.logout p {
+  width: 100px;
+  margin: 0px 0px 0px 15px;
+  padding: 0px;
+  text-align: start;
+}
+
 .sidebar-links {
   flex: 60%;
   display: flex;
@@ -436,23 +465,26 @@ select {
 
 .sidebar-links div {
   cursor: pointer;
-  color: #59594a;
+  color: #1d1d19;
   font-size: 1.1rem;
   margin: 0px;
-  padding: 0px;
+  padding: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.sidebar-links .icon {
+  font-size: 1.2rem;
+}
 .sidebar-links p {
   width: 100px;
-  margin: 0px;
+  margin: 0px 0px 0px 15px;
   padding: 0px;
   text-align: start;
 }
 
 .sidebar-links div:hover {
-  background-color: #ed6a5a;
+  background-color: black;
   border-radius: 0px 15px 15px 0px;
   color: white;
 }
@@ -464,6 +496,7 @@ select {
   align-items: center;
 
   padding: 5px 25px;
+  background-color: white;
 }
 .hamburger-menu {
   margin: 5px 0px 5px 20px;
@@ -533,6 +566,7 @@ select {
   border: none;
   color: white;
   margin-right: 15px;
+  border-radius: 7px;
 }
 
 .Add-div button:hover {
@@ -587,12 +621,14 @@ select {
 }
 .form-div .form input,
 textarea,
+button,
 select {
   width: 200px;
   margin: 5px 0px;
 }
 .form-div .form button {
   width: 100%;
+  border-radius: 7px;
 }
 
 .form-div .form div label {
@@ -610,13 +646,12 @@ select {
   height: 100%;
 
   margin: 0px;
-  padding: 0px;
+  padding: 25px;
 
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
-  gap: 5px;
-  overflow: scroll;
+  gap: 10px;
 }
 .DisplayRecipes .item {
   width: 250px;
@@ -625,6 +660,7 @@ select {
 
   word-wrap: break-word;
   background-color: white;
+  border-bottom: 2px solid #e03112;
 }
 
 .food-type {
@@ -681,9 +717,19 @@ select {
   display: flex;
   flex-direction: column;
 }
+
+.recipe-content {
+  width: 60%;
+  padding: 25px 0px;
+  margin: 0px auto;
+  background-color: rgb(252, 252, 252);
+  color: #1f1f1f;
+  font-family: "Courier New", Courier, monospace;
+}
+
 .back {
   text-align: start;
-  margin: 25px;
+  margin: 5px 25px;
   cursor: pointer;
   font-size: 1.4rem;
 }
@@ -691,8 +737,16 @@ select {
   color: #ed6a5a;
 }
 .category-text {
-  margin: 0px;
+  width: 25%;
+  margin: auto;
   padding: 0px;
+}
+.category-text p {
+  background-color: #bc412b;
+  color: white;
+  padding: 0px;
+  margin: 15px;
+  border-radius: 30px;
 }
 .prep-cook-serve {
   display: flex;
@@ -702,6 +756,7 @@ select {
 
 .recipe-sub-head {
   font-weight: 600;
+  background-color: whitesmoke;
 }
 .recipe-sub-head + p {
   font-size: 0.9rem;
@@ -710,6 +765,8 @@ select {
 .recipe-info h1 {
   margin: 0px;
   padding: 5px 0px;
+  font-weight: 600;
+  font-family: "Courier New", Courier, monospace;
 }
 
 #recipe-pic {
@@ -725,8 +782,10 @@ select {
 .ingredients-text {
   background-color: whitesmoke;
 
-  width: 60%;
+  width: 40%;
   margin: 25px auto;
+  padding: 25px;
+
   border-radius: 20px;
 }
 
@@ -739,8 +798,9 @@ select {
 .instructions-text {
   background-color: whitesmoke;
 
-  width: 60%;
+  width: 40%;
   margin: 25px auto;
+  padding: 25px;
   border-radius: 20px;
 }
 .instructions-div h3 {
@@ -753,6 +813,7 @@ select {
   border: none;
   padding: 10px 15px;
   margin: 5px;
+  border-radius: 7px;
 }
 .update {
   background-color: #bc412b;
@@ -760,6 +821,14 @@ select {
   border: none;
   padding: 10px 15px;
   margin: 5px;
+  border-radius: 7px;
+}
+
+.delete:hover {
+  background-color: #ed6a5a;
+}
+.update:hover {
+  background-color: #ed6a5a;
 }
 
 .update-form {
@@ -831,11 +900,11 @@ select {
 }
 .recipes-categories .items .icon {
   font-size: 2.4rem;
-  color: #3f3f35;
+  color: #2b2b24;
 }
 
 .recipes-categories h5 {
-  color: #3f3f35;
+  color: #25251e;
 }
 
 .recipes-categories p {
@@ -844,6 +913,10 @@ select {
   font-weight: 600;
   margin: 0px;
   padding: 0px;
+}
+
+.food-type {
+  cursor: pointer;
 }
 
 @media (max-width: 1200px) {
@@ -996,30 +1069,23 @@ select {
     text-align: center;
     margin: 50px 0px 0px 0px;
   }
-  .form-div form {
+  .form-div .form {
     width: 75%;
   }
-  .form-div form input,
+  .form-div .form input,
   textarea,
+  button,
   select {
     width: 100%;
     outline: none;
     border: 1px solid #bbb;
   }
-  .form-div form div label {
+  .form-div .form div label {
     display: flex;
     flex-direction: column;
   }
   .form-close {
     margin-top: 25px;
-  }
-
-  .Add-div button {
-    padding: 15px 30px;
-    color: #bc412b;
-    background-color: white;
-    border: none;
-    font-size: 2rem;
   }
 
   .profile-pic {
@@ -1046,6 +1112,9 @@ select {
   }
   .recipes-categories .items {
     flex: 90%;
+  }
+  .category-text {
+    width: 50%;
   }
 }
 

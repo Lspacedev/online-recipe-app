@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
             <RiFileList3Line className="icon" />
           </div>
 
-          <p>{this.props.currentUser.recipes.length}</p>
+          <p>{this.props.length}</p>
         </div>
         <div className="recipes-categories">
           <div className="items">

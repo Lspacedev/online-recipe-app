@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Form({ toggleClicked }) {
   const [obj, setObj] = useState({
@@ -10,6 +11,8 @@ function Form({ toggleClicked }) {
     cookingTime: "",
     servings: "",
   });
+  const navigation = useNavigate();
+
   const token = localStorage.getItem("token");
 
   function handleChange(e) {
@@ -39,7 +42,9 @@ function Form({ toggleClicked }) {
         }),
       });
       const data = await response.json();
-      console.log(data);
+      if (response.ok === true) {
+        navigation(0);
+      }
     } catch (error) {
       console.log(error);
     }
