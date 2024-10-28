@@ -1,16 +1,10 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Home from "./components/Home";
-import Registration from "./components/Registration";
-import Login from "./components/Login";
-import Landing from "./components/Landing";
-import Profile from "./components/Profile";
 
 import DisplayRecipes from "./components/DisplayRecipes";
 import Recipe from "./components/Recipe";
-import Dashboard from "./components/Dashboard";
 
-import ProtectedRoutes from "./components/ProtectedRoute";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
