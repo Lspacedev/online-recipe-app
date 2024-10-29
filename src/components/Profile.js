@@ -32,22 +32,34 @@ function Profile() {
     }
   }
   async function handleSubmit(obj) {
-    try {
-      const response = await fetch(`http://localhost:3000/profile`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(obj),
-      });
-      const data = await response.json();
-      if (response.ok === true) {
-        navigation(0);
-      }
+    if (!obj.username && !obj.email && !obj.password) {
+      alert("Error! No update information was entered!");
       setUpdate(false);
-    } catch (error) {
-      console.log(error);
+      return;
+    }
+    let updateConfirmation = window.confirm(
+      "You are about to update profile information. Continue?"
+    );
+    if (updateConfirmation) {
+      try {
+        const response = await fetch(`http://localhost:3000/profile`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(obj),
+        });
+        const data = await response.json();
+        if (response.ok === true) {
+          navigation(0);
+        }
+        setUpdate(false);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setUpdate(false);
     }
   }
 

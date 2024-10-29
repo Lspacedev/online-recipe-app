@@ -27,6 +27,11 @@ function Form({ toggleClicked }) {
   }
 
   async function handleSubmit() {
+    if (obj.name === "" && obj.ingredients === "") {
+      alert("Please enter recipe information.");
+      toggleClicked();
+      return;
+    }
     try {
       const response = await fetch("http://localhost:3000/api/recipes", {
         method: "POST",

@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import Backarrow from "./Backarrow";
 import { IoTime } from "react-icons/io5";
 import { RiBowlFill } from "react-icons/ri";
-function Recipe({ getPicLink }) {
+function Recipe() {
   const [recipe, setRecipe] = useState({});
   const [obj, setObj] = useState({
     name: "",
@@ -55,49 +54,74 @@ function Recipe({ getPicLink }) {
     setEdit(!edit);
   }
   function handleBackNavigate() {
-    navigation(`/home/recipes/`);
+    navigation(`/home/recipes`);
   }
   async function deleteRecipe() {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/recipes/${recipe_id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+    let deleteConfirmation = window.confirm(
+      "Are you sure you want to delete recipe?"
+    );
+    if (deleteConfirmation) {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/recipes/${recipe_id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.ok === true) {
+          alert("Delete succesful");
+          navigation("/home/recipes");
+          navigation(0);
         }
-      );
-      const data = await response.json();
-      if (response.ok === true) {
-        navigation("/home/recipes");
-        navigation(0);
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   }
   async function updateRecipe() {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/recipes/${recipe_id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(obj),
-        }
-      );
-      const data = await response.json();
-      if (response.ok === true) {
-        navigation(0);
-      }
+    if (
+      !obj.name &&
+      !obj.ingredients &&
+      !obj.instructions &&
+      !obj.category &&
+      !obj.cookingTime &&
+      !obj.prepTime &&
+      !obj.servings
+    ) {
+      alert("Error! No update information was entered!");
       setEdit(false);
-    } catch (error) {
-      console.log(error);
+      return;
+    }
+    let updateConfirmation = window.confirm(
+      "You are about to update recipe information. Continue?"
+    );
+    if (updateConfirmation) {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/recipes/${recipe_id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(obj),
+          }
+        );
+        if (response.ok === true) {
+          alert("Update success");
+          navigation(0);
+        }
+        setEdit(false);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setEdit(false);
     }
   }
   function handleImageUpload(e) {

@@ -25,6 +25,8 @@ function App() {
   });
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (token !== null) {
@@ -52,6 +54,7 @@ function App() {
         const data = await res.json();
 
         setRecipes(data.recipes);
+        setTotalPages(Math.round(data.totalRecipes / data.limit));
         setLoading(false);
       }
     } catch (error) {
@@ -91,6 +94,9 @@ function App() {
     }, 0);
     setStats((prev) => ({ ...prev, [categoryName]: number }));
   }
+  function updatePage(num) {
+    setPage(num);
+  }
   if (loading) return <div>Loading...</div>;
   return (
     <Router>
@@ -103,7 +109,14 @@ function App() {
           <Route element={<ProtectedRoutes />}>
             <Route
               path="home"
-              element={<Home handleSearchSubmit={handleSearchSubmit} />}
+              element={
+                <Home
+                  handleSearchSubmit={handleSearchSubmit}
+                  totalPages={totalPages}
+                  page={page}
+                  updatePage={updatePage}
+                />
+              }
             >
               <Route
                 index
@@ -123,6 +136,7 @@ function App() {
                 path="recipes"
                 element={
                   <DisplayRecipes
+                    page={page}
                     submittedSearch={submittedSearch}
                     updateStats={updateStats}
                   />

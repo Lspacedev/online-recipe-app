@@ -4,26 +4,28 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Recipecard from "./Recipecard";
 
-function DisplayRecipes({ submittedSearch, updateStats }) {
+function DisplayRecipes({ page, submittedSearch }) {
   const [recipes, setRecipes] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-
   const { recipe_id } = useParams();
   const navigation = useNavigate();
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     fetchRecipes();
-  }, []);
+  }, [page]);
   async function fetchRecipes() {
     try {
-      const response = await fetch("http://localhost:3000/api/recipes", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `http://localhost:3000/api/recipes?page=${page}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = await response.json();
       setRecipes(data.recipes);
     } catch (error) {
