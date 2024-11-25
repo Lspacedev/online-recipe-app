@@ -116,7 +116,7 @@ function Registration({ count, handleRegistrationSubmit, registrationStatus }) {
             <label htmlFor="password">
               Password:
               <input
-                type="text"
+                type="password"
                 id="password"
                 name="password"
                 onChange={(e) => handleChange(e)}

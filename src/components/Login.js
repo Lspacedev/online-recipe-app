@@ -53,7 +53,7 @@ function Login({ handleLoginSubmit, loginStatus }) {
             <label htmlFor="password">
               Password:
               <input
-                type="text"
+                type="password"
                 id="password"
                 name="password"
                 onChange={(e) => handleChange(e)}
