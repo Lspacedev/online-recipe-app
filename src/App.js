@@ -230,9 +230,7 @@ function App() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ recipes }),
-    })
-      .then((response) => response.json())
-      .then((user) => console.log(user, "recipe has been deleted"));
+    }).then((response) => response.json());
 
     //update state
     setCurrentUser((prev) => ({ ...prev, recipes: filteredRecipes }));

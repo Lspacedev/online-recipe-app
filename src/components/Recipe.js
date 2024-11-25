@@ -67,7 +67,6 @@ function Recipe({
     edit = currRecipe.edit;
   }
 
-  console.log("recipes in Recipe.js", recipes, currRecipe);
   return (
     <div className="Recipe">
       <Backarrow handleBackNavigate={handleBackNavigate} />

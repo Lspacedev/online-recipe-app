@@ -618,7 +618,6 @@ select {
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 5px;
-  overflow: scroll;
 }
 .DisplayRecipes .item {
   width: 250px;
