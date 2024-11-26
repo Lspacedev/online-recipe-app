@@ -23,6 +23,7 @@ function App() {
   const [registrationStatus, setRegistrationStatus] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [submittedSearch, setsubmittedSearch] = useState("");
+  const [notFound, setNotFound] = useState(false);
 
   const [searchResults, setSearchResults] = useState([]);
 
@@ -31,8 +32,18 @@ function App() {
       .then((res) => res.json())
       .then((res) => {
         setUsers(res);
+      })
+      .catch((err) => {
+        console.error({ e: err.message });
+        alert("An error occured while fetching...");
       });
   }, []);
+  useEffect(() => {
+    if (searchInput === "") {
+      setSearchResults([]);
+      setNotFound(false);
+    }
+  }, [searchInput]);
   useEffect(() => {
     const usersCopy = users.slice(0);
     const foundUser = usersCopy.find(
@@ -54,6 +65,9 @@ function App() {
             .match(submittedSearch.toLowerCase()) ||
           recipe.category.toLowerCase().match(submittedSearch.toLowerCase())
       );
+      if (filteredRecipes.length === 0) {
+        setNotFound(true);
+      }
       setSearchResults(filteredRecipes);
     }
     return () => {
@@ -404,6 +418,7 @@ function App() {
                     recipes={currentUser.recipes || []}
                     handleDeleteRecipe={handleDeleteRecipe}
                     searchResults={searchResults}
+                    notFound={notFound}
                   />
                 }
               >

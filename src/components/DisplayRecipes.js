@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Recipecard from "./Recipecard";
 import useLocalStorage from "./useLocalStorage";
 
-function DisplayRecipes({ recipes, searchResults }) {
+function DisplayRecipes({ recipes, searchResults, notFound }) {
   const [recipeInfo, setRecipeInfo] = useLocalStorage("infoObj", {
     name: "",
     index: null,
@@ -56,7 +56,6 @@ function DisplayRecipes({ recipes, searchResults }) {
       return obj.pic;
     }
   }
-
   return (
     <div className="DisplayRecipes">
       {recipe_name !== "" && typeof recipe_name !== "undefined" ? (
@@ -75,6 +74,8 @@ function DisplayRecipes({ recipes, searchResults }) {
                 />
               </div>
             ))
+          ) : searchResults.length === 0 && notFound === true ? (
+            <div>No results</div>
           ) : recipes.length > 0 ? (
             recipes.map((recipe, i) => (
               <div className="item" key={i}>
