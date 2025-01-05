@@ -36,14 +36,14 @@ function Registration() {
 
   async function handleSubmit() {
     try {
-      const res = await fetch(`http://localhost:3000/register`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userDetails),
       });
-      const data = res.json();
+      const data = await res.json();
       alert(data.message);
       navigation("/login");
     } catch (error) {

@@ -10,6 +10,11 @@ button {
   cursor: pointer;
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+}
+
 .App {
   height: 100vh;
   display: flex;
@@ -62,16 +67,27 @@ nav {
 }
 
 .logo-land {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #bc412b;
-  margin: 15px;
+  flex: 5%;
+  font-size: 2.3rem;
+  font-weight: bold;
+  font-style: oblique;
+  font-family: "Courier New", Courier, monospace;
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
-
 .logo-land span {
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-style: italic;
   font-family: Arial, Helvetica, sans-serif;
+  color: #1f1f1f;
+  border-bottom: 1px solid #e03112;
+}
+.logo-land img {
+  margin-bottom: 15px;
+  width: 50px;
+  filter: brightness(0) saturate(100%) invert(38%) sepia(69%) saturate(4378%)
+    hue-rotate(345deg) brightness(94%) contrast(94%);
 }
 .Login .err {
   color: red;
@@ -289,8 +305,9 @@ select {
   flex: 85%;
   height: inherit;
   width: calc(100% - 355px);
-  background-color: rgb(248, 249, 250);
+  background-color: rgba(248, 249, 250, 0.801);
   overflow-y: scroll;
+  border-radius: 100px 0px 0px 0px;
 }
 
 .pagination {
@@ -317,6 +334,13 @@ select {
   text-align: start;
   display: flex;
   flex-direction: column;
+}
+.Profile .close {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1.4rem;
+  cursor: pointer;
+  width: 60%;
 }
 .profile-pic {
   width: 291px;
@@ -362,7 +386,10 @@ select {
   flex: 5;
 }
 .profile-content input {
-  width: 100%;
+  width: 59%;
+  padding: 5px;
+  border-radius: 7px;
+  border: 1px solid #bbb;
 }
 .profile-pic2 label {
   display: flex;
@@ -376,8 +403,9 @@ select {
 }
 
 .Profile button {
+  width: 60%;
   padding: 10px 15px;
-  margin: 5px;
+  margin: 15px 0px;
   border: none;
   background-color: #bc412b;
   color: white;
@@ -418,27 +446,25 @@ select {
   text-align: center;
   padding: 0px 5px;
   background-color: white;
-  border-right: 1px solid rgb(216, 216, 216);
-  border-radius: 0px 15px 15px 0px;
 }
 
 .logo {
   flex: 5%;
-  font-size: 1.7rem;
-  margin: 15px;
+  font-size: 2.3rem;
   font-weight: bold;
   font-style: oblique;
   font-family: "Courier New", Courier, monospace;
+  margin-top: 70px;
 }
 .logo span {
-  font-size: 0.9rem;
+  font-size: 1.3rem;
   font-style: italic;
   font-family: Arial, Helvetica, sans-serif;
   color: #1f1f1f;
   border-bottom: 1px solid #e03112;
 }
 .logo img {
-  width: 25px;
+  width: 50px;
   filter: brightness(0) saturate(100%) invert(38%) sepia(69%) saturate(4378%)
     hue-rotate(345deg) brightness(94%) contrast(94%);
 }
@@ -448,10 +474,11 @@ select {
 }
 
 .logout {
+  height: fit-content;
   cursor: pointer;
   color: #0f0f09;
   font-size: 1.1rem;
-  margin: 0px;
+  margin: 50px 0px;
   padding: 0px;
   display: flex;
   justify-content: center;
@@ -460,7 +487,7 @@ select {
 
 .logout:hover {
   background-color: black;
-  border-radius: 0px 15px 15px 0px;
+  border-radius: 15px;
   color: white;
 }
 .logout p {
@@ -471,7 +498,7 @@ select {
 }
 
 .sidebar-links {
-  flex: 60%;
+  flex: 50%;
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -499,7 +526,7 @@ select {
 
 .sidebar-links div:hover {
   background-color: black;
-  border-radius: 0px 15px 15px 0px;
+  border-radius: 15px;
   color: white;
 }
 /*Header*/
@@ -510,7 +537,7 @@ select {
   align-items: center;
 
   padding: 5px 25px;
-  background-color: white;
+  background-color: rgb(248, 249, 250);
 }
 .hamburger-menu {
   margin: 5px 0px 5px 20px;
@@ -548,6 +575,7 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: white;
 }
 #search-icon {
   margin: 0px;
@@ -601,8 +629,11 @@ select {
 .cat-add {
   display: flex;
   justify-content: end;
+  border-radius: 25px 0px 0px 0px;
 }
-
+.Addrecipe {
+  border-radius: 25px 0px 0px 0px;
+}
 .Form {
   position: fixed;
   width: 100%;
@@ -624,6 +655,7 @@ select {
 .form-title-close {
   display: flex;
   justify-content: space-around;
+  color: #1f1f1a;
 }
 
 .form-close {
@@ -633,17 +665,19 @@ select {
 .form-div .form {
   margin: 0 auto 0 auto;
   padding: 25px;
-  width: 400px;
+  width: 600px;
   height: auto;
   overflow: hidden;
   background-color: white;
+  border-radius: 5px;
 }
 .form-div .form input,
 textarea,
 button,
 select {
   width: 200px;
-  margin: 5px 0px;
+  margin: 15px 0px;
+  padding: 5px 10px;
 }
 .form-div .form button {
   width: 100%;
@@ -659,6 +693,7 @@ select {
 .DisplayRecipes {
   height: calc(100% - 100px);
   width: 100%;
+  border-radius: 25px 0px 0px 0px;
 }
 
 .DisplayRecipes .recipes-div {
@@ -736,7 +771,12 @@ select {
   display: flex;
   flex-direction: column;
 }
-
+.Recipe .close {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
 .recipe-content {
   width: 60%;
   padding: 25px 0px;
@@ -749,11 +789,14 @@ select {
 .back {
   text-align: start;
   margin: 5px 25px;
+  padding: 5px 7px;
   cursor: pointer;
   font-size: 1.4rem;
+  width: fit-content;
+  border-radius: 50%;
 }
 .back:hover {
-  color: #ed6a5a;
+  background-color: #6161612d;
 }
 .category-text {
   width: 25%;
@@ -862,7 +905,8 @@ select {
   width: 100%;
   outline: none;
   border: 1px solid #bbb;
-  margin: 5px 0px;
+  margin: 10px 0px;
+  padding: 5px 10px;
 }
 
 .update-form div label {
@@ -1134,6 +1178,9 @@ select {
   }
   .category-text {
     width: 50%;
+  }
+  .Main {
+    border-radius: 0px;
   }
 }
 

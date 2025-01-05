@@ -43,7 +43,7 @@ function App() {
   }, [recipes]);
   async function fetchRecipes() {
     try {
-      const res = await fetch("http://localhost:3000/api/recipes", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/recipes`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

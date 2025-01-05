@@ -7,6 +7,7 @@ import Recipecard from "./Recipecard";
 function DisplayRecipes({ page, submittedSearch }) {
   const [recipes, setRecipes] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const [notFound, setNotFound] = useState(false);
   const { recipe_id } = useParams();
   const navigation = useNavigate();
   const token = localStorage.getItem("token");
@@ -17,7 +18,7 @@ function DisplayRecipes({ page, submittedSearch }) {
   async function fetchRecipes() {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/recipes?page=${page}`,
+        `${process.env.REACT_APP_API_URL}/api/recipes?page=${page}`,
         {
           method: "GET",
           headers: {
@@ -32,6 +33,7 @@ function DisplayRecipes({ page, submittedSearch }) {
       console.log(error);
     }
   }
+
   useEffect(() => {
     if (submittedSearch.length > 0) {
       let filteredRecipes = recipes.filter(
@@ -39,8 +41,14 @@ function DisplayRecipes({ page, submittedSearch }) {
           recipe.name.toLowerCase().match(submittedSearch.toLowerCase()) ||
           recipe.category.toLowerCase().match(submittedSearch.toLowerCase())
       );
+      if (filteredRecipes.length === 0) {
+        setNotFound(true);
+      }
       setSearchResults(filteredRecipes);
+    } else {
+      setSearchResults(recipes);
     }
+
     return () => {
       setSearchResults([]);
     };
@@ -50,7 +58,7 @@ function DisplayRecipes({ page, submittedSearch }) {
   }
 
   function getPicLink(obj) {
-    if (true) {
+    if (obj.imageUrl === null || obj.imageUrl === "") {
       if (obj.category === "breakfast") {
         return "/images/breakfast.jpg";
       } else if (obj.category === "lunch") {
@@ -65,10 +73,9 @@ function DisplayRecipes({ page, submittedSearch }) {
         return "/images/appetiser.jpg";
       }
     } else {
-      return obj.pic;
+      return obj.imageUrl;
     }
   }
-
   return (
     <div className="DisplayRecipes">
       {recipe_id !== "" && typeof recipe_id !== "undefined" ? (
@@ -86,6 +93,8 @@ function DisplayRecipes({ page, submittedSearch }) {
                 />
               </div>
             ))
+          ) : searchResults.length === 0 && notFound === true ? (
+            <div>No results</div>
           ) : recipes.length > 0 ? (
             recipes.map((recipe, i) => (
               <div className="item" key={i}>

@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 function Login() {
   const [loginDetails, setLoginDetails] = useState({
     username: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   //navigation
   const navigation = useNavigate();
@@ -21,13 +21,40 @@ function Login() {
   }
 
   async function handleSubmit() {
+    setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/login", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginDetails),
       });
       const data = await res.json();
+      setLoading(false);
+      if (res.ok === true) {
+        alert(data.message);
+        localStorage.setItem("token", data.token);
+        navigation("/home");
+        navigation(0);
+      } else {
+        setErr(data.message);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+  async function handleGuestSubmit() {
+    setLoading(true);
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: process.env.REACT_APP_GUEST_USERNAME,
+          password: process.env.REACT_APP_GUEST_PASSWORD,
+        }),
+      });
+      const data = await res.json();
+      setLoading(false);
 
       if (res.ok === true) {
         alert(data.message);
@@ -41,7 +68,6 @@ function Login() {
       console.log(err.message);
     }
   }
-
   return (
     <div className="Login">
       <div className="login-form-container">
@@ -74,7 +100,19 @@ function Login() {
             </label>
           </div>
 
-          <button onClick={() => handleSubmit()}>Submit</button>
+          <button
+            onClick={() => (loading ? console.log("loading") : handleSubmit())}
+          >
+            {loading ? "loading..." : "Submit"}
+          </button>
+
+          <button
+            onClick={() =>
+              loading ? console.log("loading") : handleGuestSubmit()
+            }
+          >
+            {loading ? "loading..." : "Guest log in"}
+          </button>
         </div>
         <div className="login-to-register">
           Don't have an account?{" "}

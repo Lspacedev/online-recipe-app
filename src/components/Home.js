@@ -15,7 +15,7 @@ function Home({ handleSearchSubmit, totalPages, updatePage }) {
       <div className="Main">
         <Header handleSearchSubmit={handleSearchSubmit} />
         <div className="cat-add">
-          <Addrecipe />
+          {location.pathname !== "/home/profile" && <Addrecipe />}
         </div>
         <Outlet />
         {location.pathname === "/home/recipes" && (

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { CgClose } from "react-icons/cg";
 function Form({ toggleClicked }) {
   const [obj, setObj] = useState({
     name: "",
@@ -11,6 +11,9 @@ function Form({ toggleClicked }) {
     cookingTime: "",
     servings: "",
   });
+  const [image, setImage] = useState(null);
+  const [loading, setSetLoading] = useState(null);
+
   const navigation = useNavigate();
 
   const token = localStorage.getItem("token");
@@ -27,26 +30,36 @@ function Form({ toggleClicked }) {
   }
 
   async function handleSubmit() {
-    if (obj.name === "" && obj.ingredients === "") {
+    setSetLoading(true);
+    if (obj.name === "" && obj.ingredients === "" && obj.instructions === "") {
       alert("Please enter recipe information.");
       toggleClicked();
       return;
     }
+    const formData = new FormData();
+    formData.append("name", obj.name);
+    formData.append("ingredients", obj.ingredients);
+    formData.append("instructions", obj.instructions);
+    formData.append("category", obj.category);
+    formData.append("prepTime", obj.prepTime);
+    formData.append("cookingTime", obj.cookingTime);
+    formData.append("servings", obj.servings);
+
+    formData.append("image", image);
     try {
-      const response = await fetch("http://localhost:3000/api/recipes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          ...obj,
-          prepTime: Number(obj.prepTime),
-          cookingTime: Number(obj.cookingTime),
-          servings: Number(obj.servings),
-        }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/recipes`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
       const data = await response.json();
+      setSetLoading(false);
+
       if (response.ok === true) {
         navigation(0);
       }
@@ -54,17 +67,6 @@ function Form({ toggleClicked }) {
       console.log(error);
     }
     toggleClicked();
-  }
-  function handleImageUpload(e) {
-    let input = document.getElementById("pic");
-    var fReader = new FileReader();
-    fReader.readAsDataURL(input.files[0]);
-    fReader.onloadend = function (event) {
-      setObj({
-        ...obj,
-        pic: event.target.result,
-      });
-    };
   }
 
   function handleFormClose() {
@@ -77,7 +79,7 @@ function Form({ toggleClicked }) {
         <div className="form-title-close">
           <h3>Enter Recipe Information</h3>
           <div className="form-close" onClick={handleFormClose}>
-            x
+            <CgClose />
           </div>
         </div>
         <div className="form">
@@ -109,34 +111,30 @@ function Form({ toggleClicked }) {
           </div>
 
           <div className="instructions">
-            <label htmlFor="instructions">
-              Instructions
-              <textarea
-                id="instructions"
-                name="instructions"
-                placeholder="1. Add water..."
-                onChange={(e) => handleChange(e)}
-                value={obj.instructions}
-              ></textarea>
-            </label>
+            <label htmlFor="instructions">Instructions</label>
+            <textarea
+              id="instructions"
+              name="instructions"
+              placeholder="1. Add water..."
+              onChange={(e) => handleChange(e)}
+              value={obj.instructions}
+            ></textarea>
           </div>
 
           <div className="category">
-            <label htmlFor="category">
-              Category
-              <select
-                name="category"
-                onChange={handleDropdownChange}
-                value={obj.value}
-              >
-                <option value="breakfast">breakfast</option>
-                <option value="lunch">lunch</option>
-                <option value="dinner">dinner</option>
-                <option value="dessert">dessert</option>
-                <option value="main">main</option>
-                <option value="appetiser">appetiser</option>
-              </select>
-            </label>
+            <label htmlFor="category">Category</label>
+            <select
+              name="category"
+              onChange={handleDropdownChange}
+              value={obj.value}
+            >
+              <option value="breakfast">breakfast</option>
+              <option value="lunch">lunch</option>
+              <option value="dinner">dinner</option>
+              <option value="dessert">dessert</option>
+              <option value="main">main</option>
+              <option value="appetiser">appetiser</option>
+            </select>
           </div>
 
           <div className="prepTime">
@@ -175,6 +173,8 @@ function Form({ toggleClicked }) {
               Servings
               <input
                 type="number"
+                min="1"
+                max="50"
                 id="servings"
                 name="servings"
                 onChange={(e) => handleChange(e)}
@@ -182,19 +182,23 @@ function Form({ toggleClicked }) {
               />
             </label>
           </div>
-          {/* <div className="pic">
+          <div className="pic">
             <label htmlFor="pic">
               Picture:
               <input
                 type="file"
                 id="pic"
                 name="pic"
-                onChange={(e) => handleImageUpload(e)}
+                onChange={(e) => setImage(e.target.files[0])}
               />
             </label>
-          </div> */}
+          </div>
 
-          <button onClick={() => handleSubmit()}>Submit</button>
+          <button
+            onClick={() => (loading ? console.log("loading") : handleSubmit())}
+          >
+            {loading ? "loading..." : "Submit"}
+          </button>
         </div>
       </div>
     </div>

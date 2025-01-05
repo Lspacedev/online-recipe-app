@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import Backarrow from "./Backarrow";
 import { IoTime } from "react-icons/io5";
 import { RiBowlFill } from "react-icons/ri";
+import { CgClose } from "react-icons/cg";
+
 function Recipe() {
   const [recipe, setRecipe] = useState({});
   const [obj, setObj] = useState({
@@ -15,7 +17,7 @@ function Recipe() {
     servings: "",
   });
   const [edit, setEdit] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const { recipe_id } = useParams();
   useEffect(() => {
     fetchRecipe();
@@ -23,9 +25,11 @@ function Recipe() {
   const token = localStorage.getItem("token");
 
   async function fetchRecipe() {
+    setLoading(true);
+
     try {
       const response = await fetch(
-        `http://localhost:3000/api/recipes/${recipe_id}`,
+        `${process.env.REACT_APP_API_URL}/api/recipes/${recipe_id}`,
         {
           method: "GET",
           headers: {
@@ -36,10 +40,20 @@ function Recipe() {
       );
       const data = await response.json();
       if (response.ok === true) {
+        setObj((prev) => ({ ...prev, name: data.name }));
+        setObj((prev) => ({ ...prev, ingredients: data.ingredients }));
+        setObj((prev) => ({ ...prev, instructions: data.instructions }));
+        setObj((prev) => ({ ...prev, category: data.category }));
+        setObj((prev) => ({ ...prev, prepTime: data.prepTime }));
+        setObj((prev) => ({ ...prev, cookingTime: data.cookingTime }));
+        setObj((prev) => ({ ...prev, servings: data.servings }));
         setRecipe(data);
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
+
+      setLoading(false);
     }
   }
 
@@ -63,7 +77,7 @@ function Recipe() {
     if (deleteConfirmation) {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/recipes/${recipe_id}`,
+          `${process.env.REACT_APP_API_URL}/api/recipes/${recipe_id}`,
           {
             method: "DELETE",
             headers: {
@@ -100,9 +114,11 @@ function Recipe() {
       "You are about to update recipe information. Continue?"
     );
     if (updateConfirmation) {
+      setLoading(true);
+
       try {
         const response = await fetch(
-          `http://localhost:3000/api/recipes/${recipe_id}`,
+          `${process.env.REACT_APP_API_URL}/api/recipes/${recipe_id}`,
           {
             method: "PUT",
             headers: {
@@ -114,11 +130,14 @@ function Recipe() {
         );
         if (response.ok === true) {
           alert("Update success");
-          navigation(0);
+          //navigation(0);
         }
+        setLoading(false);
         setEdit(false);
+        fetchRecipe();
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     } else {
       setEdit(false);
@@ -141,7 +160,7 @@ function Recipe() {
     setObj((prev) => ({ ...prev, [name]: value }));
   }
   function getPicLink(obj) {
-    if (true) {
+    if (obj.imageUrl === null || obj.imageUrl === "") {
       if (obj.category === "breakfast") {
         return "/images/breakfast.jpg";
       } else if (obj.category === "lunch") {
@@ -156,15 +175,19 @@ function Recipe() {
         return "/images/appetiser.jpg";
       }
     } else {
-      return obj.pic;
+      return obj.imageUrl;
     }
   }
+  if (loading) return <div className="loading">Laoding...</div>;
   return (
     <div className="Recipe">
       <Backarrow handleBackNavigate={handleBackNavigate} />
       <div className="recipe-content">
         {edit === true ? (
           <div className="update-form">
+            <div className="close" onClick={() => setEdit(false)}>
+              <CgClose />
+            </div>
             <div className="name">
               <label htmlFor="recipe-name">
                 Recipe Name
@@ -173,7 +196,7 @@ function Recipe() {
                   id="recipe-name"
                   name="name"
                   onChange={(e) => handleChange(e)}
-                  value={obj.recipeName}
+                  value={obj.name}
                 />
               </label>
             </div>
@@ -226,6 +249,8 @@ function Recipe() {
                 Preperation Time
                 <input
                   type="number"
+                  min="1"
+                  max="120"
                   id="prepTime"
                   name="prepTime"
                   onChange={(e) => handleChange(e)}
@@ -239,6 +264,8 @@ function Recipe() {
                 Cooking Time
                 <input
                   type="number"
+                  min="1"
+                  max="120"
                   id="cookingTime"
                   name="cookingTime"
                   onChange={(e) => handleChange(e)}
@@ -250,7 +277,9 @@ function Recipe() {
               <label htmlFor="servings">
                 Servings
                 <input
-                  type="text"
+                  type="number"
+                  min="1"
+                  max="50"
                   id="servings"
                   name="servings"
                   onChange={(e) => handleChange(e)}
@@ -258,17 +287,6 @@ function Recipe() {
                 />
               </label>
             </div>
-            {/* <div className="pic">
-              <label htmlFor="pic">
-                Picture:
-                <input
-                  type="file"
-                  id="pic"
-                  name="pic"
-                  onChange={(e) => handleImageUpload(e)}
-                />
-              </label>
-            </div> */}
           </div>
         ) : (
           <div className="recipe-info">

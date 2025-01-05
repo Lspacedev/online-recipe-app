@@ -5,6 +5,7 @@ function Landing() {
     <div className="landing">
       <nav>
         <div className="logo-land">
+          <img src="/images/hat.png" alt="logo" />
           Home <span>Recipes</span>
         </div>
         <div className="login-register">

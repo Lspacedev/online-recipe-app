@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { CgClose } from "react-icons/cg";
 
 function Profile() {
   const [profile, setProfile] = useState({});
@@ -10,6 +11,8 @@ function Profile() {
     password: "",
   });
   const [update, setUpdate] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const navigation = useNavigate();
 
   const token = localStorage.getItem("token");
@@ -17,8 +20,10 @@ function Profile() {
     fetchProfile();
   }, []);
   async function fetchProfile() {
+    setLoading(true);
+
     try {
-      const response = await fetch("http://localhost:3000/profile", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/profile`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -26,9 +31,14 @@ function Profile() {
         },
       });
       const data = await response.json();
+      setUserUpdate((prev) => ({ ...prev, username: data.username }));
+      setUserUpdate((prev) => ({ ...prev, email: data.email }));
+
       setProfile(data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }
   async function handleSubmit(obj) {
@@ -41,22 +51,31 @@ function Profile() {
       "You are about to update profile information. Continue?"
     );
     if (updateConfirmation) {
+      setLoading(true);
+
       try {
-        const response = await fetch(`http://localhost:3000/profile`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(obj),
-        });
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/profile`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(obj),
+          }
+        );
         const data = await response.json();
         if (response.ok === true) {
-          navigation(0);
+          //navigation(0);
         }
+        setLoading(false);
+
         setUpdate(false);
+        fetchProfile();
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     } else {
       setUpdate(false);
@@ -87,32 +106,23 @@ function Profile() {
       return obj.profilePic;
     }
   }
+  if (loading) return <div className="loading">Laoding...</div>;
 
   return (
     <div className="Profile">
       <div className="contact-details">
         <div className="profile-picture">
-          {/* {update ? (
-            <div className="profile-pic2">
-              <label htmlFor="profile-pic2">
-                Profile picture:
-                <input
-                  type="file"
-                  id="profile-pic2"
-                  name="pic"
-                  onChange={(e) => handleImageUpload(e)}
-                />
-              </label>
-            </div>
-          ) : ( */}
           <div className="profile-pic">
             {<img src={getProfilePic(profile)} alt="profile" />}
           </div>
-          {/* )} */}
         </div>
         <div className="profile-content">
           <h2>Account details</h2>{" "}
-          {update && <div onClick={() => setUpdate(false)}>X</div>}
+          {update && (
+            <div onClick={() => setUpdate(false)} className="close">
+              <CgClose />
+            </div>
+          )}
           <div className="name-div">
             <h4>Username</h4>
             {update ? (
@@ -121,9 +131,8 @@ function Profile() {
                   type="text"
                   id="name"
                   name="username"
-                  placeholder={profile.username}
                   onChange={(e) => handleChange(e)}
-                  value={userUpdate.name}
+                  value={userUpdate.username}
                 />
               </div>
             ) : (
@@ -138,7 +147,6 @@ function Profile() {
                   type="text"
                   id="email"
                   name="email"
-                  placeholder={profile.email}
                   onChange={(e) => handleChange(e)}
                   value={userUpdate.email}
                 />
@@ -149,12 +157,12 @@ function Profile() {
           </div>
           <div className="user-pass">
             <div className="pass">
-              <h4>Password:</h4>
-              {update ? (
+              {update && <h4>New password:</h4>}
+              {update && (
                 <div>
                   <div className="password">
                     <input
-                      type="text"
+                      type="password"
                       id="password"
                       name="password"
                       onChange={(e) => handleChange(e)}
@@ -162,8 +170,6 @@ function Profile() {
                     />
                   </div>
                 </div>
-              ) : (
-                <div className="password-text">{profile.password}</div>
               )}
             </div>
           </div>
@@ -175,10 +181,6 @@ function Profile() {
             >
               {update ? "Submit" : "Update"}
             </button>
-
-            {/* <button id="account-delete" onClick={handleDeleteAccount}>
-              Delete my account
-            </button> */}
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ function Sidebar() {
   return (
     <div className="Sidebar">
       <h3 className="logo">
-        <img src="/images/hat.png" />
+        <img src="/images/hat.png" alt="logo" />
         <br />
         Home<span>Recipes</span>
       </h3>
