@@ -8,6 +8,8 @@ function DisplayRecipes({ page, submittedSearch }) {
   const [recipes, setRecipes] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [notFound, setNotFound] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const { recipe_id } = useParams();
   const navigation = useNavigate();
   const token = localStorage.getItem("token");
@@ -16,6 +18,8 @@ function DisplayRecipes({ page, submittedSearch }) {
     fetchRecipes();
   }, [page]);
   async function fetchRecipes() {
+    setLoading(true);
+
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/api/recipes?page=${page}`,
@@ -29,8 +33,10 @@ function DisplayRecipes({ page, submittedSearch }) {
       );
       const data = await response.json();
       setRecipes(data.recipes);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }
 
@@ -76,6 +82,8 @@ function DisplayRecipes({ page, submittedSearch }) {
       return obj.imageUrl;
     }
   }
+  if (loading) return <div className="loading">Laoding...</div>;
+
   return (
     <div className="DisplayRecipes">
       {recipe_id !== "" && typeof recipe_id !== "undefined" ? (

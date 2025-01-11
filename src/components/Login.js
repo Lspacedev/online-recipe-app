@@ -29,6 +29,7 @@ function Login() {
         body: JSON.stringify(loginDetails),
       });
       const data = await res.json();
+
       setLoading(false);
       if (res.ok === true) {
         alert(data.message);
@@ -36,10 +37,11 @@ function Login() {
         navigation("/home");
         navigation(0);
       } else {
-        setErr(data.message);
+        setErr(data.error);
       }
     } catch (err) {
       console.log(err.message);
+      setLoading(false);
     }
   }
   async function handleGuestSubmit() {
@@ -66,6 +68,7 @@ function Login() {
       }
     } catch (err) {
       console.log(err.message);
+      setLoading(false);
     }
   }
   return (
