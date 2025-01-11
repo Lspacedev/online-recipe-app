@@ -42,6 +42,10 @@ function Profile() {
     }
   }
   async function handleSubmit(obj) {
+    if (profile.username === "Guest") {
+      alert("Cannot update user account");
+      return;
+    }
     if (!obj.username && !obj.email && !obj.password) {
       alert("Error! No update information was entered!");
       setUpdate(false);
@@ -136,7 +140,7 @@ function Profile() {
                 />
               </div>
             ) : (
-              <div>{profile.username}</div>
+              <div className="val">{profile.username}</div>
             )}
           </div>
           <div className="email-div">
@@ -152,7 +156,7 @@ function Profile() {
                 />
               </div>
             ) : (
-              <div>{profile.email}</div>
+              <div className="val">{profile.email}</div>
             )}
           </div>
           <div className="user-pass">
