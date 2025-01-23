@@ -668,23 +668,28 @@ select {
 .form-close {
   font-size: 2rem;
 }
-
+.form-div {
+  width: calc(40% - 50px);
+}
 .form-div .form {
-  margin: 0 auto 0 auto;
   padding: 25px;
-  width: 600px;
-  height: auto;
-  overflow: hidden;
+  width: calc(100% - 50px);
+  height: 100%;
   background-color: white;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 .form-div .form input,
-textarea,
 button,
 select {
   width: 200px;
   margin: 15px 0px;
   padding: 5px 10px;
+}
+.form-div textarea {
+  width: 100%;
+  margin: 15px 0px;
+  padding: 5px 0px;
+  box-sizing: border-box;
 }
 .form-div .form button {
   width: 100%;
@@ -993,8 +998,34 @@ select {
   .contact-details {
     flex-direction: column;
   }
+  .form-div {
+    width: 70%;
+  }
+}
+@media (max-width: 1024px) {
 }
 @media (max-width: 768px) {
+  .contact-details {
+    width: 90%;
+  }
+
+  .profile-content .val {
+    width: 90%;
+    padding: 5px 0px;
+    border-radius: 7px;
+    background-color: #e6e6e641;
+  }
+  .Profile button {
+    width: 95%;
+    padding: 10px 0px;
+  }
+  .profile-content input {
+    width: 90%;
+    padding: 5px;
+    border-radius: 7px;
+    border: 1px solid #e9e9e9;
+  }
+
   .Header {
     flex-direction: column-reverse;
   }
@@ -1132,15 +1163,27 @@ select {
 
     object-position: center;
   }
-}
 
-@media (max-width: 480px) {
-  .form-div h3 {
-    text-align: center;
-    margin: 50px 0px 0px 0px;
+  .DisplayRecipes .recipes-div {
+    justify-content: center;
   }
-  .form-div .form {
-    width: 75%;
+  .recipe-content {
+    width: 80%;
+  }
+  #recipe-pic {
+    width: 100%;
+  }
+
+  .ingredients-text {
+    width: 80%;
+  }
+
+  .instructions-text {
+    width: 80%;
+  }
+  .form-div .form div label {
+    display: flex;
+    flex-direction: column;
   }
   .form-div .form input,
   textarea,
@@ -1149,11 +1192,25 @@ select {
     width: 100%;
     outline: none;
     border: 1px solid #bbb;
+    margin: 0px;
+    box-sizing: border-box;
   }
-  .form-div .form div label {
-    display: flex;
-    flex-direction: column;
+}
+
+@media (max-width: 480px) {
+  .form-div {
+    width: 90%;
   }
+  .recipe-content {
+    width: 90%;
+  }
+
+  /* .form-div h3 {
+    text-align: center;
+    margin: 50px 0px 0px 0px;
+  }
+   */
+
   .form-close {
     margin-top: 25px;
   }

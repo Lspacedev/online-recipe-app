@@ -110,7 +110,7 @@ function Profile() {
       return obj.profilePic;
     }
   }
-  if (loading) return <div className="loading">Laoding...</div>;
+  if (loading) return <div className="loading">Loading...</div>;
 
   return (
     <div className="Profile">

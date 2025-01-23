@@ -178,7 +178,7 @@ function Recipe() {
       return obj.imageUrl;
     }
   }
-  if (loading) return <div className="loading">Laoding...</div>;
+  if (loading) return <div className="loading">Loading...</div>;
   return (
     <div className="Recipe">
       <Backarrow handleBackNavigate={handleBackNavigate} />
