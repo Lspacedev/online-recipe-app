@@ -134,7 +134,7 @@ function Recipe() {
         }
         setLoading(false);
         setEdit(false);
-        fetchRecipe();
+        navigation(0);
       } catch (error) {
         console.log(error);
         setLoading(false);
