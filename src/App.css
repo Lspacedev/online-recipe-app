@@ -871,6 +871,7 @@ select {
   padding: 0px;
   margin: 15px;
   border-radius: 30px;
+  text-transform: capitalize;
 }
 .prep-cook-serve {
   display: flex;
