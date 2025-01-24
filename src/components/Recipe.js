@@ -342,7 +342,7 @@ function Recipe() {
               edit ? updateRecipe() : openForm();
             }}
           >
-            {edit ? <div className="update-btn">Update </div> : <div>edit</div>}
+            {edit ? <div className="update-btn">Update </div> : <div>Edit</div>}
           </button>
 
           <button className="delete" onClick={() => deleteRecipe()}>

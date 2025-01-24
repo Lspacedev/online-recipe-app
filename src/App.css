@@ -27,6 +27,7 @@ button {
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  background-color: whitesmoke;
 }
 
 .landing-content {
@@ -38,23 +39,27 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding: 150px 0px;
 }
 .landing-img {
   flex: 50%;
-
-  background-color: gray;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .landing-img img {
-  height: 100%;
-  width: 100%;
+  height: 80%;
+  width: 90%;
+  border-radius: 10px;
+  margin-top: 25px;
 }
 .landing-title {
   font-size: 4rem;
-  font-weight: bold;
-
+  width: 80%;
   color: #0f0f09;
+  text-align: center;
 }
 .landing-subtitle {
   font-size: 1.5rem;
@@ -64,20 +69,21 @@ button {
 nav {
   display: flex;
   justify-content: space-between;
+  padding: 0px 50px;
+  box-shadow: 1px 1px 3px #e7e7e7;
 }
 
 .logo-land {
   flex: 5%;
-  font-size: 2.3rem;
+  font-size: 2rem;
   font-weight: bold;
   font-style: oblique;
-  font-family: "Courier New", Courier, monospace;
   display: flex;
   align-items: center;
   gap: 2px;
+  font-family: "Courier New", Courier, monospace;
 }
 .logo-land span {
-  font-size: 1.3rem;
   font-style: italic;
   font-family: Arial, Helvetica, sans-serif;
   color: #1f1f1f;
@@ -85,7 +91,7 @@ nav {
 }
 .logo-land img {
   margin-bottom: 15px;
-  width: 50px;
+  width: 40px;
   filter: brightness(0) saturate(100%) invert(38%) sepia(69%) saturate(4378%)
     hue-rotate(345deg) brightness(94%) contrast(94%);
 }
@@ -98,27 +104,31 @@ nav {
 .login-register {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 5px;
 }
 
 .login-btn {
-  font-size: 1.2rem;
-  color: #bc412b;
-  background-color: white;
-  border: none;
-  border-radius: 2px;
+  width: fit-content;
+  padding: 10px 25px;
+
+  font-size: 1.1rem;
+  font-weight: 300;
+  background-color: transparent;
+  border: 1px solid rgb(92, 92, 92);
+  border-radius: 7px;
 }
 .login-btn:hover {
-  color: #ed6a5a;
+  background-color: rgba(241, 241, 241, 0.603);
+  color: rgba(0, 0, 0, 0.479);
+  border: 1px solid rgba(0, 0, 0, 0.24);
 }
 .register-btn {
+  width: fit-content;
+  box-sizing: border-box;
   background-color: #bc412b;
   color: white;
-  font-weight: bold;
-  padding: 12px 5px;
+  padding: 15px 25px;
   border-radius: 7px;
-
-  margin-right: 10px;
   border: none;
 }
 
@@ -145,6 +155,7 @@ nav {
 .Login {
   width: 100%;
   display: flex;
+  background-color: whitesmoke;
 }
 
 .login-to-register p {
@@ -164,8 +175,31 @@ nav {
   justify-content: center;
   align-items: center;
 }
-
-.Login form {
+.Login h2 {
+  font-weight: 600;
+}
+.Login .login-logo {
+  font-style: oblique;
+  font-family: "Courier New", Courier, monospace;
+}
+.Login .login-logo img {
+  width: 50px;
+  filter: brightness(0) saturate(100%) invert(38%) sepia(69%) saturate(4378%)
+    hue-rotate(345deg) brightness(94%) contrast(94%);
+}
+.Registration h2 {
+  font-weight: 600;
+}
+.Registration .reg-logo {
+  font-style: oblique;
+  font-family: "Courier New", Courier, monospace;
+}
+.Registration .reg-logo img {
+  width: 50px;
+  filter: brightness(0) saturate(100%) invert(38%) sepia(69%) saturate(4378%)
+    hue-rotate(345deg) brightness(94%) contrast(94%);
+}
+.Login .form {
   margin: 50px auto;
   padding: 25px 0px;
   width: 60%;
@@ -184,9 +218,10 @@ select {
   border-radius: 10px;
   display: inline-block;
 }
-.Login form div label {
+.Login .form div label {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   font-size: 14px;
   color: rgb(133, 133, 133);
   cursor: pointer;
@@ -208,21 +243,27 @@ select {
 
 .login-img {
   flex: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-img img {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
   object-fit: cover;
   object-position: center;
+  border-radius: 10px;
 }
 
 .Registration {
   width: 100%;
   display: flex;
+  background-color: whitesmoke;
 }
 .register-to-login {
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   display: flex;
 }
 .register-to-login p {
@@ -244,9 +285,10 @@ select {
   align-items: center;
 }
 
-.Registration form {
+.Registration .form {
   margin: 0px auto;
   padding: 25px 10px;
+  width: 60%;
 }
 .Registration input,
 button,
@@ -262,9 +304,10 @@ select {
   border-radius: 10px;
   display: inline-block;
 }
-.Registration form div label {
+.Registration .form div label {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   font-size: 14px;
   color: rgb(133, 133, 133);
   cursor: pointer;
@@ -284,13 +327,18 @@ select {
 }
 .register-img {
   flex: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .register-img img {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
   object-fit: cover;
   object-position: center;
+  border-radius: 10px;
 }
 
 /**Home**/
@@ -359,6 +407,7 @@ select {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  border: 1px solid transparent;
 }
 .header-profile-pic img:hover {
   border: 1px solid #bc412b;
@@ -908,13 +957,13 @@ select {
 .update-form {
   margin: 50px auto;
   padding: 25px;
-  width: 400px;
+  width: 60%;
   overflow: hidden;
 }
 .update-form input,
 textarea,
 select {
-  width: 100%;
+  width: calc(100% - 20px);
   outline: none;
   border: 1px solid #bbb;
   margin: 10px 0px;
@@ -924,6 +973,7 @@ select {
 .update-form div label {
   display: flex;
   flex-direction: column;
+  margin: 25px 0px;
 }
 
 .Dashboard {
@@ -1129,6 +1179,8 @@ select {
   }
   .landing-info {
     flex: 60%;
+    justify-content: center;
+    padding: 0px 0px;
   }
   .login-form-container {
     flex: 60%;
@@ -1201,6 +1253,12 @@ select {
   .form-div {
     width: 90%;
   }
+  .Login .form {
+    width: 80%;
+  }
+  .Registration .form {
+    width: 80%;
+  }
   .recipe-content {
     width: 90%;
   }
@@ -1248,11 +1306,27 @@ select {
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 600px) {
   .logo-land {
     font-size: 1rem;
   }
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
   .login-register {
-    gap: 5px;
+    margin: 5px;
+    align-items: center;
+    justify-content: center;
+  }
+  .login-btn {
+    width: 50%;
+  }
+}
+
+@media (max-width: 322px) {
+  .login-btn {
+    width: 50%;
+    padding: 10px 20px;
   }
 }

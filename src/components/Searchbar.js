@@ -31,7 +31,7 @@ function Searchbar({ handleSearchSubmit }) {
         value={searchInput}
       />
       <button id="search-btn" onClick={() => handleSearchSubmit(searchInput)}>
-        search
+        Search
       </button>
     </div>
   );

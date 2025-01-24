@@ -7,8 +7,8 @@ import { useLocation } from "react-router-dom";
 
 function Home({ handleSearchSubmit, totalPages, updatePage }) {
   const location = useLocation();
+  let pages = new Array(totalPages + 1).fill(0);
 
-  let pages = new Array(totalPages).fill(0);
   return (
     <div className="Home">
       <Sidebar />

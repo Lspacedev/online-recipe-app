@@ -54,11 +54,13 @@ function Registration() {
   return (
     <div className="Registration">
       <div className="register-form-container">
+        <h3 className="reg-logo">
+          <img src="/images/hat.png" alt="logo" />
+          <br />
+          ChefBook
+        </h3>
         <h2>Create new account</h2>
-        <div className="register-to-login">
-          Already have an account?
-          <p onClick={goToLogin}>Login</p>
-        </div>
+
         <div className="form">
           <div className="username">
             <label htmlFor="username">
@@ -111,6 +113,10 @@ function Registration() {
           </div> */}
 
           <button onClick={() => handleSubmit()}>Submit</button>
+        </div>
+        <div className="register-to-login">
+          Already have an account?
+          <p onClick={goToLogin}>Login</p>
         </div>
       </div>
       <div className="register-img">

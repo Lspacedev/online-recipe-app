@@ -29,8 +29,10 @@ function Header({ handleSearchSubmit, profilePic }) {
 
   return (
     <div className="Header">
-      {location.pathname !== "/home/profile" && (
+      {location.pathname === "/home/recipes" ? (
         <Searchbar handleSearchSubmit={handleSearchSubmit} />
+      ) : (
+        <div></div>
       )}
       <div className="ham-profile">
         <div className="hamburger-menu" onClick={handleHamBurgerMenu}>

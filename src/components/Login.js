@@ -74,6 +74,11 @@ function Login() {
   return (
     <div className="Login">
       <div className="login-form-container">
+        <h3 className="login-logo">
+          <img src="/images/hat.png" alt="logo" />
+          <br />
+          ChefBook
+        </h3>
         <h2>Welcome back!</h2>
         {err && <span className="err">{err}</span>}
         <div className="form">
@@ -114,7 +119,7 @@ function Login() {
               loading ? console.log("loading") : handleGuestSubmit()
             }
           >
-            {loading ? "loading..." : "Guest log in"}
+            {loading ? "loading..." : "Guest"}
           </button>
         </div>
         <div className="login-to-register">

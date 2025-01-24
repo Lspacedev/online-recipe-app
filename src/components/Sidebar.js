@@ -21,7 +21,7 @@ function Sidebar() {
       <h3 className="logo">
         <img src="/images/hat.png" alt="logo" />
         <br />
-        Home<span>Recipes</span>
+        ChefBook
       </h3>
       <div className="sidebar-links">
         <div onClick={handleNavigateHome}>

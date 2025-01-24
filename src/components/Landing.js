@@ -1,20 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Landing() {
+  const navigation = useNavigate();
   return (
     <div className="landing">
       <nav>
         <div className="logo-land">
           <img src="/images/hat.png" alt="logo" />
-          Home <span>Recipes</span>
+          ChefBook
         </div>
         <div className="login-register">
-          <Link to="login">
-            <button className="login-btn">Log in</button>
-          </Link>
-          <Link to="register">
-            <button className="register-btn">Register</button>
-          </Link>
+          <button className="login-btn" onClick={() => navigation("login")}>
+            Log in
+          </button>
+          <button
+            className="register-btn"
+            onClick={() => navigation("register")}
+          >
+            Register
+          </button>
         </div>
       </nav>
       <div className="landing-content">
