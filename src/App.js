@@ -11,6 +11,7 @@ import Recipe from "./components/Recipe";
 import Dashboard from "./components/Dashboard";
 
 import ProtectedRoutes from "./components/ProtectedRoute";
+import ProtectedReg from "./components/ProtectedReg";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -102,9 +103,11 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route exact path="/" element={<Landing />} />
-          <Route exact path="register" element={<Registration />} />
-          <Route exact path="login" element={<Login />} />
+          <Route element={<ProtectedReg />}>
+            <Route exact path="/" element={<Landing />} />
+            <Route exact path="register" element={<Registration />} />
+            <Route exact path="login" element={<Login />} />
+          </Route>
 
           <Route element={<ProtectedRoutes />}>
             <Route

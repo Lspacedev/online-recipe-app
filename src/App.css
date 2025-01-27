@@ -57,6 +57,7 @@ button {
 }
 .landing-title {
   font-size: 4rem;
+  font-weight: 600;
   width: 80%;
   color: #0f0f09;
   text-align: center;
@@ -707,10 +708,12 @@ select {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
 }
 .form-title-close {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   color: #1f1f1a;
 }
 
@@ -718,14 +721,18 @@ select {
   font-size: 2rem;
 }
 .form-div {
-  width: calc(40% - 50px);
+  margin: 25px 0px;
+  height: calc(90% - 50px);
+  width: 50%;
+  overflow-y: auto;
 }
 .form-div .form {
+  margin: 0 auto 0 auto;
   padding: 25px;
   width: calc(100% - 50px);
-  height: 100%;
+  height: auto;
+  overflow: hidden;
   background-color: white;
-  border-radius: 2px;
 }
 .form-div .form input,
 button,

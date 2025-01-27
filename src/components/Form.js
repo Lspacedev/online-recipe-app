@@ -76,13 +76,13 @@ function Form({ toggleClicked }) {
   return (
     <div className="Form">
       <div className="form-div">
-        <div className="form-title-close">
-          <h3>Enter Recipe Information</h3>
-          <div className="form-close" onClick={handleFormClose}>
-            <CgClose />
-          </div>
-        </div>
         <div className="form">
+          <div className="form-title-close">
+            <h3>Enter Recipe Information</h3>
+            <div className="form-close" onClick={handleFormClose}>
+              <CgClose />
+            </div>
+          </div>
           <div className="name">
             <label htmlFor="recipe-name">
               Recipe Name
