@@ -50,7 +50,7 @@ button {
 }
 
 .landing-img img {
-  height: 80%;
+  height: 90%;
   width: 90%;
   border-radius: 10px;
   margin-top: 25px;
@@ -201,7 +201,7 @@ nav {
     hue-rotate(345deg) brightness(94%) contrast(94%);
 }
 .Login .form {
-  margin: 50px auto;
+  margin: 0px auto;
   padding: 25px 0px;
   width: 60%;
 }
