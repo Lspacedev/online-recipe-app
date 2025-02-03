@@ -46,9 +46,6 @@ npx json-server --watch ./data/db.json --port 8000
 
 ## Features
 
-- Authentication: Create a user account.
-- Authentication: Login to your account.
-
 - View all your recipes.
 - View individual recipe.
 - add recipe.
