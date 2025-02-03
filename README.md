@@ -26,21 +26,12 @@ cd online-recipe-app
 npm install
 ```
 
-4. Create an env file and add the following:
-
-```bash
-REACT_APP_API_URL="Deployed backend url or localhost"
-
-```
-
-5. Run the project
+4. Run the project
 
 ```bash
 npm run start
 
-Run the json-server:
 
-npx json-server --watch ./data/db.json --port 8000
 
 ```
 
@@ -62,7 +53,6 @@ npx json-server --watch ./data/db.json --port 8000
 ## Tech Stack
 
 - ReactJs
-- JSON sever
 
 ## Credits:
 
