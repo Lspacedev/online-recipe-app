@@ -294,11 +294,6 @@ function Recipe() {
             <div className="category-text">
               <p>{recipe && recipe.category}</p>
             </div>
-            <img
-              src={recipe && getPicLink(recipe)}
-              alt="recipe"
-              id="recipe-pic"
-            />
             <div className="prep-cook-serve">
               <div className="prep-text">
                 <div className="recipe-sub-head">
@@ -320,7 +315,6 @@ function Recipe() {
                 <p>{recipe && recipe.servings}</p>
               </div>
             </div>
-
             <div className="ingredients-div">
               <h3>Ingredients</h3>
               <div className="ingredients-text">

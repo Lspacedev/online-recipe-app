@@ -693,7 +693,6 @@ select {
 .DisplayRecipes {
   height: calc(100% - 100px);
   width: 100%;
-  border-radius: 25px 0px 0px 0px;
 }
 
 .DisplayRecipes .recipes-div {
@@ -709,12 +708,12 @@ select {
 }
 .DisplayRecipes .item {
   width: 250px;
-  height: 200px;
+  height: 90px;
   margin: 5px 0px;
 
   word-wrap: break-word;
   background-color: white;
-  border-bottom: 2px solid #e03112;
+  border-left: 2px solid #e03112;
 }
 
 .food-type {
