@@ -12,8 +12,6 @@ class Recipecard extends React.Component {
           className="img"
           onClick={() => this.props.handleNavigateRecipe(this.props.recipe._id)}
         >
-          <img src={this.props.pic} alt="recipe" />
-
           <div className="cook-time">
             {this.props.recipe.cookingTime}minutes
           </div>

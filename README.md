@@ -4,7 +4,7 @@ React Recipe App using MongoDb as database. A simple recipe app where users can 
 
 ### Recipe App | Backend
 
-[https://github.com/Lspacedev/recipe-app-api/tree/prod](https://github.com/Lspacedev/recipe-app-api/tree/prod)
+[https://github.com/Lspacedev/recipe-app-api/tree/auth](https://github.com/Lspacedev/recipe-app-api/tree/auth)
 
 ## Installation
 
@@ -20,25 +20,29 @@ git@github.com:Lspacedev/online-recipe-app.git
 cd online-recipe-app
 ```
 
-3.  Install all dependencies
+3. Navigate to the project folder
+
+```bash
+git checkout api
+```
+
+4.  Install all dependencies
 
 ```bash
 npm install
 ```
 
-4. Create an env file and add the following:
+5. Create an env file and add the following:
 
 ```bash
 REACT_APP_API_URL="Deployed backend url or localhost"
 
 ```
 
-5. Run the project
+6. Run the project
 
 ```bash
 npm run start
-
-
 
 ```
 

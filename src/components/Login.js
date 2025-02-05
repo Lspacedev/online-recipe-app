@@ -106,13 +106,13 @@ function Login() {
             {loading ? "loading..." : "Submit"}
           </button>
 
-          <button
+          {/* <button
             onClick={() =>
               loading ? console.log("loading") : handleGuestSubmit()
             }
           >
             {loading ? "loading..." : "Guest log in"}
-          </button>
+          </button> */}
         </div>
         <div className="login-to-register">
           Don't have an account?{" "}
