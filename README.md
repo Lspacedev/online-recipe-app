@@ -4,7 +4,7 @@ React Recipe App using MongoDb as database. A simple recipe app where users can 
 
 ### Recipe App | Backend
 
-[https://github.com/Lspacedev/recipe-app-api/tree/prod](https://github.com/Lspacedev/recipe-app-api/tree/prod)
+[https://github.com/Lspacedev/recipe-app-api/tree/main](https://github.com/Lspacedev/recipe-app-api/tree/main)
 
 ## Installation
 
@@ -20,13 +20,19 @@ git@github.com:Lspacedev/online-recipe-app.git
 cd online-recipe-app
 ```
 
-3.  Install all dependencies
+3. Navigate to the branch
+
+```bash
+git checkout part_one
+```
+
+4.  Install all dependencies
 
 ```bash
 npm install
 ```
 
-4. Run the project
+5. Run the project
 
 ```bash
 npm run start
@@ -47,8 +53,7 @@ npm run start
 ## Usage
 
 1. Open the live site in your browser.
-2. Create an account and login.
-3. Add and manage your recipes.
+2. Add and manage your recipes.
 
 ## Tech Stack
 
